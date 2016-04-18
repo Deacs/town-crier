@@ -11,8 +11,7 @@
 |
 */
 
-//use App\Announcement;
-//use Illuminate\Support\Facades\Redirect;
+use App\Announcement;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,6 +29,7 @@ Route::post('fire', function () {
 });
 
 Route::get('stream', function () {
-    // this checks for the event
-    return view('layouts.stream');
+    // this checks for the event and displays the latest 5 from the DB
+    $announcements = Announcement::latest()->take(5)->get();
+    return view('layouts.stream')->with('announcements', $announcements);
 });
