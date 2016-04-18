@@ -11,17 +11,25 @@
 |
 */
 
+//use App\Announcement;
+//use Illuminate\Support\Facades\Redirect;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('fire', function () {
+Route::get('shout', function() {
+    return view('layouts.shout');
+})->name('shout-out');
+
+Route::post('fire', function () {
     // this fires the event
     event(new App\Events\Shout());
-    return "event fired";
+
+    return redirect()->route('shout-out');
 });
 
-Route::get('test', function () {
+Route::get('stream', function () {
     // this checks for the event
-    return view('layouts.test');
+    return view('layouts.stream');
 });

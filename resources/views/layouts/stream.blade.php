@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
-    <p id="power">0</p>
+    <h2>Town Crier</h2>
 
-    <ul id="shouts">
+    <div id="shouts">
 
-    </ul>
+    </div>
 @stop
 
 @section('footer')
@@ -16,11 +16,8 @@
 
             console.log(message);
 
-            // increase the power everytime we load test route
-            //$('#power').text(parseInt($('#power').text()) + parseInt(message.data.power));
-
             // Display the latest Shout
-            //$('#shouts').
+            $('#shouts').prepend('<div class="shout"><h3>'+message.data.announcement.title+'</h3></div>');
 
         });
     </script>
