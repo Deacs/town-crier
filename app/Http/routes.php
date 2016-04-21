@@ -22,7 +22,7 @@ Route::get('shout', function() {
 })->name('shout-out');
 
 Route::post('fire', function () {
-    // this fires the event
+    // Fire the Shout event
     event(new App\Events\Shout());
 
     return redirect()->route('shout-out');
