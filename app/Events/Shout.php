@@ -15,11 +15,12 @@ class Shout extends Event implements ShouldBroadcast
     public function __construct()
     {
         // Save the announcement to persistent storage
+        // @TODO Validation required
         $announcement = Announcement::create(Input::all());
 
         if (! is_null($announcement)) {
             $this->data = [
-                'announcement' => Input::all()
+                'announcement' => $announcement
             ];
         }
         else {

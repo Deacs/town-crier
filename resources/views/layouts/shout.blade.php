@@ -11,13 +11,14 @@
             <div class="row">
                 <select name="type">
                     <option value="funded">FUNDED</option>
-                    <option value="funded">BIRTHDAY</option>
-                    <option value="funded">INVESTMENT</option>
+                    <option value="birthday">BIRTHDAY</option>
+                    <option value="investment">INVESTMENT</option>
                 </select>
             </div>
             <div class="row">
                 <textarea name="body"></textarea>
             </div>
+            <input type="hidden" name="author" value="System">
             <div class="row">
                 <input type="submit" value="SHOUT!">
             </div>

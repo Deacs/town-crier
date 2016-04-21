@@ -5,12 +5,15 @@
 
     <div id="shouts">
         @foreach($announcements as $announcement)
-            <div class="panel panel-default">
+            <div class="panel {{ $announcement->type }}">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{ $announcement->title }}</h3>
                 </div>
                 <div class="panel-body">
                     {{ $announcement->body }}
+                    <div class="author">
+                        {{ $announcement->author }} @ {{ $announcement->created_at }}
+                    </div>
                 </div>
             </div>
         @endforeach
@@ -24,18 +27,41 @@
         socket.on("test-channel:App\\Events\\Shout", function(message){
 
             console.log(message);
+
             var data = message.data.announcement;
-            var panel = '<div class="panel panel-default">'+
+            var panel = resolvePanelClass(data.type);
+
+            var panel = $('<div class="panel panel-'+panel+'">'+
                         '<div class="panel-heading">'+
                         '<h3 class="panel-title">'+data.title+'</h3>'+
                         '</div>'+
                         '<div class="panel-body">'+
                         data.body+
+                        '<div class="author">'+data.author+' @ '+data.created_at+'</div>'+
                         '</div>'+
-                        '</div>';
+                        '</div>').hide().fadeIn(250);
 
             // Display the latest Shout
             $('#shouts').prepend(panel);
+        });
+
+        var resolvePanelClass = function(type) {
+            switch (type) {
+                case 'funded':
+                    return 'success';
+                case 'birthday':
+                    return 'info';
+                case 'investment':
+                    return 'warning';
+                default:
+                    return 'default'
+            }
+        }
+
+        $(document).ready(function() {
+            $('.funded').addClass('panel-success');
+            $('.birthday').addClass('panel-info');
+            $('.investment').addClass('panel-warning');
         });
     </script>
 @stop
