@@ -38,23 +38,47 @@
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script>
 
+        var respond = function(response) {
+
+            var data = {
+                type: "success",
+                title: "Shout Heard!",
+                text: "Your Shout has been added to the fray.",
+            };
+            if (response != 'pass') {
+                data = {
+                    type: "error",
+                    title: "Uh Oh!",
+                    text: "Looks like you've forgotten something, Try again",
+                };
+            }
+
+            return data;
+        }
+
         $("#shout").submit(function(e) {
 
             e.preventDefault();
 
-            var $form   = $(this),
-                url     = $form.attr("action"),
-                title   = $("input[name='title']"),
-                type    = $("select[name='type']"),
-                body    = $("textarea[name='body']"),
-                data    = $form.serialize();
+            var $form       = $(this),
+                url         = $form.attr("action"),
+                title       = $("input[name='title']"),
+                type        = $("select[name='type']"),
+                body        = $("textarea[name='body']"),
+                data        = $form.serialize(),
+                alertData   = {};
 
             var posting = $.post( url, data )
-                .done(function() {
+                .done(function( res ) {
+
+                    console.log(res);
+
+                    alertData = respond(res);
+
                     swal({
-                        type: "success",
-                        title: "Shout Heard!",
-                        text: "Your Shout has been added to the Hubbub.",
+                        type: alertData.type,
+                        title: alertData.title,
+                        text: alertData.text,
                         timer: 2500,
                         showConfirmButton: false
                     });
@@ -69,19 +93,19 @@
                     swal({
                         type: "error",
                         title: "Uh Oh",
-                        text: "No one has heard you Shout. Shout louder",
+                        text: "Your megaphone seems to be broken. Try again?",
                         timer: 2000,
                         showConfirmButton: false
                     });
                 });
         });
 
-        var socket = io('http://192.168.10.10:3000');
-        socket.on("town-crier:App\\Events\\Heard", function(message){
-            console.log('*** Heard Event ***');
-            console.log(message);
-
-        });
+//        var socket = io('http://192.168.10.10:3000');
+//        socket.on("town-crier:App\\Events\\Heard", function(message){
+//            console.log('*** Heard Event ***');
+//            console.log(message);
+//
+//        });
 
     </script>
 @stop

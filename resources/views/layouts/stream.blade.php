@@ -28,10 +28,12 @@
 
             console.log(message);
 
-            var data = message.data.announcement;
-            var panel = resolvePanelClass(data.type);
+            if (message.data !== null) {
 
-            var panel = $('<div class="panel panel-'+panel+'">'+
+                var data = message.data.announcement;
+                var panel = resolvePanelClass(data.type);
+
+                var panel = $('<div class="panel panel-'+panel+'">'+
                         '<div class="panel-heading">'+
                         '<h3 class="panel-title">'+data.title+'</h3>'+
                         '</div>'+
@@ -41,8 +43,10 @@
                         '</div>'+
                         '</div>').hide().fadeIn(250);
 
-            // Display the latest Shout
-            $('#shouts').prepend(panel);
+                // Display the latest Shout
+                $('#shouts').prepend(panel);
+            }
+
         });
 
         var resolvePanelClass = function(type) {

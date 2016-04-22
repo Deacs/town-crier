@@ -21,12 +21,20 @@ Route::get('shout', function() {
     return view('layouts.shout');
 })->name('shout-out');
 
-Route::post('fire', function () {
-    // Fire the Shout event
-    event(new App\Events\Shout());
+//Route::post('fire', function () {
+//    // Fire the Shout event
+//    event(new App\Events\Shout());
+//
+//    return redirect()->route('shout-out');
+//});
 
-    return redirect()->route('shout-out');
-});
+Route::post('fire',
+    [
+        'as' 	=> 'store-shout',
+        'uses' 	=> 'ShoutController@store',
+    ]
+);
+
 
 Route::get('stream', function () {
     // this checks for the event and displays the latest 5 from the DB
