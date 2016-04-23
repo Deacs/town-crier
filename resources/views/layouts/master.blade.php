@@ -12,7 +12,9 @@
 </head>
 <html lang="en">
 <body>
-    <div class="container">
+
+    @include('layouts.header.nav')
+    <div class="container" style="margin:45px 0 0 0;">
         @yield('content')
     </div>
 

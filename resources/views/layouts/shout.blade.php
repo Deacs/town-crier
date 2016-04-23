@@ -100,12 +100,5 @@
                 });
         });
 
-//        var socket = io('http://192.168.10.10:3000');
-//        socket.on("town-crier:App\\Events\\Heard", function(message){
-//            console.log('*** Heard Event ***');
-//            console.log(message);
-//
-//        });
-
     </script>
 @stop

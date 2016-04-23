@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-    <h2>Town Crier</h2>
 
     <div id="shouts">
         @foreach($announcements as $announcement)

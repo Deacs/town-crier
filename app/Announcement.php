@@ -38,25 +38,9 @@ class Announcement extends Model
 
         if ($validator->passes()) {
 
-            // Save the announcement to persistent storage
-            //$this->store();
-
-
             $this->create($this->data);
-            //$announcement = Announcement::create($this->data);
 
-            // Set up the data for the event
-//            if (! is_null($this->data)) {
-//                $this->data = [
-//                    'announcement' => $data
-//                ];
-//            }
-
-//            $payload = [
-//                'announcement' => $this->data
-//            ];
-
-            // Fire the Shout event
+            // Fire the Shout event picked up by the Node app
             event(new Shout($this->data));
 
             $result = 'pass';
@@ -64,9 +48,4 @@ class Announcement extends Model
 
         return $result;
     }
-
-//    public function store()
-//    {
-//        $this->store($this->data);
-//    }
 }
