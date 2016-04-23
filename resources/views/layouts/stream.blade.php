@@ -8,12 +8,12 @@
     <ul class="list-group shouts">
         @foreach($announcements as $announcement)
             <li class="list-group-item {{ $announcement->type }}">
-                <h3 class="panel-title">{{ $announcement->title }}</h3>
+                <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
                 <div>
                     {{ $announcement->body }}
-                    <div class="author">
-                        {{ $announcement->author }} @ {{ $announcement->created_at }}
-                    </div>
+                </div>
+                <div class="author">
+                    <span class="glyphicon glyphicon-comment author-icon"></span>{{ $announcement->author }} @ {{ $announcement->created_at }}
                 </div>
             </li>
         @endforeach
@@ -26,37 +26,52 @@
         var socket = io('http://192.168.10.10:3000');
         socket.on("town-crier:App\\Events\\Shout", function(message) {
 
-            console.log(message);
-
             if (message.data !== null) {
 
                 var data = message.data.announcement;
-                var panel = resolvePanelClass(data.type);
+                var type = resolveShoutClass(data.type);
 
-                var panel = $('<li class="list-group-item list-group-item-'+panel+'">'+
-                        '<h3 class="panel-title">'+data.title+'</h3>'+
+                var panel = $('<li class="list-group-item list-group-item-'+type.panel+'">'+
+                        '<h4 class="shout-title"><span class="glyphicon glyphicon-'+type.icon+' shout-type"></span>'+data.title+'</h4>'+
                         '<div>'+
                         data.body+
-                        '<div class="author">'+data.author+' @ '+data.created_at+'</div>'+
                         '</div>'+
+                        '<div class="author"><span class="glyphicon glyphicon-comment author-icon"></span>'+data.author+' @ '+data.created_at+'</div>'+
                         '</li>').hide().fadeIn(250);
 
                 // Display the latest Shout
                 $('.shouts').prepend(panel);
+
+                console.log(panel);
             }
 
         });
 
-        var resolvePanelClass = function(type) {
+        var resolveShoutClass = function(type) {
+
+            console.log('Resolve '+type);
+
             switch (type) {
                 case 'funded':
-                    return 'success';
+                    return {
+                        'panel': 'success',
+                        'icon': 'ok',
+                    };
                 case 'birthday':
-                    return 'info';
+                    return {
+                        'panel': 'info',
+                        'icon': 'user',
+                    };
                 case 'investment':
-                    return 'warning';
+                    return {
+                        'panel': 'warning',
+                        'icon': 'piggy-bank',
+                    };
                 default:
-                    return 'default'
+                    return {
+                        'panel': 'default',
+                        'icon': 'bullhorn',
+                    };
             }
         }
 
