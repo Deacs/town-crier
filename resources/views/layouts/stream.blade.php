@@ -32,7 +32,7 @@
                 var type = resolveShoutClass(data.type);
 
                 var panel = $('<li class="list-group-item list-group-item-'+type.panel+'">'+
-                        '<h4 class="shout-title"><span class="glyphicon glyphicon-'+type.icon+' shout-type"></span>'+data.title+'</h4>'+
+                        '<h4 class="shout-title"><span class="glyphicon shout-type"></span>'+data.title+'</h4>'+
                         '<div>'+
                         data.body+
                         '</div>'+
@@ -48,8 +48,6 @@
         });
 
         var resolveShoutClass = function(type) {
-
-            console.log('Resolve '+type);
 
             switch (type) {
                 case 'funded':
@@ -76,9 +74,21 @@
         }
 
         $(document).ready(function() {
-            $('.funded').addClass('list-group-item-success');
-            $('.birthday').addClass('list-group-item-info');
-            $('.investment').addClass('list-group-item-warning');
+
+            // For each of the following elements that are found,
+            // update the outlying element to swap out the type for a bootstrap style
+            // and find the icon and swap out for the correct version
+            $('.funded').addClass('list-group-item-'+resolveShoutClass('funded').panel)
+                    .find('.shout-type')
+                    .addClass('glyphicon-'+resolveShoutClass('funded').icon);
+            $('.birthday').addClass('list-group-item-'+resolveShoutClass('birthday').panel)
+                    .find('.shout-type')
+                    .addClass('glyphicon-'+resolveShoutClass('birthday').icon);
+            $('.investment').addClass('list-group-item-'+resolveShoutClass('investment').panel)
+                    .find('.shout-type')
+                    .addClass('glyphicon-'+resolveShoutClass('investment').icon);
+//            $('.birthday').addClass('list-group-item-info');
+//            $('.investment').addClass('list-group-item-warning');
         });
     </script>
 @stop
