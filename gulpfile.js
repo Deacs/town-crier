@@ -17,9 +17,9 @@ elixir(function(mix) {
             'app/vendor/socket.io.js',
         ], 'public/js/vendor.js')
         .styles([
-                'app/vendor/sweetalert.css',
-                'app/custom.css',
-                './public/css/app.css'
+            './public/css/app.css',
+            'app/vendor/sweetalert.css',
+            'app/vendor/custom.css'
             ], './public/css/town-crier.css'
         )
 });
