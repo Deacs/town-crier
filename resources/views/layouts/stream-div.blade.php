@@ -1,23 +1,27 @@
+
 @extends('layouts.master')
 
 @section('content')
 
-    <ul class="list-group shouts">
+    <div id="shouts">
         @foreach($announcements as $announcement)
-            <li class="list-group-item {{ $announcement->type }}">
-                <h3 class="panel-title">{{ $announcement->title }}</h3>
-                <div>
+            <div class="panel {{ $announcement->type }}">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ $announcement->title }}</h3>
+                </div>
+                <div class="panel-body">
                     {{ $announcement->body }}
                     <div class="author">
                         {{ $announcement->author }} @ {{ $announcement->created_at }}
                     </div>
                 </div>
-            </li>
+            </div>
         @endforeach
-    </ul>
+    </div>
 @stop
 
 @section('footer')
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script>
         var socket = io('http://192.168.10.10:3000');
         socket.on("town-crier:App\\Events\\Shout", function(message) {
@@ -29,16 +33,18 @@
                 var data = message.data.announcement;
                 var panel = resolvePanelClass(data.type);
 
-                var panel = $('<li class="list-group-item list-group-item-'+panel+'">'+
+                var panel = $('<div class="panel panel-'+panel+'">'+
+                        '<div class="panel-heading">'+
                         '<h3 class="panel-title">'+data.title+'</h3>'+
-                        '<div>'+
+                        '</div>'+
+                        '<div class="panel-body">'+
                         data.body+
                         '<div class="author">'+data.author+' @ '+data.created_at+'</div>'+
                         '</div>'+
-                        '</li>').hide().fadeIn(250);
+                        '</div>').hide().fadeIn(250);
 
                 // Display the latest Shout
-                $('.shouts').prepend(panel);
+                $('#shouts').prepend(panel);
             }
 
         });
@@ -57,9 +63,9 @@
         }
 
         $(document).ready(function() {
-            $('.funded').addClass('list-group-item-success');
-            $('.birthday').addClass('list-group-item-info');
-            $('.investment').addClass('list-group-item-warning');
+            $('.funded').addClass('panel-success');
+            $('.birthday').addClass('panel-info');
+            $('.investment').addClass('panel-warning');
         });
     </script>
 @stop
