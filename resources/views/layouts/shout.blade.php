@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('head-scripts')
-    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
-@stop
-@section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.css') }}">
-@stop
+{{--@section('head-scripts')--}}
+    {{--<script src="{{ asset('js/sweetalert.min.js') }}"></script>--}}
+{{--@stop--}}
+{{--@section('styles')--}}
+    {{--<link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.css') }}">--}}
+{{--@stop--}}
 
 @section('content')
     <div class="container">
@@ -35,7 +35,6 @@
 @stop
 
 @section('footer')
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script>
 
         var respond = function(response) {
