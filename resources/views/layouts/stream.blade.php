@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
+@section('page-title')Stream@stop
+
 @section('content')
 
+    <div class="town-crier">
     <ul class="list-group shouts">
         @foreach($announcements as $announcement)
             <li class="list-group-item {{ $announcement->type }}">
@@ -15,6 +18,7 @@
             </li>
         @endforeach
     </ul>
+    </div>
 @stop
 
 @section('footer')

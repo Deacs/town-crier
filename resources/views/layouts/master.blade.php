@@ -4,13 +4,12 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="{{ asset('css/town-crier.css') }}">
     <meta charset="UTF-8">
-    <title>Town Crier : Stream</title>
+    <title>Town Crier @yield('page-title')</title>
 </head>
 <html lang="en">
 <body>
-
     @include('layouts.header.nav')
-    <div class="container town-crier">
+    <div class="container main">
         @yield('content')
     </div>
 
