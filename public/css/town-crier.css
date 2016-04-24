@@ -6684,13 +6684,27 @@ body.stop-scrolling {
     -o-transform: translateY(145%);
     transform: translateY(145%); } }
 
+.main {
+    margin-top: 30px;
+    padding: 0;
+}
 .town-crier {
     width:100%;
-    padding:0;
-    margin:45px 0 0 0;
 }
 .shouts {
     width:100%;
+}
+.shout-type {
+    margin-right: 0.5em;
+}
+.shout-title {
+    margin: 0 0 10px 0;
+}
+.author {
+    text-align: right;
+}
+.author-icon {
+    margin-right:0.5em;
 }
 
 /*# sourceMappingURL=town-crier.css.map */

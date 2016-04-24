@@ -1,14 +1,9 @@
 @extends('layouts.master')
 
-{{--@section('head-scripts')--}}
-    {{--<script src="{{ asset('js/sweetalert.min.js') }}"></script>--}}
-{{--@stop--}}
-{{--@section('styles')--}}
-    {{--<link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.css') }}">--}}
-{{--@stop--}}
+@section('page-title')Shout!@stop
 
 @section('content')
-    <div class="container">
+    <div class="town-crier">
         <h2>Shout!</h2>
         <form action="fire" id="shout" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
