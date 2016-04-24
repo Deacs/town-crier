@@ -6693,6 +6693,7 @@ body.stop-scrolling {
 }
 .shouts {
     width:100%;
+    display:none;
 }
 .shout-type {
     margin-right: 0.5em;

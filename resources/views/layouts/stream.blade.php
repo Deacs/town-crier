@@ -25,6 +25,8 @@
     <script>
         var socket = io('http://192.168.10.10:3000');
 
+        var $shouts = $('.shouts');
+
         var typeMeta = {
             funded: {
                 panel: 'success',
@@ -60,26 +62,42 @@
                         '</li>').hide().fadeIn(250);
 
                 // Display the latest Shout
-                $('.shouts').prepend(panel);
+                $shouts.prepend(panel);
             }
 
         });
 
+        // For each of the following elements that are found,
+        // update the outlying element to swap out the type for a bootstrap style
+        // and find the icon and swap out for the correct version
+        var swapPanelStyles = function() {
+            for (var key in typeMeta) {
+                // skip loop if the property is from prototype
+                if (!typeMeta.hasOwnProperty(key)) continue;
+
+                var obj = typeMeta[key];
+
+                for (var prop in obj) {
+                    // skip loop if the property is from prototype
+                    if(!obj.hasOwnProperty(prop)) continue;
+
+                    $('.'+key).addClass('list-group-item-' + obj.panel)
+                            .find('.shout-type')
+                            .addClass('glyphicon-' + obj.icon);
+                }
+            }
+        }
+
+        // Callback function to fade in the shout stream
+        // Allows a delay in order to manipulate the css
+        var displayStream = function() {
+            $shouts.fadeIn(1000);
+        }
+
         $(document).ready(function() {
 
-            // For each of the following elements that are found,
-            // update the outlying element to swap out the type for a bootstrap style
-            // and find the icon and swap out for the correct version
-            // TODO - this needs to loop the typeMeta array
-            $('.funded').addClass('list-group-item-' + typeMeta.funded.panel)
-                    .find('.shout-type')
-                    .addClass('glyphicon-' + typeMeta.funded.icon);
-            $('.birthday').addClass('list-group-item-' + typeMeta.birthday.panel)
-                    .find('.shout-type')
-                    .addClass('glyphicon-' + typeMeta.birthday.icon);
-            $('.investment').addClass('list-group-item-' + typeMeta.investment.panel)
-                    .find('.shout-type')
-                    .addClass('glyphicon-' + typeMeta.investment.icon);
+            swapPanelStyles(displayStream());
+
         });
     </script>
 @stop
