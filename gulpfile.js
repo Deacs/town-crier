@@ -4,7 +4,8 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
 
-    var bootstrapPath = 'node_modules/bootstrap-sass/assets';
+    var bootstrapPath   = 'node_modules/bootstrap-sass/assets';
+    var momentPath      = 'node_modules/moment';
 
     mix.sass('app.scss')
         .copy(bootstrapPath + '/fonts', 'public/fonts')
@@ -15,6 +16,7 @@ elixir(function(mix) {
             'app/vendor/modernizr.js',
             'app/vendor/sweetalert-dev.js',
             'app/vendor/socket.io.js',
+            'app/vendor/moment.min.js',
         ], 'public/js/vendor.js')
         .styles([
             './public/css/app.css',

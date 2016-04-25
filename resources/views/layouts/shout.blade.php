@@ -4,26 +4,40 @@
 
 @section('content')
     <div class="town-crier">
+
         <h2>Shout!</h2>
-        <form action="fire" id="shout" method="POST">
+
+        <form action="fire" id="shout" method="POST" class="form-horizontal">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="row">
-                <input type="text" name="title">
-            </div>
-            <div class="row">
-                <select name="type">
-                    <option value="">Shout About ...</option>
-                    <option value="funded">FUNDED</option>
-                    <option value="birthday">BIRTHDAY</option>
-                    <option value="investment">INVESTMENT</option>
-                </select>
-            </div>
-            <div class="row">
-                <textarea name="body"></textarea>
-            </div>
             <input type="hidden" name="author" value="System">
-            <div class="row">
-                <input type="submit" class="btn btn-primary" value="SHOUT!">
+            <div class="form-group">
+                <label for="title" class="col-sm-2 control-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Title">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="body" class="col-sm-2 control-label">Body</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="body" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="body" class="col-sm-2 control-label">Go on,</label>
+                <div class="col-sm-10">
+                    <select name="type" class="form-control">
+                        <option value="">shout about ...</option>
+                        <option value="funded">FUNDED</option>
+                        <option value="birthday">BIRTHDAY</option>
+                        <option value="investment">INVESTMENT</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-lg btn-primary">Shout! <span class="glyphicon glyphicon-volume-up"></span></button>
+                </div>
             </div>
         </form>
     </div>

@@ -1,23 +1,25 @@
 @extends('layouts.master')
 
-@section('page-title')Stream@stop
+@section('page-title')
+    Stream
+@stop
 
 @section('content')
 
     <div class="town-crier">
-    <ul class="list-group shouts">
-        @foreach($announcements as $announcement)
-            <li class="list-group-item {{ $announcement->type }}">
-                <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
-                <div>
-                    {{ $announcement->body }}
-                </div>
-                <div class="author">
-                    <span class="glyphicon glyphicon-comment author-icon"></span>{{ $announcement->author }} @ {{ $announcement->created_at }}
-                </div>
-            </li>
-        @endforeach
-    </ul>
+        <ul class="list-group shouts">
+            @foreach($announcements as $announcement)
+                <li class="list-group-item {{ $announcement->type }}">
+                    <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
+                    <div>
+                        {{ $announcement->body }}
+                    </div>
+                    <div class="author">
+                        <span class="glyphicon glyphicon-comment author-icon"></span>{{ $announcement->author }}, {{ $announcement->created_at->diffForHumans() }}
+                    </div>
+                </li>
+            @endforeach
+        </ul>
     </div>
 @stop
 
@@ -53,12 +55,14 @@
                 var data = message.data.announcement,
                     type = typeMeta[data.type]
 
+                console.log(data);
+
                 var panel = $('<li class="list-group-item list-group-item-'+type.panel+'">'+
                         '<h4 class="shout-title"><span class="glyphicon glyphicon-'+type.icon+' shout-type"></span>'+data.title+'</h4>'+
                         '<div>'+
                         data.body+
                         '</div>'+
-                        '<div class="author"><span class="glyphicon glyphicon-comment author-icon"></span>'+data.author+' @ '+data.created_at+'</div>'+
+                        '<div class="author"><span class="glyphicon glyphicon-comment author-icon"></span>'+data.author+', '+moment().calendar()+'</div>'+
                         '</li>').hide().fadeIn(250);
 
                 // Display the latest Shout
