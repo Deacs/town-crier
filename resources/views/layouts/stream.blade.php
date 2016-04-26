@@ -48,6 +48,22 @@
             }
         };
 
+        // Tasks performed by teh Janitor
+        socket.on("town-crier:App\\Events\\Janitor", function(task) {
+
+            var data    = task.data,
+                action  = data.action;
+
+            // Refresh the current window
+            // 
+            if (action !== null) {
+                if (action == 'refresh') {
+                    location.reload();
+                }
+            }
+
+        });
+
         socket.on("town-crier:App\\Events\\Shout", function(message) {
 
             if (message.data !== null) {

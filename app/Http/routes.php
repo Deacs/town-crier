@@ -33,3 +33,10 @@ Route::get('stream', function () {
     $announcements = Announcement::latest()->take(5)->get();
     return view('layouts.stream')->with('announcements', $announcements);
 });
+
+Route::get('refresh',
+    [
+        'as'    => 'refresh-remotes',
+        'uses'  => 'SocketController@refresh'
+    ]
+);
