@@ -4,9 +4,11 @@
 }
 .town-crier {
     width:100%;
+    margin-top:20px;
 }
 .shouts {
     width:100%;
+    display:none;
 }
 .shout-type {
     margin-right: 0.5em;

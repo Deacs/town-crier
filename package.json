@@ -8,6 +8,7 @@
     "express": "^4.13.4",
     "ioredis": "^1.15.1",
     "laravel-elixir": "^5.0.0",
+    "moment": "^2.13.0",
     "redis": "^2.5.3",
     "socket.io": "^1.4.5"
   }
