@@ -6692,6 +6692,10 @@ body.stop-scrolling {
     width:100%;
     margin-top:20px;
 }
+.janitor , .shout-out {
+    width:100%;
+    margin-top:40px;
+}
 .shouts {
     width:100%;
     display:none;

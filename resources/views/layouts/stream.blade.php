@@ -5,7 +5,6 @@
 @stop
 
 @section('content')
-
     <div class="town-crier">
         <ul class="list-group shouts">
             @foreach($announcements as $announcement)
@@ -15,7 +14,7 @@
                         {{ $announcement->body }}
                     </div>
                     <div class="author">
-                        <span class="glyphicon glyphicon-comment author-icon"></span>{{ $announcement->author }}, {{ $announcement->created_at->diffForHumans() }}
+                        {{ $announcement->author }}, {{ $announcement->created_at->diffForHumans() }} <span class="glyphicon glyphicon-time"></span>
                     </div>
                 </li>
             @endforeach
@@ -42,8 +41,8 @@
                 'panel': 'info',
                 'icon': 'user'
             },
-            d: {
-                'panel': 'success',
+            announcement: {
+                'panel': 'danger',
                 'icon': 'bullhorn'
             }
         };
@@ -55,7 +54,7 @@
                 action  = data.action;
 
             // Refresh the current window
-            // 
+            //
             if (action !== null) {
                 if (action == 'refresh') {
                     location.reload();
@@ -78,7 +77,7 @@
                         '<div>'+
                         data.body+
                         '</div>'+
-                        '<div class="author"><span class="glyphicon glyphicon-comment author-icon"></span>'+data.author+', '+moment().calendar()+'</div>'+
+                        '<div class="author">'+data.author+', '+moment().calendar()+' <span class="glyphicon glyphicon glyphicon-time"></span></div>'+
                         '</li>').hide().fadeIn(250);
 
                 // Display the latest Shout

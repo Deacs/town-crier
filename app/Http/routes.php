@@ -17,9 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('shout', function() {
-    return view('layouts.shout');
-})->name('shout-out');
+Route::get('shout',
+    [
+        'as'    => 'shout-out',
+        'uses'  => 'ShoutController@create'
+    ]
+);
 
 Route::post('fire',
     [
@@ -28,15 +31,23 @@ Route::post('fire',
     ]
 );
 
-Route::get('stream', function () {
-    // this checks for the event and displays the latest 5 from the DB
-    $announcements = Announcement::latest()->take(5)->get();
-    return view('layouts.stream')->with('announcements', $announcements);
-});
+Route::get('stream',
+    [
+        'as'    => 'stream',
+        'uses'  => 'StreamController@index'
+    ]
+);
+
+Route::get('janitor',
+    [
+        'as'    => 'janitor',
+        'uses'  => 'JanitorController@index'
+    ]
+);
 
 Route::get('refresh',
     [
         'as'    => 'refresh-remotes',
-        'uses'  => 'SocketController@refresh'
+        'uses'  => 'JanitorController@refresh'
     ]
 );
