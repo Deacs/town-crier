@@ -47,7 +47,14 @@
             }
         };
 
-        // Tasks performed by teh Janitor
+        // Gossip
+        socket.on("town-crier:App\\Events\\Rumour", function(output) {
+
+            console.log(output);
+
+        });
+
+        // Tasks performed by the Janitor
         socket.on("town-crier:App\\Events\\Janitor", function(task) {
 
             var data    = task.data,
@@ -82,6 +89,9 @@
 
                 // Display the latest Shout
                 $shouts.prepend(panel);
+            }
+            else {
+                console.log('No Data');
             }
 
         });

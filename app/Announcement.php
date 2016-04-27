@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Events\Shout;
+use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
@@ -37,6 +38,8 @@ class Announcement extends Model
         ]);
 
         if ($validator->passes()) {
+
+            \Log::info('All Good!');
 
             $this->create($this->data);
 

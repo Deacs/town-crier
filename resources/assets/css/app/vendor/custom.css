@@ -22,6 +22,8 @@
 }
 .author {
     text-align: right;
+    font-style: italic;
+    margin-top: 10px;
 }
 .author-icon {
     margin-right:0.5em;

@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Announcement;
+use App\Gossip;
 use Illuminate\Console\Command;
 
-class Investment extends Command
+class Invest extends Command
 {
     /**
      * The name and signature of the console command.
@@ -27,18 +29,6 @@ class Investment extends Command
      */
     public function handle()
     {
-
-//        $this->comment(PHP_EOL.Inspiring::quote().PHP_EOL);
-//        $this->data = [
-//            'title'         => 'Auto Generated',
-//            'body'          => 'This content is automatically generated',
-//            'author'        => 'Scheduler',
-//            'type'          => 'announcement',
-//            'created_at'    => Carbon::now()
-//        ];
-//
-//        $schedule->call(function () {
-//            event(new Shout($this->data));
-//        })->everyMinute();
+        (new Gossip())->investment();
     }
 }
