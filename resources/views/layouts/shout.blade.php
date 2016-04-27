@@ -1,11 +1,14 @@
 @extends('layouts.master')
 
-@section('page-title')Shout!@stop
+@section('page-title')
+    Shout!
+@stop
 
 @section('content')
-    <div class="town-crier">
 
-        <h2>Shout!</h2>
+    <div class="shout-out">
+
+        <h1><span class="glyphicon glyphicon-bullhorn"></span> Shout!</h1>
 
         <form action="fire" id="shout" method="POST" class="form-horizontal">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -30,6 +33,7 @@
                         <option value="funded">FUNDED</option>
                         <option value="birthday">BIRTHDAY</option>
                         <option value="investment">INVESTMENT</option>
+                        <option value="announcement">ANNOUNCEMENT</option>
                     </select>
                 </div>
             </div>
@@ -51,7 +55,7 @@
             var data = {
                 type: "success",
                 title: "Shout Heard!",
-                text: "Your Shout has been added to the fray.",
+                text: "Your Shout has been added to the burble.",
             };
             if (response != 'pass') {
                 data = {
