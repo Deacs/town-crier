@@ -3,9 +3,10 @@
 namespace App;
 
 use App\Events\Chore;
+//use App\Announcement;
 use Illuminate\Database\Eloquent\Model;
 
-class Janitor extends Model
+class Duty extends Model
 {
     public static function refreshClients()
     {
@@ -14,11 +15,12 @@ class Janitor extends Model
 
     public static function purgeDB()
     {
-
+        event(new Chore('rewind'));
+        Announcement::getQuery()->delete();
     }
 
     public static function purgeRedis()
     {
-
+        dd('Purge Redis');
     }
 }

@@ -7,7 +7,7 @@
 @section('content')
     <div class="town-crier">
         <ul class="list-group shouts">
-            @foreach($announcements as $announcement)
+            @forelse($announcements as $announcement)
                 <li class="list-group-item {{ $announcement->type }}">
                     <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
                     <div>
@@ -17,7 +17,9 @@
                         {{ $announcement->author }}, {{ $announcement->created_at->diffForHumans() }} <span class="glyphicon glyphicon-time"></span>
                     </div>
                 </li>
-            @endforeach
+            @empty
+                <li class="list-group-item tumbleweed" id="empty_message_item">It's real quiet out there</li>
+            @endforelse
         </ul>
     </div>
 @stop
@@ -62,6 +64,24 @@
             // Refresh the current window
             if (action !== null) {
                 if (action == 'refresh') {
+
+                    swal({
+                        title: "Clean up on aisle 4",
+                        text: "We are having a quick clean up. Hold on to your hat!",
+                        type: "info",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    }, function(){
+                        setTimeout(function(){
+                            location.reload();
+                        }, 3000);
+                    });
+                }
+
+                if (action == 'rewind') {
+                    // Show a notification modal (SweetAlert)
+                    alert('Reeeeeewind!');
+                    // reload window
                     location.reload();
                 }
             }
@@ -71,6 +91,9 @@
         socket.on("town-crier:App\\Events\\Shout", function(message) {
 
             if (message.data !== null) {
+
+                // Check for the empty stream message and remove if found
+                $('#empty_message_item').remove();
 
                 var data = message.data.announcement,
                     type = typeMeta[data.type]

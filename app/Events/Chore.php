@@ -3,7 +3,7 @@
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class CleanUp extends Event implements ShouldBroadcast
+class Chore extends Event implements ShouldBroadcast
 {
     use SerializesModels;
 
