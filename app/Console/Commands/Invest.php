@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Announcement;
 use App\Gossip;
+use App\Announcement;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class Invest extends Command
 {
@@ -29,6 +30,9 @@ class Invest extends Command
      */
     public function handle()
     {
-        (new Gossip())->investment();
+        Log::info('Invest Command Response....');
+        (new Gossip())->whisper();
+        Log::info('After Whisper....');
+//        (new Gossip())->investment();
     }
 }
