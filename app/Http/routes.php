@@ -32,7 +32,7 @@ Route::get('janitor',
     ]
 );
 
-Route::get('refresh',
+Route::get('refresh-remotes',
     [
         'as'    => 'refresh-remotes',
         'uses'  => 'JanitorController@refreshClients'
@@ -43,5 +43,12 @@ Route::get('purge-db',
     [
         'as'    => 'purge-db',
         'uses'  => 'JanitorController@purgeDB'
+    ]
+);
+
+Route::get('purge-redis',
+    [
+        'as'    => 'purge-redis',
+        'uses'  => 'JanitorController@purgeRedis'
     ]
 );

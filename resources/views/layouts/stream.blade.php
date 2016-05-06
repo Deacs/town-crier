@@ -18,7 +18,9 @@
                     </div>
                 </li>
             @empty
-                <li class="list-group-item tumbleweed" id="empty_message_item">It's real quiet out there</li>
+                <li class="list-group-item tumbleweed" id="empty_message_item">
+                    <h2 class="text-center"><span class="glyphicon glyphicon-headphones"></span> It's real quiet out there</h2>
+                </li>
             @endforelse
         </ul>
     </div>
@@ -48,6 +50,17 @@
             }
         };
 
+        var choreMsgData = {
+            refresh: {
+                'title': 'Clean up on aisle 4, please',
+                'text': 'We are having a quick clean up. Hold on to your hat!'
+            },
+            rewind: {
+                'title': 'Rewind!',
+                'text': 'Let\'s take it back ...... way back'
+            }
+        }
+
         // Gossip
         socket.on("town-crier:App\\Events\\Rumour", function(output) {
 
@@ -59,30 +72,23 @@
         socket.on("town-crier:App\\Events\\Chore", function(task) {
 
             var data    = task.data,
-                action  = data.action;
+                action  = data.action ;
 
-            // Refresh the current window
             if (action !== null) {
-                if (action == 'refresh') {
+
+                if (action == 'refresh' || action == 'rewind') {
+
+                    var msgData = choreMsgData[action];
 
                     swal({
-                        title: "Clean up on aisle 4",
-                        text: "We are having a quick clean up. Hold on to your hat!",
+                        title: msgData.title,
+                        text: msgData.text,
                         type: "info",
                         showConfirmButton: false,
-                        timer: 2000,
+                        timer: 5000,
                     }, function(){
-                        setTimeout(function(){
-                            location.reload();
-                        }, 3000);
+                        location.reload();
                     });
-                }
-
-                if (action == 'rewind') {
-                    // Show a notification modal (SweetAlert)
-                    alert('Reeeeeewind!');
-                    // reload window
-                    location.reload();
                 }
             }
 

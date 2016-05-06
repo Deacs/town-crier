@@ -18,7 +18,7 @@ class JanitorController extends Controller
     public function refreshClients()
     {
         Duty::refreshClients();
-        return redirect('janitor');
+//        return redirect('janitor');
     }
 
     /**
@@ -27,7 +27,7 @@ class JanitorController extends Controller
     public function purgeDB()
     {
         Duty::purgeDB();
-        return redirect('janitor');
+//        return redirect('janitor');
     }
 
 }
