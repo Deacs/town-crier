@@ -51,3 +51,10 @@ Route::get('refresh',
         'uses'  => 'JanitorController@refresh'
     ]
 );
+
+Route::get('purge-db',
+    [
+        'as'    => 'purge-db',
+        'uses'  => 'JanitorController@purge_db'
+    ]
+);

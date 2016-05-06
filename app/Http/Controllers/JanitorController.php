@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\Janitor;
-use Illuminate\Http\Request;
-
+use App\Janitor;
 use App\Http\Requests;
 
 class JanitorController extends Controller
@@ -19,8 +17,15 @@ class JanitorController extends Controller
      */
     public function refresh()
     {
-        event(new Janitor('refresh'));
+        Janitor::refreshClients();
         return redirect('janitor');
+    }
+
+    public function purge_db()
+    {
+        // Purge the persistent storage
+
+        // Automatically refresh the remote clients
     }
 
 }

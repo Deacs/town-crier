@@ -54,7 +54,7 @@
         });
 
         // Tasks performed by the Janitor
-        socket.on("town-crier:App\\Events\\Janitor", function(task) {
+        socket.on("town-crier:App\\Events\\Chore", function(task) {
 
             var data    = task.data,
                 action  = data.action;
