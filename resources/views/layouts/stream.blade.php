@@ -24,8 +24,7 @@
 
 @section('footer')
     <script>
-        var socket = io('http://192.168.10.10:3000');
-
+        var socket = io('{{ env('SOCKET_ADDRESS') }}');
         var $shouts = $('.shouts');
 
         var typeMeta = {
@@ -61,7 +60,6 @@
                 action  = data.action;
 
             // Refresh the current window
-            //
             if (action !== null) {
                 if (action == 'refresh') {
                     location.reload();

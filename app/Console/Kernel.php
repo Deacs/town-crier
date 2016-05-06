@@ -25,9 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-
-        $schedule->call(function () {
-            (new Gossip())->whisper();
-        })->everyMinute();
+//        $schedule->call(function () {
+//            (new Gossip())->whisper();
+//        })->everyMinute();
     }
 }
