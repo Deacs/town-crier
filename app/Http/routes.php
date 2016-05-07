@@ -1,8 +1,6 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'StreamController@index');
 
 Route::get('shout',
     [
@@ -22,6 +20,13 @@ Route::get('stream',
     [
         'as'    => 'stream',
         'uses'  => 'StreamController@index'
+    ]
+);
+
+Route::get('stats',
+    [
+        'as'    => 'stats',
+        'uses'  => 'StatsController@index'
     ]
 );
 
