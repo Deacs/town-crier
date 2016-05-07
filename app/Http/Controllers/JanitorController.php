@@ -18,7 +18,6 @@ class JanitorController extends Controller
     public function refreshClients()
     {
         Duty::refreshClients();
-//        return redirect('janitor');
     }
 
     /**
@@ -27,7 +26,15 @@ class JanitorController extends Controller
     public function purgeDB()
     {
         Duty::purgeDB();
-//        return redirect('janitor');
+    }
+
+    /**
+     * Fire an event that will purge Redis
+     */
+    public function purgeRedis()
+    {
+        // @TODO
+        //Duty::purgeRedis();
     }
 
 }
