@@ -1,18 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-use App\Announcement;
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -45,9 +32,23 @@ Route::get('janitor',
     ]
 );
 
-Route::get('refresh',
+Route::get('refreshremotes',
     [
         'as'    => 'refresh-remotes',
-        'uses'  => 'JanitorController@refresh'
+        'uses'  => 'JanitorController@refreshClients'
+    ]
+);
+
+Route::get('purgedb',
+    [
+        'as'    => 'purge-db',
+        'uses'  => 'JanitorController@purgeDB'
+    ]
+);
+
+Route::get('purgeredis',
+    [
+        'as'    => 'purge-redis',
+        'uses'  => 'JanitorController@purgeRedis'
     ]
 );
