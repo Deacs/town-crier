@@ -39,8 +39,6 @@ class Announcement extends Model
 
         if ($validator->passes()) {
 
-            \Log::info('All Good!');
-
             $this->create($this->data);
 
             // Fire the Shout event picked up by the Node app

@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class AnnouncementsTableSeeder extends Seeder
@@ -14,10 +15,11 @@ class AnnouncementsTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         DB::table('announcements')->insert([
-            'title'         => $faker->words(2),
+            'title'         => $faker->word(),
             'body'          => $faker->text(50),
             'type'          => $faker->word(),
             'author'        => $faker->name,
+            'active'        => $faker->boolean(50),
             'created_at'    => Carbon::now(),
             'updated_at'    => Carbon::now(),
         ]);

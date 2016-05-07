@@ -18,6 +18,7 @@ class CreateAnnouncementsTable extends Migration
             $table->text('body');
             $table->text('type');
             $table->string('author');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

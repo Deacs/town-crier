@@ -16,7 +16,10 @@ class Duty extends Model
     public static function purgeDB()
     {
         event(new Chore('rewind'));
-        Announcement::getQuery()->delete();
+        // Nothing drastic, mark active announcements as inactive
+        Announcement::where('active', '=', 1)->update(['active' => 0]);
+//        $affected = DB::table('announcements')->update(array('active' => 0));
+        //Announcement::getQuery()->delete();
     }
 
     public static function purgeRedis()
