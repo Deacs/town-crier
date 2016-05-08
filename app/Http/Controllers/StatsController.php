@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Stats;
+use App\Http\Requests;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 
 class StatsController extends Controller
 {
     public function index()
     {
-        return view('stats.index');
+        $statData = Stats::dashboardDetails();
+
+        return view('stats.index')->with('statData', $statData);
     }
 }

@@ -11,7 +11,7 @@ class StreamController extends Controller
 {
     public function index()
     {
-        $announcements = Announcement::latest()->where('active', 1)->take(5)->get();
+        $announcements = Announcement::latest()->where('active', 1)->take(10)->get();
         return view('layouts.stream')->with('announcements', $announcements);
     }
 }

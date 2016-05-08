@@ -1,6 +1,9 @@
 <?php
 
 Route::get('/', 'StreamController@index');
+//Route::get('/', function() {
+//    dd(\App\Announcement::activeTotal());
+//});
 
 Route::get('shout',
     [

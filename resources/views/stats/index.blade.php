@@ -9,8 +9,8 @@
         <div class="row">
             <h1><span class="glyphicon glyphicon-dashboard"></span> Stats</h1>
             <ul>
-                <li>Total Announcements: </li>
-                <li>Last Announcement: </li>
+                <li>Total Announcements: <b>{{ $statData['activeAnnouncementsCount'] }}</b></li>
+                <li>Last Announcement: <b>{{ $statData['latestAnnouncementDate']->diffForHumans() }}</b> <b>({{ $statData['latestAnnouncementDate']->toDayDateTimeString() }})</b></li>
                 <li>Last DB Purge: </li>
                 <li>Last Redis Purge: </li>
             </ul>
