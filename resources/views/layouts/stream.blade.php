@@ -52,7 +52,7 @@
 
         var choreMsgData = {
             refresh: {
-                'title': 'Clean up on aisle 4, please',
+                'title': 'Clean up on aisle 4',
                 'text': 'We are having a quick clean up. Hold on to your hat!'
             },
             rewind: {
