@@ -95,7 +95,7 @@
         });
 
         socket.on("town-crier:App\\Events\\Shout", function(message) {
-            
+
             if (message.data !== null) {
 
                 // Check for the empty stream message and remove if found

@@ -2,14 +2,21 @@
 
 namespace App;
 
+use App\Auditor;
 use App\Events\Chore;
-//use App\Announcement;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
 
 class Duty extends Model
 {
     public static function refreshClients()
     {
+        // Audit the action
+        Log::info('Calling Audit for client Refresh');
+
+        $auditor = new Auditor();
+        $auditor->record('clients refreshed', 1);
+
         event(new Chore('refresh'));
     }
 
@@ -17,14 +24,14 @@ class Duty extends Model
     {
         // Nothing drastic, mark active announcements as inactive
         Announcement::where('active', '=', 1)->update(['active' => 0]);
-        // Audit the action
-        Audit::record('database purge');
         // Fire the event to clear the streams and refresh the clients
         event(new Chore('rewind'));
     }
 
     public static function purgeRedis()
     {
+        // Audit the action
+        Audit::record('redis purged');
         dd('Purge Redis');
     }
 }
