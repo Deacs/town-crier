@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-    <div class="town-crier">
+    <div class="town-crier shouts">
         {{--<ul class="list-group shouts">--}}
             @forelse($announcements as $announcement)
                 <div class="list-group-item {{ $announcement->type }}">
@@ -95,30 +95,36 @@
         });
 
         socket.on("town-crier:App\\Events\\Shout", function(message) {
-
+            
             if (message.data !== null) {
 
                 // Check for the empty stream message and remove if found
                 $('#empty_message_item').remove();
 
                 var data = message.data.announcement,
-                    type = typeMeta[data.type]
+                    type = typeMeta[data.type];
 
                 console.log(data);
 
-                var panel = $('<li class="list-group-item list-group-item-'+type.panel+'">'+
+                var panel = $('<div class="list-group-item list-group-item-'+type.panel+'">'+
                         '<h4 class="shout-title"><span class="glyphicon glyphicon-'+type.icon+' shout-type"></span>'+data.title+'</h4>'+
                         '<div>'+
                         data.body+
                         '</div>'+
                         '<div class="author">'+data.author+', '+moment().calendar()+' <span class="glyphicon glyphicon glyphicon-time"></span></div>'+
-                        '</li>').hide().fadeIn(250);
+                        '</div>').hide().fadeIn(250);
 
                 // Display the latest Shout
                 $shouts.prepend(panel);
             }
             else {
-                console.log('No Data');
+                swal({
+                    title: 'Whoops',
+                    text: 'An empty Shout has been heard. Please report this error',
+                    type: "error",
+                    showConfirmButton: false,
+                    timer: 5000,
+                });
             }
 
         });
