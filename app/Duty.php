@@ -15,9 +15,12 @@ class Duty extends Model
 
     public static function purgeDB()
     {
-        event(new Chore('rewind'));
         // Nothing drastic, mark active announcements as inactive
         Announcement::where('active', '=', 1)->update(['active' => 0]);
+        // Audit the action
+        Audit::record('database purge');
+        // Fire the event to clear the streams and refresh the clients
+        event(new Chore('rewind'));
     }
 
     public static function purgeRedis()
