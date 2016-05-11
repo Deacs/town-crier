@@ -11,8 +11,9 @@
             <ul>
                 <li>Total Announcements: <b>{{ $statData['activeAnnouncementsCount'] }}</b></li>
                 <li>Last Announcement: <b>{{ $statData['latestAnnouncementDate']->diffForHumans() }}</b> <b>({{ $statData['latestAnnouncementDate']->toDayDateTimeString() }})</b></li>
-                <li>Last DB Purge: </li>
-                <li>Last Redis Purge: </li>
+                <li>Last Client Refresh: <b>{{ $statData['lastClientRefreshDate']->diffForHumans() }}</b> <b>({{ $statData['lastClientRefreshDate'] }})</b></li>
+                <li>Last DB Purge: ???</li>
+                <li>Last Redis Purge: ???</li>
             </ul>
         </div>
 

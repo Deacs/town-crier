@@ -11,8 +11,15 @@ class Stats extends Model
     {
         return [
             'latestAnnouncementDate'    => self::latestAnnouncementDate(),
-            'activeAnnouncementsCount'  => self::activeAnnouncementTotal()
+            'activeAnnouncementsCount'  => self::activeAnnouncementTotal(),
+            'lastClientRefreshDate'     => self::lastClientRefreshDate(),
         ];
+    }
+
+    public static function lastClientRefreshDate()
+    {
+        $lastDatabsePurge = Audit::latest()->where('type_id', 3)->take(1)->first();
+        return $lastDatabsePurge->created_at;
     }
 
     /**
