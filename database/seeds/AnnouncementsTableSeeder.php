@@ -18,7 +18,6 @@ class AnnouncementsTableSeeder extends Seeder
             DB::table('announcements')->insert([
                 'title'         => $faker->word(),
                 'body'          => $faker->text(50),
-                //'type'          => $faker->word(['announcement', 'investment']),
                 'type'          => $faker->randomElement($array = ['announcement', 'investment', 'funded', 'birthday']),
                 'user_id'       => factory(App\User::class)->create()->id,
                 'active'        => $faker->boolean(50),

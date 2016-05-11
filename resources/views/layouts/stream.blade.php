@@ -14,7 +14,7 @@
                         {{ $announcement->body }}
                     </div>
                     <div class="author">
-                        {{ $announcement->author }}, {{ $announcement->created_at->diffForHumans() }} <span class="glyphicon glyphicon-time"></span>
+                        {{ $announcement->user->name }}, {{ $announcement->created_at->diffForHumans() }} <span class="glyphicon glyphicon-time"></span>
                     </div>
                 </div>
             @empty

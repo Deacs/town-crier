@@ -24,6 +24,11 @@ class Announcement extends Model
         'type'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     public function shout()
     {
         $result = 'fail';
