@@ -6,9 +6,9 @@
 
 @section('content')
     <div class="town-crier">
-        <ul class="list-group shouts">
+        {{--<ul class="list-group shouts">--}}
             @forelse($announcements as $announcement)
-                <li class="list-group-item {{ $announcement->type }}">
+                <div class="list-group-item {{ $announcement->type }}">
                     <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
                     <div>
                         {{ $announcement->body }}
@@ -16,13 +16,13 @@
                     <div class="author">
                         {{ $announcement->author }}, {{ $announcement->created_at->diffForHumans() }} <span class="glyphicon glyphicon-time"></span>
                     </div>
-                </li>
+                </div>
             @empty
-                <li class="list-group-item tumbleweed" id="empty_message_item">
+                <div class="list-group-item tumbleweed" id="empty_message_item">
                     <h2 class="text-center"><span class="glyphicon glyphicon-headphones"></span> It's real quiet out there</h2>
-                </li>
+                </div>
             @endforelse
-        </ul>
+        {{--</ul>--}}
     </div>
 @stop
 
