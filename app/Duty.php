@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Auditor;
+use App\Audit;
 use App\Events\Chore;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
@@ -14,8 +14,8 @@ class Duty extends Model
         // Audit the action
         Log::info('Calling Audit for client Refresh');
 
-        $auditor = new Auditor();
-        $auditor->record('clients refreshed', 1);
+        $audit = new Audit();
+        $audit->record(3, 1);
 
         event(new Chore('refresh'));
     }

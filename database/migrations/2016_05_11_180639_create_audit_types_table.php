@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAuditTable extends Migration
+class CreateAuditTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,9 @@ class CreateAuditTable extends Migration
      */
     public function up()
     {
-        Schema::create('audit', function (Blueprint $table) {
+        Schema::create('audit_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('type_id')->references('id')->on('audit_types');
-            $table->integer('user_id')->references('id')->on('users');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class CreateAuditTable extends Migration
      */
     public function down()
     {
-        Schema::drop('audit');
+        Schema::drop('audit_types');
     }
 }
