@@ -33,6 +33,13 @@ Route::get('stats',
     ]
 );
 
+Route::get('audit-log',
+    [
+        'as'    => 'audit-log',
+        'uses'  => 'AuditController@index'
+    ]
+);
+
 Route::get('janitor',
     [
         'as'    => 'janitor',
