@@ -67,3 +67,10 @@ Route::get('purgeredis',
         'uses'  => 'JanitorController@purgeRedis'
     ]
 );
+
+Route::get('mockinvestment',
+    [
+        'as'    => 'mock-investment',
+        'uses'  => 'SystemEventController@mockInvestment'
+    ]
+);

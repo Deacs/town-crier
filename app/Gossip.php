@@ -26,7 +26,7 @@ class Gossip extends Model
 
     protected $body = null;
 
-    protected $author = null;
+    protected $user_id = 1;
 
     protected $type = null;
 
@@ -39,14 +39,19 @@ class Gossip extends Model
         'investment',
     ];
 
-    public function __construct()
+    public function __construct($eventType = null)
     {
         $this->faker = Factory::create();
 
-        $this->getEventType();
+        if (! is_null($eventType) && in_array($eventType, $this->actions)) {
+            $this->event = $eventType;
+        }
+        else {
+            $this->generateRandomEventType();
+        }
     }
 
-    private function getEventType()
+    private function generateRandomEventType()
     {
         $this->event = $this->actions[array_rand($this->actions)];
     }
@@ -75,7 +80,7 @@ class Gossip extends Model
         return [
             'title'     => $this->title ?: $this->faker->company,
             'body'      => $this->body ?: $this->faker->text,
-            'author'    => $this->author ?: 'System',
+            'user_id'   => $this->user_id ?: 1,
             'type'      => $this->type ?: $this->event
         ];
     }
@@ -84,7 +89,7 @@ class Gossip extends Model
 
         switch ($this->event) {
             case 'announcement':
-                $this->author = $this->faker->name;
+                $this->user_id = 1;
                 break;
             case 'birthday':
                 $this->title = 'Happy Birthday!';
@@ -96,7 +101,7 @@ class Gossip extends Model
                 break;
             case 'investment':
                     $this->title = 'Investment';
-                    $this->body = $this->faker->company.' has received £'.$this->faker->numberBetween(10, 500000).' investment';
+                    $this->body = $this->faker->company.' has received £'.$this->faker->numberBetween(10, 5000).' investment';
                 break;
             default:
                 $this->body = 'An unknown announcement has been heard';
