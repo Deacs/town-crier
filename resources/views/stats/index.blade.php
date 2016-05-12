@@ -10,9 +10,14 @@
             <h1><span class="glyphicon glyphicon-dashboard"></span> Stats</h1>
             <ul>
                 <li>Total Announcements: <b>{{ $statData['activeAnnouncementsCount'] }}</b></li>
-                <li>Last Announcement: <b>{{ $statData['latestAnnouncementDate']->diffForHumans() }}</b> <b>({{ $statData['latestAnnouncementDate']->toDayDateTimeString() }})</b></li>
-                <li>Last Client Refresh: <b>{{ $statData['lastClientRefreshDate']->diffForHumans() }}</b> <b>({{ $statData['lastClientRefreshDate'] }})</b></li>
-                <li>Last DB Purge: ???</li>
+                <li>Last Announcement:
+                    @if(!is_null($statData['latestAnnouncementDate']))
+                        <b>{{ $statData['latestAnnouncementDate']->created_at->diffForHumans() }}</b> <b>({{ $statData['latestAnnouncementDate']->created_at->toDayDateTimeString() }})</b></li>
+                    @else
+                        <b>No active announcements</b>
+                    @endif
+                <li>Last Client Refresh: <b>{{ $statData['lastClientRefreshDate']->diffForHumans() }}</b> <b>({{ $statData['lastClientRefreshDate']->toDayDateTimeString() }})</b></li>
+                <li>Last DB Purge: <b>{{ $statData['lastDatabasePurgeDate']->diffForHumans() }}</b> <b>({{ $statData['lastDatabasePurgeDate']->toDayDateTimeString() }})</b></li>
                 <li>Last Redis Purge: ???</li>
             </ul>
         </div>
