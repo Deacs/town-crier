@@ -12,11 +12,8 @@ class Duty extends Model
     public static function refreshClients()
     {
         // Audit the action
-        Log::info('Calling Audit for client Refresh');
-
-        $audit = new Audit();
-        $audit->record(3, 1);
-
+        (new Audit)->record(3, 1);
+        // Fire the event to refresh the clients
         event(new Chore('refresh'));
     }
 
@@ -24,6 +21,8 @@ class Duty extends Model
     {
         // Nothing drastic, mark active announcements as inactive
         Announcement::where('active', '=', 1)->update(['active' => 0]);
+        // Audit the action
+        (new Audit)->record(1, 1);
         // Fire the event to clear the streams and refresh the clients
         event(new Chore('rewind'));
     }
