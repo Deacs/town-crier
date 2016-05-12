@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnnouncementsTable extends Migration
+class CreateAuditTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,9 @@ class CreateAnnouncementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('announcements', function (Blueprint $table) {
+        Schema::create('audit_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->text('body');
-            $table->text('type');
-            $table->integer('user_id')->references('id')->on('users');
-            $table->boolean('active')->default(1);
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ class CreateAnnouncementsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('announcements');
+        Schema::drop('audit_types');
     }
 }

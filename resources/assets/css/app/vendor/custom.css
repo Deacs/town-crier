@@ -1,12 +1,12 @@
 .main {
-    margin-top: 30px;
+    margin-top: 50px;
     padding: 0;
 }
 .town-crier {
     width:100%;
-    margin-top:20px;
+    margin-top:0px;
 }
-.janitor , .shout-out {
+.janitor , .shout-out , .stats {
     width:100%;
     margin-top:40px;
 }

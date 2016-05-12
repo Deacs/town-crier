@@ -12,7 +12,7 @@
 
         <form action="fire" id="shout" method="POST" class="form-horizontal">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="author" value="System">
+            <input type="hidden" name="user_id" value="1">
             <div class="form-group">
                 <label for="title" class="col-sm-2 control-label">Title</label>
                 <div class="col-sm-10">

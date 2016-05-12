@@ -20,28 +20,34 @@ class Announcement extends Model
     protected $fillable = [
         'title',
         'body',
-        'author',
+        'user_id',
         'type'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
     public function shout()
     {
         $result = 'fail';
 
-        $this->data = Input::only('title', 'body', 'author', 'type');
+        $this->data = Input::only('title', 'body', 'user_id', 'type');
 
         $validator = Validator::make($this->data, [
             'title'     => 'required|max:255',
             'body'      => 'required|min:5',
-            'author'    => 'required',
+            'user_id'   => 'required',
             'type'      => 'required'
         ]);
 
         if ($validator->passes()) {
 
-            \Log::info('All Good!');
-
             $this->create($this->data);
+
+            // Add the resolved author to the array
+            $this->data['author'] = User::find($this->data['user_id'])->name;
 
             // Fire the Shout event picked up by the Node app
             event(new Shout($this->data));

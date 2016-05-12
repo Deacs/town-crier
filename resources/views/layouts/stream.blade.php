@@ -5,24 +5,24 @@
 @stop
 
 @section('content')
-    <div class="town-crier">
-        <ul class="list-group shouts">
+    <div class="town-crier shouts">
+        {{--<ul class="list-group shouts">--}}
             @forelse($announcements as $announcement)
-                <li class="list-group-item {{ $announcement->type }}">
+                <div class="list-group-item {{ $announcement->type }}">
                     <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
                     <div>
                         {{ $announcement->body }}
                     </div>
                     <div class="author">
-                        {{ $announcement->author }}, {{ $announcement->created_at->diffForHumans() }} <span class="glyphicon glyphicon-time"></span>
+                        {{ $announcement->user->name }}, {{ $announcement->created_at->diffForHumans() }} <span class="glyphicon glyphicon-time"></span>
                     </div>
-                </li>
+                </div>
             @empty
-                <li class="list-group-item tumbleweed" id="empty_message_item">
+                <div class="list-group-item tumbleweed" id="empty_message_item">
                     <h2 class="text-center"><span class="glyphicon glyphicon-headphones"></span> It's real quiet out there</h2>
-                </li>
+                </div>
             @endforelse
-        </ul>
+        {{--</ul>--}}
     </div>
 @stop
 
@@ -52,7 +52,7 @@
 
         var choreMsgData = {
             refresh: {
-                'title': 'Clean up on aisle 4, please',
+                'title': 'Clean up on aisle 4',
                 'text': 'We are having a quick clean up. Hold on to your hat!'
             },
             rewind: {
@@ -102,23 +102,29 @@
                 $('#empty_message_item').remove();
 
                 var data = message.data.announcement,
-                    type = typeMeta[data.type]
+                    type = typeMeta[data.type];
 
                 console.log(data);
 
-                var panel = $('<li class="list-group-item list-group-item-'+type.panel+'">'+
+                var panel = $('<div class="list-group-item list-group-item-'+type.panel+'">'+
                         '<h4 class="shout-title"><span class="glyphicon glyphicon-'+type.icon+' shout-type"></span>'+data.title+'</h4>'+
                         '<div>'+
                         data.body+
                         '</div>'+
                         '<div class="author">'+data.author+', '+moment().calendar()+' <span class="glyphicon glyphicon glyphicon-time"></span></div>'+
-                        '</li>').hide().fadeIn(250);
+                        '</div>').hide().fadeIn(250);
 
                 // Display the latest Shout
                 $shouts.prepend(panel);
             }
             else {
-                console.log('No Data');
+                swal({
+                    title: 'Whoops',
+                    text: 'An empty Shout has been heard. Please report this error',
+                    type: "error",
+                    showConfirmButton: false,
+                    timer: 5000,
+                });
             }
 
         });
