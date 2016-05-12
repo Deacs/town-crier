@@ -74,3 +74,10 @@ Route::get('mockinvestment',
         'uses'  => 'SystemEventController@mockInvestment'
     ]
 );
+
+Route::get('mockfunding',
+    [
+        'as'    => 'mock-funding',
+        'uses'  => 'SystemEventController@mockFunding'
+    ]
+);

@@ -19,5 +19,7 @@ class SystemEventController extends Controller
     public function mockFunding()
     {
         Log::info('Mocking Funding');
+
+        (new Gossip('funded'))->whisper();
     }
 }

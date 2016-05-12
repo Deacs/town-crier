@@ -17,9 +17,12 @@
         <div class="row">
             <button class="btn btn-lg btn-success janitor-task" data-action="purgeredis"><span class="glyphicon glyphicon-erase"></span> Purge Redis</button>
         </div>
-
+        <hr />
         <div class="row">
-            <button class="btn btn-lg btn-info janitor-task" data-action="mockinvestment"><span class="glyphicon glyphicon-gbp"></span> Mock Investment</button>
+            <button class="btn btn-lg btn-info janitor-task" data-action="mockinvestment"><span class="glyphicon glyphicon-piggy-bank"></span> Mock Investment</button>
+        </div>
+        <div class="row">
+            <button class="btn btn-lg btn-info janitor-task" data-action="mockfunding"><span class="glyphicon glyphicon-fire"></span> Mock Funding</button>
         </div>
     </div>
 @stop
@@ -65,6 +68,12 @@
                 success: {
                     title: 'All done!',
                     text: 'Investment has been mocked'
+                }
+            },
+            mockfunding: {
+                success: {
+                    title: 'All done!',
+                    text: 'Funding has been mocked'
                 }
             }
         };
