@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Audit;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,6 +11,8 @@ class AuditController extends Controller
 {
     public function index()
     {
-        return view('audit.index');
+        $audits = Audit::with(['type', 'user'])->latest()->get();
+
+        return view('audit.index')->with(['audits' => $audits]);
     }
 }

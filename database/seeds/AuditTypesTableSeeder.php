@@ -16,17 +16,17 @@ class AuditTypesTableSeeder extends Seeder
 
         DB::table('audit_types')->insert([
             'id'            => 1,
-            'type'          => 'Purge Database',
+            'title'         => 'Purge Database',
             'updated_at'    => Carbon::now(),
         ]);
         DB::table('audit_types')->insert([
             'id'            => 2,
-            'type'          => 'Purge Redis',
+            'title'         => 'Purge Redis',
             'updated_at'    => Carbon::now(),
         ]);
         DB::table('audit_types')->insert([
             'id'            => 3,
-            'type'          => 'Refresh Clients',
+            'title'         => 'Refresh Clients',
             'updated_at'    => Carbon::now(),
         ]);
     }
