@@ -51,6 +51,11 @@ class Stats extends Model
     public static function lastDatabasePurgeDate()
     {
         $lastDatabasePurgeDate = Audit::latest()->where('type_id', 1)->take(1)->first();
-        return $lastDatabasePurgeDate->created_at;
+
+        if (! is_null($lastDatabasePurgeDate)) {
+            return $lastDatabasePurgeDate->created_at;
+        }
+
+        return null;
     }
 }
