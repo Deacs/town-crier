@@ -17,6 +17,13 @@
         <div class="row">
             <button class="btn btn-lg btn-success janitor-task" data-action="purgeredis"><span class="glyphicon glyphicon-erase"></span> Purge Redis</button>
         </div>
+        <hr />
+        <div class="row">
+            <button class="btn btn-lg btn-info janitor-task" data-action="mockinvestment"><span class="glyphicon glyphicon-piggy-bank"></span> Mock Investment</button>
+        </div>
+        <div class="row">
+            <button class="btn btn-lg btn-info janitor-task" data-action="mockfunding"><span class="glyphicon glyphicon-fire"></span> Mock Funding</button>
+        </div>
     </div>
 @stop
 
@@ -57,6 +64,18 @@
                     text: 'Redis has been purged. All remote clients will now be refreshed, Great job!'
                 }
             },
+            mockinvestment: {
+                success: {
+                    title: 'All done!',
+                    text: 'Investment has been mocked'
+                }
+            },
+            mockfunding: {
+                success: {
+                    title: 'All done!',
+                    text: 'Funding has been mocked'
+                }
+            }
         };
 
         $(".janitor-task").each(function() {
@@ -69,7 +88,8 @@
                     prompt  = actionData[action].prompt,
                     success = actionData[action].success;
 
-                swal({
+                if (prompt) {
+                    swal({
                         title: prompt.title,
                         text: prompt.text,
                         type: "warning",
@@ -79,8 +99,31 @@
                         closeOnConfirm: false
                     }, function(){
 
-
                         $.ajax({
+                                url: '/'+$item.data('action')
+                            })
+                            .done(function( res ) {
+                                swal({
+                                    type: "success",
+                                    title: success.title,
+                                    text: success.text,
+                                    timer: 3000,
+                                    showConfirmButton: false
+                                });
+                            })
+                            .fail(function ( res ) {
+                                swal({
+                                    type: "error",
+                                    title: "Uh Oh",
+                                    text: "Your broom seems to be broken. Try again?",
+                                    timer: 3000,
+                                    showConfirmButton: false
+                                });
+                            });
+                    });
+                }
+                else {
+                    $.ajax({
                             url: '/'+$item.data('action')
                         })
                         .done(function( res ) {
@@ -101,7 +144,8 @@
                                 showConfirmButton: false
                             });
                         });
-                });
+                }
+
             });
         });
     </script>

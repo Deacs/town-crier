@@ -6,6 +6,7 @@ use App\Events\Shout;
 use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class Announcement extends Model
@@ -53,6 +54,9 @@ class Announcement extends Model
             event(new Shout($this->data));
 
             $result = 'pass';
+        }
+        else {
+            Log::info('Shout Validation FAILED');
         }
 
         return $result;
