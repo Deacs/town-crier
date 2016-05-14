@@ -22,7 +22,7 @@
                         <li><a href="/shout"><span class="glyphicon glyphicon-bullhorn"></span> Shout</a></li>
                         <li><a href="/stats"><span class="glyphicon glyphicon-dashboard"></span> Stats</a></li>
                         <li><a href="/audit-log"><span class="glyphicon glyphicon-th-list"></span> Audit Log</a></li>
-                        <li><a href="/janitor"><span class="glyphicon glyphicon-wrench"></span> Janitor</a></li>
+                        <li><a href="/janitor"><span class="glyphicon glyphicon-sunglasses"></span> Janitor</a></li>
                     </ul>
                 </li>
             </ul>
