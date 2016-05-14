@@ -12,8 +12,8 @@ class Gossip extends Model
     protected $fillable = [
         'title',
         'body',
-        'author',
-        'type'
+        'user_id',
+        'type_id'
     ];
 
     protected $table = 'announcements';
@@ -28,16 +28,11 @@ class Gossip extends Model
 
     protected $user_id = 1;
 
-    protected $type = null;
+    protected $type_id = null;
 
     protected $faker;
 
-    protected $actions = [
-        'announcement',
-        'birthday',
-        'funded',
-        'investment',
-    ];
+    protected $actions = [1,2,3,4];
 
     public function __construct($eventType = null)
     {
@@ -81,27 +76,28 @@ class Gossip extends Model
             'title'     => $this->title ?: $this->faker->company,
             'body'      => $this->body ?: $this->faker->text,
             'user_id'   => $this->user_id ?: 1,
-            'type'      => $this->type ?: $this->event
+            'type_id'   => $this->type_id ?: $this->event
         ];
     }
 
     private function buildAnnouncementData() {
 
         switch ($this->event) {
-            case 'announcement':
-                $this->user_id = 1;
+
+            case 1:
+                    $this->title = 'Investment';
+                    $this->body = $this->faker->company.' has received £'.$this->faker->numberBetween(10, 5000).' investment';
                 break;
-            case 'birthday':
-                $this->title = 'Happy Birthday!';
-                $this->body = 'It\'s '.$this->faker->name.'\'s Birthday today!';
-                break;
-            case 'funded':
+            case 2:
                     $this->title = 'Pitch Funded';
                     $this->body = $this->faker->company.' has reached target!';
                 break;
-            case 'investment':
-                    $this->title = 'Investment';
-                    $this->body = $this->faker->company.' has received £'.$this->faker->numberBetween(10, 5000).' investment';
+            case 3:
+                    $this->user_id = 1;
+                break;
+            case 4:
+                    $this->title = 'Happy Birthday!';
+                    $this->body = 'It\'s '.$this->faker->name.'\'s Birthday today!';
                 break;
             default:
                 $this->body = 'An unknown announcement has been heard';

@@ -17,10 +17,37 @@ class Stats extends Model
         ];
     }
 
+    public static function graphData()
+    {
+        $graphData = [];
+        $announcementTypes = AnnouncementType::all();
+
+        foreach($announcementTypes as $type) {
+            $graphData[] = [
+                'type' => [
+                    'title'         => $type->title,
+                    'announcements' => $type->activeAnnouncementsCount
+                ]
+            ];
+        }
+
+        return $graphData;
+    }
+
+    /**
+     * Return the date of the last client refresh
+     *
+     * @return string | null
+     */
     public static function lastClientRefreshDate()
     {
         $lastClientRefreshDate = Audit::latest()->where('type_id', 3)->take(1)->first();
-        return $lastClientRefreshDate->created_at;
+
+        if (! is_null($lastClientRefreshDate)) {
+            return $lastClientRefreshDate->created_at;
+        }
+
+        return null;
     }
 
     /**

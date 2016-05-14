@@ -33,6 +33,13 @@ Route::get('stats',
     ]
 );
 
+Route::get('graphdata',
+    [
+        'as'    => 'graph-stats',
+        'uses'  => 'StatsController@graphData'
+    ]
+);
+
 Route::get('audit-log',
     [
         'as'    => 'audit-log',

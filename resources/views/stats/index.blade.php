@@ -16,17 +16,17 @@
                     @else
                         <b>No active announcements</b>
                     @endif
-                <li>Last Client Refresh:
-                    @if(!is_null($statData['lastClientRefreshDate']))
-                        <b>{{ $statData['lastClientRefreshDate']->diffForHumans() }}</b> <b>({{ $statData['lastClientRefreshDate']->toDayDateTimeString() }})</b></li>
+                    <li>Last Client Refresh:
+                        @if(!is_null($statData['lastClientRefreshDate']))
+                            <b>{{ $statData['lastClientRefreshDate']->diffForHumans() }}</b> <b>({{ $statData['lastClientRefreshDate']->toDayDateTimeString() }})</b></li>
                     @else
                         <b>No client refreshes recorded</b>
                     @endif
-                <li>Last DB Purge:
-                    @if(!is_null($statData['lastDatabasePurgeDate']))
-                        <b>{{ $statData['lastDatabasePurgeDate']->diffForHumans() }}</b> <b>({{ $statData['lastDatabasePurgeDate']->toDayDateTimeString() }})</b></li>
+                    <li>Last DB Purge:
+                        @if(!is_null($statData['lastDatabasePurgeDate']))
+                            <b>{{ $statData['lastDatabasePurgeDate']->diffForHumans() }}</b> <b>({{ $statData['lastDatabasePurgeDate']->toDayDateTimeString() }})</b></li>
                     @else
-                    <b>No database purges recorded</b>
+                        <b>No database purges recorded</b>
                     @endif
                 <li>Last Redis Purge: ???</li>
             </ul>
@@ -35,10 +35,51 @@
         <div class="row">
             <h2><span class="glyphicon glyphicon-stats"></span> Announcements by type</h2>
         </div>
+
+        <div class="row">
+            <canvas id="statsChart" width="400" height="200"></canvas>
+        </div>
     </div>
 @stop
 
 @section('footer')
     <script>
+        $(function() {
+
+            var graphLabels = [],
+                graphData   = []
+
+            $.get( "graphdata", function( data ) {
+
+                for (var i = 0; i < data.length; i++) {
+                    graphLabels.push(data[i].type.title);
+                    graphData.push(data[i].type.announcements);
+                }
+
+                var ctx = document.getElementById("statsChart");
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: graphLabels,
+                        datasets: [{
+                            label: '# of Announcements',
+                            data: graphData
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            });
+
+        });
+
+
     </script>
 @stop

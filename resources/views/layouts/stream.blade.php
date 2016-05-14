@@ -6,24 +6,22 @@
 
 @section('content')
     <div class="town-crier shouts">
-        {{--<ul class="list-group shouts">--}}
-            @forelse($announcements as $announcement)
-                <div class="list-group-item {{ $announcement->type }}">
-                    <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
-                    <div>
-                        {{ $announcement->body }}
-                    </div>
-                    <div class="author">
-                        {{ $announcement->user->name }}, {{ $announcement->created_at->diffForHumans() }} <span class="glyphicon glyphicon-time"></span>
-                    </div>
+        @forelse($announcements as $announcement)
+            <div class="list-group-item {{ $announcement->type_id }}">
+                <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
+                <div>
+                    {{ $announcement->body }}
                 </div>
-            @empty
-                <div class="list-group-item tumbleweed" id="empty_message_item">
-                    <h2 class="text-center"><span class="glyphicon glyphicon-headphones"></span> It's real quiet out there</h2>
+                <div class="author">
+                    {{ $announcement->user->name }}, {{ $announcement->created_at->diffForHumans() }} <span class="glyphicon glyphicon-time"></span>
                 </div>
-            @endforelse
-        {{--</ul>--}}
-    </div>
+            </div>
+        @empty
+            <div class="list-group-item tumbleweed" id="empty_message_item">
+                <h2 class="text-center"><span class="glyphicon glyphicon-headphones"></span> It's real quiet out there</h2>
+            </div>
+        @endforelse
+</div>
 @stop
 
 @section('footer')
@@ -32,21 +30,25 @@
         var $shouts = $('.shouts');
 
         var typeMeta = {
-            funded: {
-                panel: 'success',
-                icon: 'ok'
-            },
-            investment: {
+            1: {
                 'panel': 'warning',
                 'icon': 'piggy-bank'
             },
-            birthday: {
+            2: {
+                panel: 'success',
+                icon: 'ok'
+            },
+            3: {
+                'panel': 'danger',
+                'icon': 'bullhorn'
+            },
+            4: {
                 'panel': 'info',
                 'icon': 'user'
             },
-            announcement: {
-                'panel': 'danger',
-                'icon': 'bullhorn'
+            5: {
+                'panel': 'info',
+                'icon': 'cloud-upload'
             }
         };
 
@@ -61,7 +63,7 @@
             }
         }
 
-        // Gossip
+        // Gossip :: Not Used
         socket.on("town-crier:App\\Events\\Rumour", function(output) {
 
             console.log(output);
@@ -102,7 +104,7 @@
                 $('#empty_message_item').remove();
 
                 var data = message.data.announcement,
-                    type = typeMeta[data.type];
+                    type = typeMeta[data.type_id];
 
                 console.log(data);
 

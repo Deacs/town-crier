@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Gossip;
 use App\Http\Requests;
+use App\AnnouncementType;
 use Illuminate\Support\Facades\Log;
 
 class SystemEventController extends Controller
@@ -12,7 +13,7 @@ class SystemEventController extends Controller
     {
         Log::info('Mocking Investment');
 
-        (new Gossip('investment'))->whisper();
+        (new Gossip(AnnouncementType::INVESTMENT_ID))->whisper();
 
     }
 
@@ -20,6 +21,6 @@ class SystemEventController extends Controller
     {
         Log::info('Mocking Funding');
 
-        (new Gossip('funded'))->whisper();
+        (new Gossip(AnnouncementType::FUNDED_ID))->whisper();
     }
 }
