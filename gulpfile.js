@@ -16,6 +16,7 @@ elixir(function(mix) {
             'app/vendor/modernizr.js',
             'app/vendor/sweetalert-dev.js',
             'app/vendor/socket.io.js',
+            'app/vendor/chart.js',
             'app/vendor/moment.min.js',
         ], 'public/js/vendor.js')
         .styles([

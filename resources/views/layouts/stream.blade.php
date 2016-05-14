@@ -32,19 +32,19 @@
         var $shouts = $('.shouts');
 
         var typeMeta = {
-            funded: {
-                panel: 'success',
-                icon: 'ok'
-            },
-            investment: {
+            1: {
                 'panel': 'warning',
                 'icon': 'piggy-bank'
             },
-            birthday: {
+            2: {
+                panel: 'success',
+                icon: 'ok'
+            },
+            3: {
                 'panel': 'info',
                 'icon': 'user'
             },
-            announcement: {
+            4: {
                 'panel': 'danger',
                 'icon': 'bullhorn'
             }
@@ -102,7 +102,7 @@
                 $('#empty_message_item').remove();
 
                 var data = message.data.announcement,
-                    type = typeMeta[data.type];
+                    type = typeMeta[data.type_id];
 
                 console.log(data);
 

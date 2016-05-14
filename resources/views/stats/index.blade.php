@@ -25,10 +25,34 @@
         <div class="row">
             <h2><span class="glyphicon glyphicon-stats"></span> Announcements by type</h2>
         </div>
+
+        <div class="row">
+            <canvas id="statsChart" width="400" height="200"></canvas>
+        </div>
     </div>
 @stop
 
 @section('footer')
     <script>
+        var ctx = document.getElementById("statsChart");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Announcements',
+                    data: [12, 19, 3, 5, 2, 3]
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
     </script>
 @stop

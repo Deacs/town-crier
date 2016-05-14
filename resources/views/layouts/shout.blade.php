@@ -28,12 +28,12 @@
             <div class="form-group">
                 <label for="body" class="col-sm-2 control-label">Go on,</label>
                 <div class="col-sm-10">
-                    <select name="type" class="form-control">
+                    <select name="type_id" class="form-control">
                         <option value="">shout about ...</option>
-                        <option value="funded">FUNDED</option>
-                        <option value="birthday">BIRTHDAY</option>
-                        <option value="investment">INVESTMENT</option>
-                        <option value="announcement">ANNOUNCEMENT</option>
+                        <option value="1">INVESTMENT</option>
+                        <option value="2">FUNDED</option>
+                        <option value="3">ANNOUNCEMENT</option>
+                        <option value="4">BIRTHDAY</option>
                     </select>
                 </div>
             </div>
@@ -75,7 +75,7 @@
             var $form       = $(this),
                 url         = $form.attr("action"),
                 title       = $("input[name='title']"),
-                type        = $("select[name='type']"),
+                type_id     = $("select[name='type_id']"),
                 body        = $("textarea[name='body']"),
                 data        = $form.serialize(),
                 alertData   = {};
@@ -96,7 +96,7 @@
                     });
 
                     // Clear form input
-                    type.val('');
+                    type_id.val('');
                     title.val('');
                     body.val('');
 

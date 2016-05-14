@@ -17,6 +17,14 @@ class Stats extends Model
         ];
     }
 
+    public static function graphData()
+    {
+
+//        foreach () {
+//
+//        }
+    }
+
     public static function lastClientRefreshDate()
     {
         $lastClientRefreshDate = Audit::latest()->where('type_id', 3)->take(1)->first();

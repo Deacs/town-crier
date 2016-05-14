@@ -15,4 +15,11 @@ class StatsController extends Controller
 
         return view('stats.index')->with('statData', $statData);
     }
+
+    public function graphdata()
+    {
+        $graphData = Stats::graphData();
+
+        return view()->with('graphData', $graphData);
+    }
 }
