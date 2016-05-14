@@ -21,6 +21,5 @@ class StatsController extends Controller
         $graphData = Stats::graphData();
 
         return $graphData;
-        return json_encode($graphData);
     }
 }
