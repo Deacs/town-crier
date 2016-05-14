@@ -13,14 +13,14 @@
         <div class="row">
             <table class="table table-striped">
                 <tr>
-                    <th>Date</th><th>Action</th><th>Perfomed By</th>
+                    <th>Action</th><th>Perfomed By</th><th>Date</th>
                 </tr>
                 @foreach($audits as $audit)
 
                     <tr>
-                        <td>{{ $audit->created_at }}</td>
                         <td>{{ $audit->type->title }}</td>
                         <td>{{ $audit->user->name }}</td>
+                        <td>{{ $audit->created_at }}</td>
                     </tr>
                 @endforeach
             </table>

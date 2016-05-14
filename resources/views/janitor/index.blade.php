@@ -14,10 +14,10 @@
             <button class="btn btn-lg btn-success janitor-task" data-action="refreshremotes"><span class="glyphicon glyphicon-refresh"></span> Refresh Clients</button>
         </div>
         <div class="row">
-            <button class="btn btn-lg btn-success janitor-task" data-action="purgedb"><span class="glyphicon glyphicon-trash"></span> Purge DB</button>
+            <button class="btn btn-lg btn-success janitor-task" data-action="purgedb"><span class="glyphicon glyphicon-erase"></span> Purge DB</button>
         </div>
         <div class="row">
-            <button class="btn btn-lg btn-success janitor-task" data-action="purgeredis"><span class="glyphicon glyphicon-erase"></span> Purge Redis</button>
+            <button class="btn btn-lg btn-success janitor-task" data-action="purgeredis"><span class="glyphicon glyphicon-trash"></span> Purge Redis</button>
         </div>
 
         <h3><span class="glyphicon glyphicon-transfer"></span> System Event</h3>
