@@ -19,16 +19,31 @@ class Stats extends Model
 
     public static function graphData()
     {
+        $graphData = [];
+        $announcementTypes = AnnouncementType::all();
 
-//        foreach () {
-//
-//        }
+        foreach($announcementTypes as $type) {
+            $graphData[] = [
+                'type' => [
+                    'title'         => $type->title,
+                    'announcements' => $type->activeAnnouncementsCount
+                ]
+            ];
+        }
+
+//        dd($graphData);
+        return $graphData;
     }
 
     public static function lastClientRefreshDate()
     {
         $lastClientRefreshDate = Audit::latest()->where('type_id', 3)->take(1)->first();
-        return $lastClientRefreshDate->created_at;
+
+        if (! is_null($lastClientRefreshDate)) {
+            return $lastClientRefreshDate->created_at;
+        }
+
+        return null;
     }
 
     /**
@@ -59,6 +74,10 @@ class Stats extends Model
     public static function lastDatabasePurgeDate()
     {
         $lastDatabasePurgeDate = Audit::latest()->where('type_id', 1)->take(1)->first();
-        return $lastDatabasePurgeDate->created_at;
+
+        if (! is_null($lastDatabasePurgeDate)) {
+            return $lastDatabasePurgeDate->created_at;
+        }
+        return null;
     }
 }

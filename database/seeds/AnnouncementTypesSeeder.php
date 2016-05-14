@@ -27,6 +27,10 @@ class AnnouncementTypesTableSeeder extends Seeder
             'id'    => 4,
             'title' => 'Birthday'
         ]);
+        DB::table('announcement_types')->insert([
+            'id'    => 5,
+            'title' => 'Code Deploy'
+        ]);
     }
 
 }

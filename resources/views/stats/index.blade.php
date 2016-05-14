@@ -44,25 +44,42 @@
 
 @section('footer')
     <script>
-        var ctx = document.getElementById("statsChart");
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                datasets: [{
-                    label: '# of Announcements',
-                    data: [12, 19, 3, 5, 2, 3]
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
+        $(function() {
+
+            var graphLabels = [],
+                graphData   = []
+
+            $.get( "graphdata", function( data ) {
+
+                for (var i = 0; i < data.length; i++) {
+                    graphLabels.push(data[i].type.title);
+                    graphData.push(data[i].type.announcements);
                 }
-            }
+
+                var ctx = document.getElementById("statsChart");
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: graphLabels,
+                        datasets: [{
+                            label: '# of Announcements',
+                            data: graphData
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            });
+
         });
+
+
     </script>
 @stop

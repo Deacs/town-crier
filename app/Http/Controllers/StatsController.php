@@ -20,6 +20,7 @@ class StatsController extends Controller
     {
         $graphData = Stats::graphData();
 
-        return view()->with('graphData', $graphData);
+        return $graphData;
+        return json_encode($graphData);
     }
 }
