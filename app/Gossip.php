@@ -19,19 +19,12 @@ class Gossip extends Model
     protected $table = 'announcements';
 
     protected $event;
-
     protected $data;
-
     protected $title = null;
-
     protected $body = null;
-
     protected $user_id = 1;
-
     protected $type_id = null;
-
     protected $faker;
-
     protected $actions = [1,2,3,4,5];
 
     public function __construct($eventType = null)
@@ -75,36 +68,39 @@ class Gossip extends Model
         return [
             'title'     => $this->title ?: $this->faker->company,
             'body'      => $this->body ?: $this->faker->text,
-            'user_id'   => $this->user_id ?: 1,
+            'user_id'   => $this->user_id ?: User::SYSTEM_USER_ID,
             'type_id'   => $this->type_id ?: $this->event
         ];
     }
 
+    /**
+     * Create a set of data for the specified Announcement Type
+     */
     private function buildAnnouncementData() {
 
         switch ($this->event) {
 
-            case 1:
-                    $this->title = 'Investment';
-                    $this->body = $this->faker->company.' has received £'.$this->faker->numberBetween(10, 5000).' investment';
+            case AnnouncementType::INVESTMENT_ID:
+                    $this->title = $this->faker->company;
+                    $this->body =  "£".$this->faker->numberBetween(10, 5000)." investment. Pitch has now reached ".$this->faker->numberBetween(5, 99)."%";
                 break;
-            case 2:
+            case AnnouncementType::FUNDED_ID:
                     $this->title = 'Pitch Funded';
                     $this->body = $this->faker->company.' has reached target!';
                 break;
-            case 3:
-                    $this->user_id = 1;
+            case AnnouncementType::ANNOUNCEMENT_ID:
+                    $this->user_id = User::SYSTEM_USER_ID;
                 break;
-            case 4:
+            case AnnouncementType::BIRTHDAY_ID:
                     $this->title = 'Happy Birthday!';
-                    $this->body = 'It\'s '.$this->faker->name.'\'s Birthday today!';
+                    $this->body = "It's ".$this->faker->name."'s Birthday today!";
                 break;
-            case 5:
-                $this->title = 'Blast Off!';
-                $this->body = 'New application code successfully deployed';
+            case AnnouncementType::CODE_DEPLOY_ID:
+                    $this->title = 'Blast Off!';
+                    $this->body = 'New application code successfully deployed';
                 break;
             default:
-                $this->body = 'An unknown announcement has been heard';
+                $this->body = 'Hmmm, An unknown announcement has been heard';
         }
     }
 }

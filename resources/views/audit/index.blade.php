@@ -16,9 +16,11 @@
                     <th>Action</th><th>Perfomed By</th><th>Date</th>
                 </tr>
                 @foreach($audits as $audit)
-
                     <tr>
-                        <td>{{ $audit->type->title }}</td>
+                        <td>
+                            <span class="glyphicon audit-type" data-type="{{ $audit->type->id }}"></span>
+                            {{ $audit->type->title }}
+                        </td>
                         <td>{{ $audit->user->name }}</td>
                         <td>{{ $audit->created_at }}</td>
                     </tr>
@@ -31,5 +33,22 @@
 
 @section('footer')
     <script>
+        $(function() {
+
+            var auditTypeStyles = {
+                1: 'erase',
+                2: 'trash',
+                3: 'refresh'
+            };
+            var $auditTypeIcons = $('span.audit-type');
+
+            $auditTypeIcons.each(function() {
+                var $this   = $(this),
+                    type    = $this.data('type');
+
+                $this.addClass('glyphicon-'+auditTypeStyles[type]);
+            });
+
+        });
     </script>
 @stop
