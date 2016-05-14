@@ -13,7 +13,7 @@ class AuditController extends Controller
     {
         $audits = Audit::with(['type', 'user'])->latest()->get();
 
-        dd($audits);
+        //dd($audits);
 
         return view('audit.index')->with(['audits' => $audits]);
     }
