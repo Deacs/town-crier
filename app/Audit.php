@@ -25,7 +25,7 @@ class Audit extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function record($type_id, $user_id = 1)
+    public function record($type_id, $user_id = User::SYSTEM_USER_ID)
     {
         $this->create(['type_id' => $type_id, 'user_id' => $user_id]);
     }

@@ -13,7 +13,8 @@ class Stats extends Model
             'latestAnnouncementDate'    => self::latestAnnouncementDate(),
             'activeAnnouncementsCount'  => self::activeAnnouncementTotal(),
             'lastClientRefreshDate'     => self::lastClientRefreshDate(),
-            'lastDatabasePurgeDate'     => self::lastDatabasePurgeDate(),
+            'lastDatabasePurgeDate'     => self::lastPurgeDate(AuditType::PURGE_DB_ID),
+            'lastRedisPurgeDate'        => self::lastPurgeDate(AuditType::PURGE_REDIS_ID),
         ];
     }
 
@@ -41,7 +42,7 @@ class Stats extends Model
      */
     public static function lastClientRefreshDate()
     {
-        $lastClientRefreshDate = Audit::latest()->where('type_id', 3)->take(1)->first();
+        $lastClientRefreshDate = Audit::latest()->where('type_id', 3)->first();
 
         if (! is_null($lastClientRefreshDate)) {
             return $lastClientRefreshDate->created_at;
@@ -57,7 +58,7 @@ class Stats extends Model
      */
     public static function latestAnnouncementDate()
     {
-        $lastAnnouncement = Announcement::latest()->where('active', 1)->take(1)->first();
+        $lastAnnouncement = Announcement::latest()->where('active', 1)->first();
 
         return $lastAnnouncement;
     }
@@ -73,14 +74,14 @@ class Stats extends Model
     }
 
     /**
-     * Return the date of the last database purge
+     * Return the date of the last purge of th specified storage
      */
-    public static function lastDatabasePurgeDate()
+    public static function lastPurgeDate($auditTypeId)
     {
-        $lastDatabasePurgeDate = Audit::latest()->where('type_id', 1)->take(1)->first();
+        $lastPurgeDate = Audit::latest()->where('type_id', $auditTypeId)->first();
 
-        if (! is_null($lastDatabasePurgeDate)) {
-            return $lastDatabasePurgeDate->created_at;
+        if (! is_null($lastPurgeDate)) {
+            return $lastPurgeDate->created_at;
         }
 
         return null;

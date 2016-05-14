@@ -33,8 +33,7 @@ class JanitorController extends Controller
      */
     public function purgeRedis()
     {
-        // @TODO
-        //Duty::purgeRedis();
+        Duty::purgeRedis();
     }
 
 }

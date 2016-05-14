@@ -16,19 +16,24 @@
                     @else
                         <b>No active announcements</b>
                     @endif
-                    <li>Last Client Refresh:
-                        @if(!is_null($statData['lastClientRefreshDate']))
-                            <b>{{ $statData['lastClientRefreshDate']->diffForHumans() }}</b> <b>({{ $statData['lastClientRefreshDate']->toDayDateTimeString() }})</b></li>
+                <li>Last Client Refresh:
+                    @if(!is_null($statData['lastClientRefreshDate']))
+                        <b>{{ $statData['lastClientRefreshDate']->diffForHumans() }}</b> <b>({{ $statData['lastClientRefreshDate']->toDayDateTimeString() }})</b></li>
                     @else
                         <b>No client refreshes recorded</b>
                     @endif
-                    <li>Last DB Purge:
-                        @if(!is_null($statData['lastDatabasePurgeDate']))
-                            <b>{{ $statData['lastDatabasePurgeDate']->diffForHumans() }}</b> <b>({{ $statData['lastDatabasePurgeDate']->toDayDateTimeString() }})</b></li>
+                <li>Last DB Purge:
+                    @if(!is_null($statData['lastDatabasePurgeDate']))
+                        <b>{{ $statData['lastDatabasePurgeDate']->diffForHumans() }}</b> <b>({{ $statData['lastDatabasePurgeDate']->toDayDateTimeString() }})</b></li>
                     @else
                         <b>No database purges recorded</b>
                     @endif
-                <li>Last Redis Purge: ???</li>
+                <li>Last Redis Purge:
+                    @if(!is_null($statData['lastRedisPurgeDate']))
+                        <b>{{ $statData['lastRedisPurgeDate']->diffForHumans() }}</b> <b>({{ $statData['lastRedisPurgeDate']->toDayDateTimeString() }})</b></li>
+                @else
+                    <b>No Redis purges recorded</b>
+                @endif
             </ul>
         </div>
 

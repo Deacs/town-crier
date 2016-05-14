@@ -60,7 +60,7 @@
                     text: 'Database has been purged. All remote clients will now be refreshed, Great job!'
                 }
             },
-            purgereds: {
+            purgeredis: {
                 prompt: {
                     title: 'Are you sure?',
                     text: 'Redis will be purged. This cannot be undone',
