@@ -6,7 +6,9 @@
 
 @section('content')
     <div class="janitor">
-        <h1><span class="glyphicon glyphicon-wrench"></span> Janitor</h1>
+        <h1><span class="glyphicon glyphicon-sunglasses"></span> Janitor</h1>
+
+        <h3><span class="glyphicon glyphicon-wrench"></span> Chores</h3>
 
         <div class="row">
             <button class="btn btn-lg btn-success janitor-task" data-action="refreshremotes"><span class="glyphicon glyphicon-refresh"></span> Refresh Clients</button>
@@ -17,12 +19,17 @@
         <div class="row">
             <button class="btn btn-lg btn-success janitor-task" data-action="purgeredis"><span class="glyphicon glyphicon-erase"></span> Purge Redis</button>
         </div>
-        <hr />
+
+        <h3><span class="glyphicon glyphicon-transfer"></span> System Event</h3>
+
         <div class="row">
             <button class="btn btn-lg btn-info janitor-task" data-action="mockinvestment"><span class="glyphicon glyphicon-piggy-bank"></span> Mock Investment</button>
         </div>
         <div class="row">
-            <button class="btn btn-lg btn-info janitor-task" data-action="mockfunding"><span class="glyphicon glyphicon-fire"></span> Mock Funding</button>
+            <button class="btn btn-lg btn-info janitor-task" data-action="mockfunding"><span class="glyphicon glyphicon-glass"></span> Mock Funding</button>
+        </div>
+        <div class="row">
+            <button class="btn btn-lg btn-info janitor-task" data-action="mockcodedeploy"><span class="glyphicon glyphicon-cloud-upload"></span> Mock Code Deploy</button>
         </div>
     </div>
 @stop
@@ -74,6 +81,12 @@
                 success: {
                     title: 'All done!',
                     text: 'Funding has been mocked'
+                }
+            },
+            mockcodedeploy: {
+                success: {
+                    title: 'All done!',
+                    text: 'Code Deploy has been mocked'
                 }
             }
         };

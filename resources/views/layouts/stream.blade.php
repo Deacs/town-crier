@@ -36,7 +36,7 @@
             },
             2: {
                 panel: 'success',
-                icon: 'ok'
+                icon: 'glass'
             },
             3: {
                 'panel': 'danger',
@@ -47,7 +47,7 @@
                 'icon': 'user'
             },
             5: {
-                'panel': 'info',
+                'panel': 'success',
                 'icon': 'cloud-upload'
             }
         };

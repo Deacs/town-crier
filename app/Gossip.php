@@ -32,7 +32,7 @@ class Gossip extends Model
 
     protected $faker;
 
-    protected $actions = [1,2,3,4];
+    protected $actions = [1,2,3,4,5];
 
     public function __construct($eventType = null)
     {
@@ -98,6 +98,10 @@ class Gossip extends Model
             case 4:
                     $this->title = 'Happy Birthday!';
                     $this->body = 'It\'s '.$this->faker->name.'\'s Birthday today!';
+                break;
+            case 5:
+                $this->title = 'Blast Off!';
+                $this->body = 'New application code successfully deployed';
                 break;
             default:
                 $this->body = 'An unknown announcement has been heard';

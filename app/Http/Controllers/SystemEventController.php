@@ -23,4 +23,11 @@ class SystemEventController extends Controller
 
         (new Gossip(AnnouncementType::FUNDED_ID))->whisper();
     }
+
+    public function mockCodeDeploy()
+    {
+        Log::info('Mocking Code Deploy');
+
+        (new Gossip(AnnouncementType::CODE_DEPLOY_ID))->whisper();
+    }
 }

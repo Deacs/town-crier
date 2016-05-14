@@ -63,17 +63,11 @@
                         labels: graphLabels,
                         datasets: [{
                             label: '# of Announcements',
-                            data: graphData
+                            data: graphData,
+                            backgroundColor: '#da7600'
                         }]
                     },
                     options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true
-                                }
-                            }]
-                        }
                     }
                 });
             });
