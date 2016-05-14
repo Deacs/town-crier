@@ -8,7 +8,7 @@
     <div class="town-crier shouts">
         {{--<ul class="list-group shouts">--}}
             @forelse($announcements as $announcement)
-                <div class="list-group-item {{ $announcement->type }}">
+                <div class="list-group-item {{ $announcement->type_id }}">
                     <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
                     <div>
                         {{ $announcement->body }}
