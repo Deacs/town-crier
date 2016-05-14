@@ -30,10 +30,9 @@
                 <div class="col-sm-10">
                     <select name="type_id" class="form-control">
                         <option value="">shout about ...</option>
-                        <option value="1">INVESTMENT</option>
-                        <option value="2">FUNDED</option>
-                        <option value="3">ANNOUNCEMENT</option>
-                        <option value="4">BIRTHDAY</option>
+                        @foreach($announcement_types as $announcement_type)
+                            <option value="{{ $announcement_type->id }}">{{ $announcement_type->title }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Announcement;
+use App\AnnouncementType;
 
 class ShoutController extends Controller
 {
     public function create()
     {
-        return view('layouts.shout');
+        $announcementTypes = AnnouncementType::all();
+        return view('layouts.shout')->with('announcement_types', $announcementTypes);
     }
 
     public function store()

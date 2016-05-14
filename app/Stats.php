@@ -31,10 +31,14 @@ class Stats extends Model
             ];
         }
 
-//        dd($graphData);
         return $graphData;
     }
 
+    /**
+     * Return the date of the last client refresh
+     *
+     * @return string | null
+     */
     public static function lastClientRefreshDate()
     {
         $lastClientRefreshDate = Audit::latest()->where('type_id', 3)->take(1)->first();
