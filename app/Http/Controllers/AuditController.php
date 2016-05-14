@@ -12,9 +12,6 @@ class AuditController extends Controller
     public function index()
     {
         $audits = Audit::with(['type', 'user'])->latest()->get();
-
-        //dd($audits);
-
         return view('audit.index')->with(['audits' => $audits]);
     }
 }

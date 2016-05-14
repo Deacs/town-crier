@@ -82,6 +82,7 @@ class Stats extends Model
         if (! is_null($lastDatabasePurgeDate)) {
             return $lastDatabasePurgeDate->created_at;
         }
+
         return null;
     }
 }

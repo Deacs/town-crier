@@ -10,6 +10,8 @@ class AuditType extends Model
     const PURGE_REDIS_ID        = 2;
     const REFRESH_CLIENTS_ID    = 3;
 
+    protected $title;
+
     public function audits()
     {
         return $this->hasMany('App\Audit');
