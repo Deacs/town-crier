@@ -18,11 +18,16 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/stream"><span class="glyphicon glyphicon-list-alt"></span> Stream</a></li>
-                        <li><a href="/shout"><span class="glyphicon glyphicon-bullhorn"></span> Shout</a></li>
-                        <li><a href="/stats"><span class="glyphicon glyphicon-dashboard"></span> Stats</a></li>
-                        <li><a href="/audit-log"><span class="glyphicon glyphicon-th-list"></span> Audit Log</a></li>
-                        <li><a href="/janitor"><span class="glyphicon glyphicon-sunglasses"></span> Janitor</a></li>
+                        <li><a href="{{ url('/stream') }}"><span class="glyphicon glyphicon-list-alt"></span> Stream</a></li>
+                        @if (Auth::guest())
+                            <li><a href="{{ url('/login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        @else
+                            <li><a href="{{ url('/shout') }}"><span class="glyphicon glyphicon-bullhorn"></span> Shout</a></li>
+                            <li><a href="{{ url('/stats') }}"><span class="glyphicon glyphicon-dashboard"></span> Stats</a></li>
+                            <li><a href="{{ url('/audit-log') }}"><span class="glyphicon glyphicon-th-list"></span> Audit Log</a></li>
+                            <li><a href="{{ url('/janitor') }}"><span class="glyphicon glyphicon-sunglasses"></span> Janitor</a></li>
+                            <li><a href="{{ url('/logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        @endif
                     </ul>
                 </li>
             </ul>
