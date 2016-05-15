@@ -21,7 +21,7 @@
                 <h2 class="text-center"><span class="glyphicon glyphicon-headphones"></span> It's real quiet out there</h2>
             </div>
         @endforelse
-</div>
+    </div>
 @stop
 
 @section('footer')
