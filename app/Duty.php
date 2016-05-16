@@ -15,7 +15,7 @@ class Duty extends Model
     public static function refreshClients()
     {
         // Audit the action
-        (new Audit)->record(AuditType::REFRESH_CLIENTS_ID);
+        (new Audit)->record(AuditType::REFRESH_CLIENTS_ID, User::JANITOR_USER_ID);
         // Fire the event to refresh the clients
         event(new Chore('refresh'));
     }
@@ -29,7 +29,7 @@ class Duty extends Model
         // Nothing drastic, mark active announcements as inactive
         Announcement::where('active', '=', 1)->update(['active' => 0]);
         // Audit the action
-        (new Audit)->record(AuditType::PURGE_DB_ID);
+        (new Audit)->record(AuditType::PURGE_DB_ID, User::JANITOR_USER_ID);
         // Fire the event to clear the streams and refresh the clients
         event(new Chore('rewind'));
     }
@@ -43,7 +43,7 @@ class Duty extends Model
     {
         // TODO Not actually purging Redis, just mimic subsequent behaviour
         // Audit the action
-        (new Audit)->record(AuditType::PURGE_REDIS_ID);
+        (new Audit)->record(AuditType::PURGE_REDIS_ID, User::JANITOR_USER_ID);
         // Fire the event to refresh the clients
         event(new Chore('refresh'));
     }
