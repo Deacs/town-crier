@@ -1,8 +1,13 @@
 <?php
 
-Route::get('/', 'StreamController@index');
-
 Route::auth();
+//Route::get('/', 'StreamController@index');
+Route::get('/',
+    [
+        'as'    => 'home',
+        'uses'  => 'HomeController@index'
+    ]
+);
 
 Route::get('stream',
     [
@@ -40,7 +45,9 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'  => 'StatsController@graphData'
         ]
     );
+});
 
+Route::group(['middleware' => 'janitor'], function () {
     Route::get('audit-log',
         [
             'as'    => 'audit-log',
@@ -96,5 +103,4 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'  => 'SystemEventController@mockCodeDeploy'
         ]
     );
-
 });
