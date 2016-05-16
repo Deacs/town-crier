@@ -13,6 +13,7 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             'system',
+            'janitor',
             'marketing',
             'engineering'
         ];

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     const SYSTEM_USER_ID = 1;
+    const JANITOR_USER_ID = 2;
 
     protected $table = 'users';
 
@@ -23,8 +24,25 @@ class User extends Authenticatable
         'name'
     ];
 
+    /**
+     * Is the current user the System User
+     *
+     * @return boolean
+     */
+    public function isSystem()
+    {
+        $id = $this->getAttribute('id');
+        return $id == self::SYSTEM_USER_ID;
+    }
+
+    /**
+     * Is the current user the Janitor User
+     *
+     * @return boolean
+     */
     public function isJanitor()
     {
-        return $this->id == self::SYSTEM_USER_ID;
+        $id = $this->getAttribute('id');
+        return $id == self::JANITOR_USER_ID;
     }
 }
