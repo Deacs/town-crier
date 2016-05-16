@@ -24,8 +24,10 @@
                         @else
                             <li><a href="{{ url('/shout') }}"><span class="glyphicon glyphicon-bullhorn"></span> Shout</a></li>
                             <li><a href="{{ url('/stats') }}"><span class="glyphicon glyphicon-dashboard"></span> Stats</a></li>
-                            <li><a href="{{ url('/audit-log') }}"><span class="glyphicon glyphicon-th-list"></span> Audit Log</a></li>
+                        @if (Auth::user()->isJanitor())
                             <li><a href="{{ url('/janitor') }}"><span class="glyphicon glyphicon-sunglasses"></span> Janitor</a></li>
+                            <li><a href="{{ url('/audit-log') }}"><span class="glyphicon glyphicon-th-list"></span> Audit Log</a></li>
+                        @endif
                             <li><a href="{{ url('/logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                         @endif
                     </ul>

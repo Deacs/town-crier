@@ -6696,6 +6696,10 @@ body.stop-scrolling {
     width:100%;
     margin-top:20px;
 }
+.home {
+    min-height: 500px;
+    background: url("/img/TownCrierBG.png") right bottom no-repeat;
+}
 .shouts {
     width:100%;
     display:none;
