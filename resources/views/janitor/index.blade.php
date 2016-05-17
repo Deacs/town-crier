@@ -31,6 +31,9 @@
         <div class="row">
             <button class="btn btn-lg btn-info janitor-task" data-action="mockcodedeploy"><span class="glyphicon glyphicon-cloud-upload"></span> Mock Code Deploy</button>
         </div>
+        <div class="row">
+            <button class="btn btn-lg btn-info janitor-task" data-action="mockfundingmilestone"><span class="glyphicon glyphicon-flag"></span> Mock Funding Milestone</button>
+        </div>
     </div>
 @stop
 

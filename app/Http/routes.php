@@ -1,8 +1,17 @@
 <?php
 
 Route::auth();
-//Route::get('/', 'StreamController@index');
-Route::get('/',
+
+Route::get('/', 'StreamController@index');
+
+Route::get('shout',
+    [
+        'as'    => 'shout-out',
+        'uses'  => 'ShoutController@create'
+    ]
+);
+
+Route::post('fire',
     [
         'as'    => 'home',
         'uses'  => 'HomeController@index'
