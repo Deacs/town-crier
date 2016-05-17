@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class AnnouncementType extends Model
 {
-    const INVESTMENT_ID     = 1;
-    const FUNDED_ID         = 2;
-    const ANNOUNCEMENT_ID   = 3;
-    const BIRTHDAY_ID       = 4;
-    const CODE_DEPLOY_ID    = 5;
+    const INVESTMENT_ID         = 1;
+    const FUNDED_ID             = 2;
+    const ANNOUNCEMENT_ID       = 3;
+    const BIRTHDAY_ID           = 4;
+    const CODE_DEPLOY_ID        = 5;
+    const FUNDING_MILESTONE_ID  = 6;
 
     protected $id;
     protected $title;

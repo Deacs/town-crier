@@ -25,7 +25,7 @@ class Gossip extends Model
     protected $user_id = 1;
     protected $type_id = null;
     protected $faker;
-    protected $actions = [1,2,3,4,5];
+    protected $actions = [1,2,3,4,5,6];
 
     public function __construct($eventType = null)
     {
@@ -98,6 +98,11 @@ class Gossip extends Model
             case AnnouncementType::CODE_DEPLOY_ID:
                     $this->title = 'Blast Off!';
                     $this->body = 'New application code successfully deployed';
+                break;
+            case AnnouncementType::FUNDING_MILESTONE_ID:
+                    $milestones = [25, 50, 75, 90, 99];
+                    $this->title = $this->faker->company;
+                    $this->body = 'Milestone reached : '.$milestones[array_rand($milestones)].'% of target!';
                 break;
             default:
                 $this->body = 'Hmmm, An unknown announcement has been heard';

@@ -31,6 +31,10 @@ class AnnouncementTypesTableSeeder extends Seeder
             'id'    => 5,
             'title' => 'Code Deploy'
         ]);
+        DB::table('announcement_types')->insert([
+            'id'    => 6,
+            'title' => 'Funding Milestone'
+        ]);
     }
 
 }

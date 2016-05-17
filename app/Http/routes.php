@@ -112,4 +112,11 @@ Route::group(['middleware' => 'janitor'], function () {
             'uses'  => 'SystemEventController@mockCodeDeploy'
         ]
     );
+
+    Route::get('mockfundingmilestone',
+        [
+            'as'    => 'mock-funding-milestone',
+            'uses'  => 'SystemEventController@mockFundingMilestone'
+        ]
+    );
 });

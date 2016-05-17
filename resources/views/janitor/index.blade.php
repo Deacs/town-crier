@@ -91,7 +91,13 @@
                     title: 'All done!',
                     text: 'Code Deploy has been mocked'
                 }
-            }
+            },
+            mockfundingmilestone: {
+                success: {
+                    title: 'All done!',
+                    text: 'Funding Milestone has been mocked'
+                }
+            },
         };
 
         $(".janitor-task").each(function() {

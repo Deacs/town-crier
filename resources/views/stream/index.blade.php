@@ -53,6 +53,10 @@
             5: {
                 'panel': 'success',
                 'icon': 'cloud-upload'
+            },
+            6: {
+                'panel': 'info',
+                'icon': 'flag'
             }
         };
 
