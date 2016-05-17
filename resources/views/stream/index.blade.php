@@ -4,6 +4,10 @@
     Stream
 @stop
 
+@section('container')
+    foobar
+@stop
+
 @section('content')
     <div class="town-crier shouts">
         @forelse($announcements as $announcement)

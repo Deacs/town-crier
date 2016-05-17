@@ -42,7 +42,7 @@
                 prompt: {
                     title: 'Are you sure?',
                     text: 'All remote clients will be automatically refreshed',
-                    confirm: 'Yes, refresh the clients'
+                    confirm: 'Clean \'em up good!'
                 },
                 success: {
                     title: 'All done!',
@@ -53,7 +53,7 @@
                 prompt: {
                     title: 'Are you sure?',
                     text: 'Persistent storage will be purged. This cannot be undone',
-                    confirm: 'Yep, purge the database.'
+                    confirm: 'Flush \'em, cowboy!'
                 },
                 success: {
                     title: 'All done!',
@@ -64,7 +64,7 @@
                 prompt: {
                     title: 'Are you sure?',
                     text: 'Redis will be purged. This cannot be undone',
-                    confirm: 'Yep, purge Redis.'
+                    confirm: 'Flush \'em, cowboy!'
                 },
                 success: {
                     title: 'All done!',
