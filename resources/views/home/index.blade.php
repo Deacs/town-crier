@@ -6,7 +6,10 @@
 
 @section('content')
     <div class="home">
-        <h1><span class="glyphicon glyphicon-sunglasses"></span> The Town Crier</h1>
+
+        <div class="row">
+            <h1><span class="glyphicon glyphicon-home"></span> The Town Crier</h1>
+        </div>
 
         <div class="row">
             @if (Auth::guest())

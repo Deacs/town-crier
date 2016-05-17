@@ -9,7 +9,7 @@
 <html lang="en">
 <body>
     @include('layouts.header.nav')
-    <div class="container main">
+    <div class="@yield('container', 'container') main">
         @yield('content')
     </div>
 
