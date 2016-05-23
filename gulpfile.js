@@ -19,6 +19,9 @@ elixir(function(mix) {
             'app/vendor/chart.js',
             'app/vendor/moment.min.js',
         ], 'public/js/vendor.js')
+        .scripts([
+            'app/stream.js'
+        ], 'public/js/app.js')
         .styles([
             './public/css/app.css',
             'app/vendor/sweetalert.css',
