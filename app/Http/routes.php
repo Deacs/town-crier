@@ -2,7 +2,7 @@
 
 Route::auth();
 
-Route::get('/', 'StreamController@index');
+Route::get('/', 'HomeController@index');
 
 Route::get('shout',
     [

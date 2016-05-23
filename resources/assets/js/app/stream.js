@@ -38,13 +38,6 @@ var choreMsgData = {
     }
 }
 
-// Gossip :: Not Used
-socket.on("town-crier:App\\Events\\Rumour", function(output) {
-
-    console.log(output);
-
-});
-
 // Tasks performed by the Janitor
 socket.on("town-crier:App\\Events\\Chore", function(task) {
 
@@ -95,7 +88,7 @@ socket.on("town-crier:App\\Events\\Shout", function(message) {
     else {
         swal({
             title: 'Whoops',
-            text: 'An empty Shout has been heard. Please report this error',
+            text: 'Tumbleweed! Please report this error',
             type: "error",
             showConfirmButton: false,
             timer: 5000,
