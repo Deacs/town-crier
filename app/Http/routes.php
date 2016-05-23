@@ -11,12 +11,12 @@ Route::get('shout',
     ]
 );
 
-Route::post('fire',
-    [
-        'as'    => 'home',
-        'uses'  => 'HomeController@index'
-    ]
-);
+//Route::post('fire',
+//    [
+//        'as'    => 'home',
+//        'uses'  => 'HomeController@index'
+//    ]
+//);
 
 Route::get('stream',
     [

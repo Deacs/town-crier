@@ -81,8 +81,6 @@ socket.on("town-crier:App\\Events\\Shout", function(message) {
         var data = message.data.announcement,
             type = typeMeta[data.type_id];
 
-        console.log(data);
-
         var panel = $('<div class="list-group-item list-group-item-'+type.panel+'">'+
             '<h4 class="shout-title"><span class="glyphicon glyphicon-'+type.icon+' shout-type"></span>'+data.title+'</h4>'+
             '<div>'+
