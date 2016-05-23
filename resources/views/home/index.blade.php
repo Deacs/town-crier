@@ -8,7 +8,7 @@
     <div class="home">
 
         <div class="row">
-            <h1><span class="glyphicon glyphicon-home"></span> The Town Crier</h1>
+            <h1><span class="glyphicon glyphicon-home"></span> The Town Square</h1>
         </div>
 
         <div class="row">
