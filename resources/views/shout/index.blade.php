@@ -82,8 +82,6 @@
             var posting = $.post( url, data )
                 .done(function( res ) {
 
-                    console.log(res);
-
                     alertData = respond(res);
 
                     swal({

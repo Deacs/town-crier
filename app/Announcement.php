@@ -44,7 +44,7 @@ class Announcement extends Model
             'title'     => 'required|max:255',
             'body'      => 'required|min:5',
             'user_id'   => 'required',
-            'type_id'   => 'required'
+            'type_id'   => 'required|integer|in:'.implode(',', AnnouncementType::$type_ids)
         ]);
 
         if ($validator->passes()) {

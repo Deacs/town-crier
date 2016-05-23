@@ -104,11 +104,25 @@
 
             var $item = $(this);
 
+            var swalData = function(data, success) {
+                return swal({
+                    type:   success ? "success" : "error",
+                    title:  data.title,
+                    text:   data.text,
+                    timer:  3000,
+                    showConfirmButton: false
+                });
+            }
+
             $item.on('click', function() {
 
-                var action  = $item.data('action'),
-                    prompt  = actionData[action].prompt,
-                    success = actionData[action].success;
+                var action      = $item.data('action'),
+                    prompt      = actionData[action].prompt,
+                    success     = actionData[action].success,
+                    failData    = {
+                        title: 'Uh oh',
+                        text: 'Your broom seems to be broken. Try again'
+                    }
 
                 if (prompt) {
                     swal({
@@ -125,22 +139,10 @@
                                 url: '/'+$item.data('action')
                             })
                             .done(function( res ) {
-                                swal({
-                                    type: "success",
-                                    title: success.title,
-                                    text: success.text,
-                                    timer: 3000,
-                                    showConfirmButton: false
-                                });
+                                swalData(success, true);
                             })
                             .fail(function ( res ) {
-                                swal({
-                                    type: "error",
-                                    title: "Uh Oh",
-                                    text: "Your broom seems to be broken. Try again?",
-                                    timer: 3000,
-                                    showConfirmButton: false
-                                });
+                                swalData(failData, false);
                             });
                     });
                 }
@@ -149,22 +151,17 @@
                             url: '/'+$item.data('action')
                         })
                         .done(function( res ) {
-                            swal({
-                                type: "success",
-                                title: success.title,
-                                text: success.text,
-                                timer: 3000,
-                                showConfirmButton: false
-                            });
+
+                            if (res == 'pass') {
+                                swalData(success, true);
+                            }
+                            else {
+                                swalData(failData, false);
+                            }
+
                         })
                         .fail(function ( res ) {
-                            swal({
-                                type: "error",
-                                title: "Uh Oh",
-                                text: "Your broom seems to be broken. Try again?",
-                                timer: 3000,
-                                showConfirmButton: false
-                            });
+                            swalData(failData, false);
                         });
                 }
 

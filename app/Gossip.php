@@ -53,7 +53,7 @@ class Gossip extends Model
 
         Input::merge($this->buildPayload());
 
-        (new Announcement())->shout();
+        return (new Announcement())->shout();
     }
 
     /**

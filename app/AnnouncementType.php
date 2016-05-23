@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
 
 class AnnouncementType extends Model
@@ -17,6 +16,15 @@ class AnnouncementType extends Model
     protected $id;
     protected $title;
     protected $activeAnnouncementsCount;
+
+    public static $type_ids = [
+        self::INVESTMENT_ID,
+        self::FUNDED_ID,
+        self::ANNOUNCEMENT_ID,
+        self::BIRTHDAY_ID,
+        self::CODE_DEPLOY_ID,
+        self::FUNDING_MILESTONE_ID
+    ];
 
     public function announcements()
     {

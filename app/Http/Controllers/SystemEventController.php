@@ -13,7 +13,7 @@ class SystemEventController extends Controller
     {
         Log::info('Mocking Investment');
 
-        (new Gossip(AnnouncementType::INVESTMENT_ID))->whisper();
+        return (new Gossip(AnnouncementType::INVESTMENT_ID))->whisper();
 
     }
 
@@ -21,20 +21,20 @@ class SystemEventController extends Controller
     {
         Log::info('Mocking Funding');
 
-        (new Gossip(AnnouncementType::FUNDED_ID))->whisper();
+        return (new Gossip(AnnouncementType::FUNDED_ID))->whisper();
     }
 
     public function mockCodeDeploy()
     {
         Log::info('Mocking Code Deploy');
 
-        (new Gossip(AnnouncementType::CODE_DEPLOY_ID))->whisper();
+        return (new Gossip(AnnouncementType::CODE_DEPLOY_ID))->whisper();
     }
 
     public function mockFundingMilestone()
     {
         Log::info('Mocking Funding Milestone');
 
-        (new Gossip(AnnouncementType::FUNDING_MILESTONE_ID))->whisper();
+        return (new Gossip(AnnouncementType::FUNDING_MILESTONE_ID))->whisper();
     }
 }
