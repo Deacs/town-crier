@@ -18,7 +18,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('/') }}"><span class="glyphicon glyphicon-list-home"></span> Home</a></li>
+                        <li><a href="{{ url('/') }}"><span class="glyphicon glyphicon-git home"></span> Home</a></li>
                         <li><a href="{{ url('/stream') }}"><span class="glyphicon glyphicon-list-alt"></span> Stream</a></li>
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
