@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><img src="{{ asset('/img/announcement.png') }}" alt="Town Crier" height="20px"/></a>
+            <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-bullhorn"></span></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -21,6 +21,7 @@
                         <li><a href="{{ url('/') }}"><span class="glyphicon glyphicon-home"></span> Town Square</a></li>
                         <li><a href="{{ url('/stream') }}"><span class="glyphicon glyphicon-list-alt"></span> Stream</a></li>
                         @if (Auth::guest())
+                            <li role="separator" class="divider"></li>
                             <li><a href="{{ url('/login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         @else
                             <li><a href="{{ url('/shout') }}"><span class="glyphicon glyphicon-bullhorn"></span> Shout</a></li>
@@ -29,6 +30,7 @@
                             <li><a href="{{ url('/janitor') }}"><span class="glyphicon glyphicon-sunglasses"></span> Janitor</a></li>
                             <li><a href="{{ url('/audit-log') }}"><span class="glyphicon glyphicon-th-list"></span> Audit Log</a></li>
                         @endif
+                            <li role="separator" class="divider"></li>
                             <li><a href="{{ url('/logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                         @endif
                     </ul>
