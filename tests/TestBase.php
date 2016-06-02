@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 class TestBase extends TestCase
 {
 
@@ -24,5 +26,10 @@ class TestBase extends TestCase
         $user = factory(User::class)->make($attributes);
 
         return $user;
+    }
+
+    public function createJanitor()
+    {
+        return $this->createUser(['id' => User::JANITOR_USER_ID]);
     }
 }

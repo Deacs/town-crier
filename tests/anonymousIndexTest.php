@@ -31,20 +31,37 @@ class AnonymousIndexTest extends TestBase
      */
     public function user_can_log_in()
     {
-        $user = factory(User::class)->create([
-            'name'      => 'Janitor',
-            'email'     => 'janitor@'.env('DOMAIN'),
-            'password'  => bcrypt('janitor')]
-        );
+        $attributes = [
+            'name'      => 'John Doe',
+            'password'  => bcrypt('johndoe')
+        ];
+
+        $user = $this->createUser($attributes);
 
         $this->visit('/login')
                 ->submitForm('Login',
                     [
                         'email'     => $user->email,
-                        'password'  => 'janitor'
+                        'password'  => 'johndoe'
                     ]
                 )
                 ->seePageIs('/')
                 ->see('Welcome back, '.$user->name);
+    }
+
+    /**
+     * @test
+     */
+    public function janitor_has_access_to_janitor_page()
+    {
+        $janitor = $this->createJanitor();
+
+        $this->actingAs($janitor);
+
+        $this->visit('/janitor')
+                ->seePageIs('/janitor')
+                ->see('Janitor')
+                ->see('Chores')
+                ->see('System Events');
     }
 }
