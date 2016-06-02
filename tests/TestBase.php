@@ -12,11 +12,17 @@ class TestBase extends TestCase
         Artisan::call('migrate:refresh');
     }
 
-    public function createUser()
+    public function createUser($attributes = [])
     {
-        $user  = factory(User::class)->create();
+        $user = factory(User::class)->create($attributes);
 
         return $user;
     }
 
+    public function makeUser($attributes = [])
+    {
+        $user = factory(User::class)->make($attributes);
+
+        return $user;
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -26,18 +27,24 @@ class AnonymousIndexTest extends TestBase
     }
 
     /**
-     * @_test
+     * @test
      */
-    public function janitor_can_log_in()
+    public function user_can_log_in()
     {
+        $user = factory(User::class)->create([
+            'name'      => 'Janitor',
+            'email'     => 'janitor@'.env('DOMAIN'),
+            'password'  => bcrypt('janitor')]
+        );
+
         $this->visit('/login')
                 ->submitForm('Login',
                     [
-                        'email'    => 'janitor@'.env('DOMAIN'),
-                        'password' => 'janitos',
+                        'email'     => $user->email,
+                        'password'  => 'janitor'
                     ]
                 )
                 ->seePageIs('/')
-                ->see('Welcome back, Janitor');
+                ->see('Welcome back, '.$user->name);
     }
 }
