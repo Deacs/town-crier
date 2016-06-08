@@ -32,4 +32,13 @@ class TestBase extends TestCase
     {
         return $this->createUser(['id' => User::JANITOR_USER_ID]);
     }
+
+    protected function actAsJanitor()
+    {
+        $janitor = $this->createJanitor();
+
+        $this->actingAs($janitor);
+
+        return $this;
+    }
 }

@@ -1,6 +1,5 @@
 <?php
 
-use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -29,7 +28,7 @@ class AnonymousIndexTest extends TestBase
     /**
      * @test
      */
-    public function user_can_log_in()
+    public function user_can_log_in_and_see_correct_welcome_page()
     {
         $attributes = [
             'name'      => 'John Doe',
@@ -52,16 +51,13 @@ class AnonymousIndexTest extends TestBase
     /**
      * @test
      */
-    public function janitor_has_access_to_janitor_page()
+    public function standard_user_has_no_access_to_janitor_page()
     {
-        $janitor = $this->createJanitor();
+        $user = $this->createUser();
 
-        $this->actingAs($janitor);
+        $this->actingAs($user);
 
         $this->visit('/janitor')
-                ->seePageIs('/janitor')
-                ->see('Janitor')
-                ->see('Chores')
-                ->see('System Events');
+                ->seePageIs('/');
     }
 }

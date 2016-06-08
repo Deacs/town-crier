@@ -2,7 +2,12 @@
 
 Route::auth();
 
-Route::get('/', 'HomeController@index');
+Route::get('/',
+    [
+        'as'    => 'home',
+        'uses'  =>'HomeController@index'
+    ]
+);
 
 Route::get('shout',
     [
@@ -10,13 +15,6 @@ Route::get('shout',
         'uses'  => 'ShoutController@create'
     ]
 );
-
-//Route::post('fire',
-//    [
-//        'as'    => 'home',
-//        'uses'  => 'HomeController@index'
-//    ]
-//);
 
 Route::get('stream',
     [
