@@ -28,7 +28,7 @@ class JanitorRoutesTest extends TestBase
         $this->actAsJanitor();
 
         $this->visit('/janitor')
-            ->press('Refresh Clients')
+            ->click('Refresh Clients')
             ->see('All Done!');
     }
 
@@ -40,7 +40,7 @@ class JanitorRoutesTest extends TestBase
         $this->actAsJanitor();
 
         $this->visit('/janitor')
-            ->press('Purge DB')
+            ->click('Purge DB')
             ->see('All Done!');
     }
 
@@ -52,7 +52,7 @@ class JanitorRoutesTest extends TestBase
         $this->actAsJanitor();
 
         $this->visit('/janitor')
-            ->press('Purge Redis')
+            ->click('Purge Redis')
             ->see('All Done!');
     }
 
@@ -64,7 +64,7 @@ class JanitorRoutesTest extends TestBase
         $this->actAsJanitor();
 
         $this->visit('/janitor')
-                ->press('Mock Investment')
+                ->click('Mock Investment')
                 ->see('All Done!');
     }
 
@@ -76,7 +76,7 @@ class JanitorRoutesTest extends TestBase
         $this->actAsJanitor();
 
         $this->visit('/janitor')
-            ->press('Mock Funding')
+            ->click('Mock Funding')
             ->see('All Done!');
     }
 
@@ -88,7 +88,7 @@ class JanitorRoutesTest extends TestBase
         $this->actAsJanitor();
 
         $this->visit('/janitor')
-            ->press('Mock Code Deploy')
+            ->click('Mock Code Deploy')
             ->see('All Done!');
     }
 
@@ -100,7 +100,7 @@ class JanitorRoutesTest extends TestBase
         $this->actAsJanitor();
 
         $this->visit('/janitor')
-            ->press('Mock Funding Milestone')
+            ->click('Mock Funding Milestone')
             ->see('All Done!');
     }
 

@@ -10,38 +10,32 @@
 
         <h3><span class="glyphicon glyphicon-wrench"></span> Chores</h3>
 
-        <form>
+        <div class="row">
+            <a class="btn btn-lg btn-success janitor-task" id="refreshremotes" data-action="refreshremotes"><span class="glyphicon glyphicon-refresh"></span> Refresh Clients</a>
+        </div>
+        <div class="row">
+            <a class="btn btn-lg btn-success janitor-task" data-action="purgedb"><span class="glyphicon glyphicon-erase"></span> Purge DB</a>
+        </div>
+        <div class="row">
+            <a class="btn btn-lg btn-success janitor-task" data-action="purgeredis"><span class="glyphicon glyphicon-trash"></span> Purge Redis</a>
+        </div>
 
-            <div class="row">
-                <button class="btn btn-lg btn-success janitor-task" data-action="refreshremotes"><span class="glyphicon glyphicon-refresh"></span> Refresh Clients</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-lg btn-success janitor-task" data-action="purgedb"><span class="glyphicon glyphicon-erase"></span> Purge DB</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-lg btn-success janitor-task" data-action="purgeredis"><span class="glyphicon glyphicon-trash"></span> Purge Redis</button>
-            </div>
-
-        </form>
 
         <h3><span class="glyphicon glyphicon-transfer"></span> System Events</h3>
 
-        <form>
+        <div class="row">
+            <a class="btn btn-lg btn-info janitor-task" id="mockinvestment" data-action="mockinvestment"><span class="glyphicon glyphicon-piggy-bank"></span> Mock Investment</a>
+        </div>
+        <div class="row">
+            <a class="btn btn-lg btn-info janitor-task" id="mockfunding" data-action="mockfunding"><span class="glyphicon glyphicon-glass"></span> Mock Funding</a>
+        </div>
+        <div class="row">
+            <a class="btn btn-lg btn-info janitor-task" id="mockcodedeploy" data-action="mockcodedeploy"><span class="glyphicon glyphicon-cloud-upload"></span> Mock Code Deploy</a>
+        </div>
+        <div class="row">
+            <a class="btn btn-lg btn-info janitor-task" id="mockfundingmilestone" data-action="mockfundingmilestone"><span class="glyphicon glyphicon-flag"></span> Mock Funding Milestone</a>
+        </div>
 
-            <div class="row">
-                <button class="btn btn-lg btn-info janitor-task" data-action="mockinvestment"><span class="glyphicon glyphicon-piggy-bank"></span> Mock Investment</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-lg btn-info janitor-task" data-action="mockfunding"><span class="glyphicon glyphicon-glass"></span> Mock Funding</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-lg btn-info janitor-task" data-action="mockcodedeploy"><span class="glyphicon glyphicon-cloud-upload"></span> Mock Code Deploy</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-lg btn-info janitor-task" data-action="mockfundingmilestone"><span class="glyphicon glyphicon-flag"></span> Mock Funding Milestone</button>
-            </div>
-
-        </form>
     </div>
 @stop
 
@@ -133,6 +127,8 @@
                     }
 
                 if (prompt) {
+
+
                     swal({
                         title: prompt.title,
                         text: prompt.text,
@@ -140,7 +136,8 @@
                         showCancelButton: true,
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: prompt.confirm,
-                        closeOnConfirm: false
+                        closeOnConfirm: false,
+                        timer: 3000
                     }, function(){
 
                         $.ajax({

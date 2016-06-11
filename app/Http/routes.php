@@ -39,6 +39,16 @@ Route::group(['middleware' => 'auth'], function () {
         ]
     );
 
+});
+
+Route::group(['middleware' => 'janitor'], function () {
+    Route::get('audit-log',
+        [
+            'as'    => 'audit-log',
+            'uses'  => 'AuditController@index'
+        ]
+    );
+
     Route::get('stats',
         [
             'as'    => 'stats',
@@ -50,15 +60,6 @@ Route::group(['middleware' => 'auth'], function () {
         [
             'as'    => 'graph-stats',
             'uses'  => 'StatsController@graphData'
-        ]
-    );
-});
-
-Route::group(['middleware' => 'janitor'], function () {
-    Route::get('audit-log',
-        [
-            'as'    => 'audit-log',
-            'uses'  => 'AuditController@index'
         ]
     );
 
