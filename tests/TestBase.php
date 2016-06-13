@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use App\AnnouncementType;
 
 class TestBase extends TestCase
 {
@@ -28,6 +29,11 @@ class TestBase extends TestCase
         return $user;
     }
 
+    public function createSystemUser()
+    {
+        return $this->createUser(['id' => User::SYSTEM_USER_ID]);
+    }
+
     public function createJanitor()
     {
         return $this->createUser(['id' => User::JANITOR_USER_ID]);
@@ -40,5 +46,12 @@ class TestBase extends TestCase
         $this->actingAs($janitor);
 
         return $this;
+    }
+
+    protected function createAnnouncementType($attributes = [])
+    {
+        $announcementType = factory(AnnouncementType::class)->create($attributes);
+
+        return $announcementType;
     }
 }
