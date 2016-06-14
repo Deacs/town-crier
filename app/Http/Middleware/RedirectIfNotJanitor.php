@@ -17,7 +17,7 @@ class RedirectIfNotJanitor
     public function handle($request, Closure $next)
     {
         if (! Auth::check() || ! Auth::user()->isJanitor()) {
-            return redirect()->route('home');
+            return redirect('login');
         }
 
         return $next($request);

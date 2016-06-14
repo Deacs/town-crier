@@ -54,10 +54,28 @@ class GuestUserTest extends TestBase
     /**
      * @test
      */
+    public function is_redirected_to_login_if_attempting_to_visit_shout_page()
+    {
+        $this->visit('/shout')
+                ->seePageIs('/login');
+    }
+
+    /**
+     * @test
+     */
     public function cannot_see_janitor_option()
     {
         $this->visit('/')
             ->dontSee('Janitor');
+    }
+
+    /**
+     * @test
+     */
+    public function is_redirected_to_login_if_attempting_to_visit_janitor_page()
+    {
+        $this->visit('/janitor')
+            ->seePageIs('/login');
     }
 
     /**
@@ -72,10 +90,28 @@ class GuestUserTest extends TestBase
     /**
      * @test
      */
+    public function is_redirected_to_login_if_attempting_to_visit_stats_page()
+    {
+        $this->visit('/stats')
+            ->seePageIs('/login');
+    }
+
+    /**
+     * @test
+     */
     public function cannot_see_audit_log_option()
     {
         $this->visit('/')
             ->dontSee('Audit Log');
+    }
+
+    /**
+     * @test
+     */
+    public function is_redirected_to_login_if_attempting_to_visit_audit_log_page()
+    {
+        $this->visit('/audit-log')
+            ->seePageIs('/login');
     }
 
     /**
