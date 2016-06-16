@@ -54,4 +54,18 @@ class TestBase extends TestCase
 
         return $announcementType;
     }
+
+    protected function createInvestmentAttributes()
+    {
+        $faker = Faker\Factory::create();
+
+        $attributes = [
+            'title'     => $faker->company(),
+            'body'      => "£".$faker->numberBetween(10, 5000)." investment. Pitch has now reached ".$faker->numberBetween(5, 99)."%",
+            'type_id'   => AnnouncementType::INVESTMENT_ID,
+            'user_id'   => User::SYSTEM_USER_ID
+        ];
+
+        return $attributes;
+    }
 }

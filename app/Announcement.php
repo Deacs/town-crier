@@ -60,6 +60,7 @@ class Announcement extends Model
             $result = 'pass';
         }
         else {
+            // TODO Throw exception
             Log::info('Shout Validation FAILED');
         }
 

@@ -1,40 +1,32 @@
 <?php
 
-use App\User;
 use App\Announcement;
 use App\AnnouncementType;
+use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class StreamTest extends TestBase
+class AnnouncementTest extends TestBase
 {
     /**
      * @test
      */
-    public function investment_is_correctly_displayed()
+    public function investment_correctly_stored()
     {
-
-        $user = $this->createSystemUser();
-
         $attributes = $this->createInvestmentAttributes();
 
         Announcement::create($attributes);
 
-        $this->visit('/stream')
-            ->see($attributes['title'])
-            ->see($attributes['body'])
-            ->see($user->name);
+        $this->seeInDatabase('announcements', $attributes);
     }
 
     /**
      * @test
      */
-    public function funding_is_correctly_displayed()
+    public function funding_is_correctly_stored()
     {
         $faker = Faker\Factory::create();
-
-        $user = $this->createSystemUser();
 
         $attributes = [
             'title'     => 'Pitch Funded',
@@ -45,20 +37,15 @@ class StreamTest extends TestBase
 
         Announcement::create($attributes);
 
-        $this->visit('/stream')
-            ->see($attributes['title'])
-            ->see($attributes['body'])
-            ->see($user->name);
+        $this->seeInDatabase('announcements', $attributes);
     }
 
     /**
      * @test
      */
-    public function funding_milestone_is_correctly_displayed()
+    public function funding_milestone_is_correctly_stored()
     {
         $faker = Faker\Factory::create();
-
-        $user = $this->createSystemUser();
 
         $milestones = [25, 50, 75, 90, 99];
 
@@ -71,16 +58,13 @@ class StreamTest extends TestBase
 
         Announcement::create($attributes);
 
-        $this->visit('/stream')
-            ->see($attributes['title'])
-            ->see($attributes['body'])
-            ->see($user->name);
+        $this->seeInDatabase('announcements', $attributes);
     }
 
     /**
      * @test
      */
-    public function birthday_is_correctly_displayed()
+    public function birthday_is_correctly_stored()
     {
         $faker = Faker\Factory::create();
 
@@ -95,16 +79,13 @@ class StreamTest extends TestBase
 
         Announcement::create($attributes);
 
-        $this->visit('/stream')
-            ->see($attributes['title'])
-            ->see($attributes['body'])
-            ->see($user->name);
+        $this->seeInDatabase('announcements', $attributes);
     }
 
     /**
      * @test
      */
-    public function code_deploy_is_correctly_displayed()
+    public function code_deploy_is_correctly_stored()
     {
         $user = $this->createSystemUser();
 
@@ -117,16 +98,13 @@ class StreamTest extends TestBase
 
         Announcement::create($attributes);
 
-        $this->visit('/stream')
-            ->see($attributes['title'])
-            ->see($attributes['body'])
-            ->see($user->name);
+        $this->seeInDatabase('announcements', $attributes);
     }
 
     /**
      * @test
      */
-    public function announcement_is_correctly_displayed()
+    public function announcement_is_correctly_stored()
     {
         $user = $this->createUser();
 
@@ -139,9 +117,6 @@ class StreamTest extends TestBase
 
         Announcement::create($attributes);
 
-        $this->visit('/stream')
-            ->see($attributes['title'])
-            ->see($attributes['body'])
-            ->see($user->name);
+        $this->seeInDatabase('announcements', $attributes);
     }
 }
