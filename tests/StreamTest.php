@@ -32,16 +32,9 @@ class StreamTest extends TestBase
      */
     public function funding_is_correctly_displayed()
     {
-        $faker = Faker\Factory::create();
-
         $user = $this->createSystemUser();
 
-        $attributes = [
-            'title'     => 'Pitch Funded',
-            'body'      => $faker->company().' has reached target!',
-            'type_id'   => AnnouncementType::FUNDED_ID,
-            'user_id'   => User::SYSTEM_USER_ID
-        ];
+        $attributes = $this->createFundingAttributes();
 
         Announcement::create($attributes);
 
@@ -56,18 +49,9 @@ class StreamTest extends TestBase
      */
     public function funding_milestone_is_correctly_displayed()
     {
-        $faker = Faker\Factory::create();
-
         $user = $this->createSystemUser();
 
-        $milestones = [25, 50, 75, 90, 99];
-
-        $attributes = [
-            'title'     => $faker->company(),
-            'body'      => 'Milestone reached : '.$milestones[array_rand($milestones)].'% of target!',
-            'type_id'   => AnnouncementType::FUNDING_MILESTONE_ID,
-            'user_id'   => User::SYSTEM_USER_ID
-        ];
+        $attributes = $this->createFundingMilestoneAttributes();
 
         Announcement::create($attributes);
 
@@ -82,16 +66,9 @@ class StreamTest extends TestBase
      */
     public function birthday_is_correctly_displayed()
     {
-        $faker = Faker\Factory::create();
-
         $user = $this->createUser();
 
-        $attributes = [
-            'title'     => 'Happy Birthday!',
-            'body'      => "It's ".$faker->name."'s Birthday today!",
-            'type_id'   => AnnouncementType::BIRTHDAY_ID,
-            'user_id'   => $user->id
-        ];
+        $attributes = $this->createBirthdayAttributes();
 
         Announcement::create($attributes);
 
@@ -108,12 +85,7 @@ class StreamTest extends TestBase
     {
         $user = $this->createSystemUser();
 
-        $attributes = [
-            'title'     => 'Blast Off!',
-            'body'      => 'New application code successfully deployed',
-            'type_id'   => AnnouncementType::CODE_DEPLOY_ID,
-            'user_id'   => $user->id
-        ];
+        $attributes = $this->createCodeDeployAttributes();
 
         Announcement::create($attributes);
 
@@ -130,12 +102,7 @@ class StreamTest extends TestBase
     {
         $user = $this->createUser();
 
-        $attributes = [
-            'title'     => 'Announcement title',
-            'body'      => 'Body of the announcement',
-            'type_id'   => AnnouncementType::ANNOUNCEMENT_ID,
-            'user_id'   => $user->id
-        ];
+        $attributes = $this->createAnnouncementAttributes($user);
 
         Announcement::create($attributes);
 

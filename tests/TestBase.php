@@ -34,6 +34,11 @@ class TestBase extends TestCase
         return $this->createUser(['id' => User::SYSTEM_USER_ID]);
     }
 
+    public function makeSystemUser()
+    {
+        return $this->makeUser(['id' => User::SYSTEM_USER_ID]);
+    }
+
     public function createJanitor()
     {
         return $this->createUser(['id' => User::JANITOR_USER_ID]);
@@ -93,41 +98,39 @@ class TestBase extends TestCase
         ];
     }
 
-    protected function createBirthdayAttributes()
+    protected function createBirthdayAttributes(User $user = null)
     {
-        $faker = Faker\Factory::create();
+        $announcer = $user ?: $this->makeSystemUser();
 
-        $user = $this->createUser();
+        $faker = Faker\Factory::create();
 
         return [
             'title'     => 'Happy Birthday!',
             'body'      => "It's ".$faker->name."'s Birthday today!",
             'type_id'   => AnnouncementType::BIRTHDAY_ID,
-            'user_id'   => $user->id
+            'user_id'   => $announcer->id
         ];
     }
 
     protected function createCodeDeployAttributes()
     {
-        $user = $this->createSystemUser();
-
         return [
             'title'     => 'Blast Off!',
             'body'      => 'New application code successfully deployed',
             'type_id'   => AnnouncementType::CODE_DEPLOY_ID,
-            'user_id'   => $user->id
+            'user_id'   => User::SYSTEM_USER_ID
         ];
     }
 
-    protected function createAnnouncementAttributes()
+    protected function createAnnouncementAttributes(User $user = null)
     {
-        $user = $this->createUser();
+        $announcer = $user ?: $this->makeSystemUser();
 
         return [
             'title'     => 'Announcement title',
             'body'      => 'Body of the announcement',
             'type_id'   => AnnouncementType::ANNOUNCEMENT_ID,
-            'user_id'   => $user->id
+            'user_id'   => $announcer->id
         ];
 
     }
