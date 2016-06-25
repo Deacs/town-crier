@@ -17,6 +17,8 @@ class AnnouncementType extends Model
     protected $title;
     protected $activeAnnouncementsCount;
 
+    public $timestamps = false;
+
     public static $type_ids = [
         self::INVESTMENT_ID,
         self::FUNDED_ID,

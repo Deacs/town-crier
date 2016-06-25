@@ -31,18 +31,18 @@ class User extends Authenticatable
      */
     public function isSystem()
     {
-        $id = $this->getAttribute('id');
-        return $id == self::SYSTEM_USER_ID;
+//        $id = $this->getAttribute('id');
+        return $this->getAttribute('id') == self::SYSTEM_USER_ID;
     }
 
     /**
-     * Is the current user the Janitor User
+     * Is the current user the Janitor
      *
      * @return boolean
      */
     public function isJanitor()
     {
-        $id = $this->getAttribute('id');
-        return $id == self::JANITOR_USER_ID;
+//        $id = $this->getAttribute('id');
+        return $this->getAttribute('id') == self::JANITOR_USER_ID;
     }
 }

@@ -3,13 +3,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectIfNotJanitor
 {
     /**
-     * Ensure the current User is the System User (the Janitor)
+     * Redirects any user other than the Janitor to home route
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -17,8 +16,8 @@ class RedirectIfNotJanitor
      */
     public function handle($request, Closure $next)
     {
-        if (! Auth::user()->isJanitor()) {
-            return redirect()->route('home');
+        if (! Auth::check() || ! Auth::user()->isJanitor()) {
+            return redirect('login');
         }
 
         return $next($request);

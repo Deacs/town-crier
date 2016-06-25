@@ -2,7 +2,12 @@
 
 Route::auth();
 
-Route::get('/', 'HomeController@index');
+Route::get('/',
+    [
+        'as'    => 'home',
+        'uses'  =>'HomeController@index'
+    ]
+);
 
 Route::get('shout',
     [
@@ -10,13 +15,6 @@ Route::get('shout',
         'uses'  => 'ShoutController@create'
     ]
 );
-
-//Route::post('fire',
-//    [
-//        'as'    => 'home',
-//        'uses'  => 'HomeController@index'
-//    ]
-//);
 
 Route::get('stream',
     [
@@ -41,6 +39,16 @@ Route::group(['middleware' => 'auth'], function () {
         ]
     );
 
+});
+
+Route::group(['middleware' => 'janitor'], function () {
+    Route::get('audit-log',
+        [
+            'as'    => 'audit-log',
+            'uses'  => 'AuditController@index'
+        ]
+    );
+
     Route::get('stats',
         [
             'as'    => 'stats',
@@ -52,15 +60,6 @@ Route::group(['middleware' => 'auth'], function () {
         [
             'as'    => 'graph-stats',
             'uses'  => 'StatsController@graphData'
-        ]
-    );
-});
-
-Route::group(['middleware' => 'janitor'], function () {
-    Route::get('audit-log',
-        [
-            'as'    => 'audit-log',
-            'uses'  => 'AuditController@index'
         ]
     );
 

@@ -8,8 +8,10 @@ redis.subscribe('town-crier', function(err, count) {
 });
 
 redis.on('message', function(channel, message) {
-    console.log('Message Recieved: ' + message);
+
+    console.log('Message Received: ' + message);
     message = JSON.parse(message);
+
     io.emit(channel + ':' + message.event, message.data);
 });
 http.listen(3000, function(){

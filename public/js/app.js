@@ -11,7 +11,6 @@ var typeMeta = {
     },
     3: {
         'panel': 'danger',
-        //'icon': 'bullhorn'
         'icon': 'flash'
     },
     4: {
