@@ -28,6 +28,10 @@
             </table>
         </div>
 
+        <div class="row text-center">
+            {{ $audits->render() }}
+        </div>
+
     </div>
 @stop
 
