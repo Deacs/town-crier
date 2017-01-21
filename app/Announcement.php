@@ -58,11 +58,10 @@ class Announcement extends Model
 
         if ($validator->passes()) {
 
-            $this->create($this->data);
-
             // Some decoration needed here to add extra elements for specific types
             $this->decorateData();
 
+            $this->create($this->data);
             // Fire the Shout event picked up by the Node app
             event(new Shout($this->data));
 
@@ -71,6 +70,7 @@ class Announcement extends Model
         else {
             // TODO Throw exception
             Log::info('Shout Validation FAILED');
+
         }
 
         return $result;
@@ -81,7 +81,6 @@ class Announcement extends Model
         $this->data['author'] = $this->createAuthorName();
 
         // Add required img path to the array
-//        $this->data['img_path'] = $this->createImgPath();
         $this->data['thumb_path'] = $this->createImgPath();
     }
 
@@ -124,7 +123,7 @@ class Announcement extends Model
                 $imgType = 'abstract';
         }
 
-        $imgPath = 'http://lorempixel.com/'.env('THUMBNAIL_WIDTH').'/'.env('THUMBNAIL_HEIGHT').'/'.$imgType.'/?'.rand(1000000, 999999);
+        $imgPath = 'http://lorempixel.com/'.env('THUMBNAIL_WIDTH').'/'.env('THUMBNAIL_HEIGHT').'/'.$imgType.'/?'.rand(100000, 999999);
 
         return $imgPath;
     }
