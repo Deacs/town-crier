@@ -15,5 +15,5 @@ redis.on('message', function(channel, message) {
     io.emit(channel + ':' + message.event, message.data);
 });
 http.listen(3000, function(){
-    console.log('Listening on Port 3000 : Town Crier App');
+    console.log('Listening on Port 3000 : The Town Crier App');
 });

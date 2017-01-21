@@ -68,6 +68,8 @@ socket.on("town-crier:App\\Events\\Shout", function(message) {
 
     if (message.data !== null) {
 
+        console.log('Janitor working.......');
+
         // Check for the empty stream message and remove if found
         $('#empty_message_item').remove();
 
@@ -77,6 +79,7 @@ socket.on("town-crier:App\\Events\\Shout", function(message) {
         var panel = $('<div class="list-group-item list-group-item-'+type.panel+'">'+
             '<h4 class="shout-title"><span class="glyphicon glyphicon-'+type.icon+' shout-type"></span>'+data.title+'</h4>'+
             '<div>'+
+            '<img src="'+data.img_path+'" alt="No Image From JS">'+
             data.body+
             '</div>'+
             '<div class="author">'+data.author+', '+moment().calendar()+' <span class="glyphicon glyphicon glyphicon-time"></span></div>'+

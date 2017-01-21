@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://town-crier.dev'),
+    'url' => env('APP_URL', 'http://town-crier.app'),
 
     /*
     |--------------------------------------------------------------------------

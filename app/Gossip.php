@@ -26,6 +26,7 @@ class Gossip extends Model
     protected $type_id = null;
     protected $faker;
     protected $actions = [1,2,3,4,5,6];
+    protected $img_path = null;
 
     public function __construct($eventType = null)
     {
@@ -64,13 +65,19 @@ class Gossip extends Model
     private function buildPayload() {
 
         $this->buildAnnouncementData();
+        Log::info($this->body);
 
-        return [
+        $payload = [
             'title'     => $this->title ?: $this->faker->company,
             'body'      => $this->body ?: $this->faker->text,
             'user_id'   => $this->user_id ?: User::SYSTEM_USER_ID,
-            'type_id'   => $this->type_id ?: $this->event
+            'type_id'   => $this->type_id ?: $this->event,
+            'img_path'  => $this->img_path ?: 'http://lorempixel.com/70/70/'
         ];
+
+//        Log::info($payload);
+
+        return $payload;
     }
 
     /**

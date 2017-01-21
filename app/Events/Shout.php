@@ -13,7 +13,6 @@ class Shout extends Event implements ShouldBroadcast
     {
         if (! is_null($data)) {
 
-            \Log::info('Firing Event');
             $this->data = [
                 'announcement' => $data
             ];

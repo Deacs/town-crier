@@ -14,6 +14,7 @@
             <div class="list-group-item {{ $announcement->type_id }}">
                 <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
                 <div>
+                    <img src="{{ $announcement->img_path }}" alt="No Image Available" />
                     {{ $announcement->body }}
                 </div>
                 <div class="author">
