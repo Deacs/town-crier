@@ -13,6 +13,7 @@ class Announcement extends Model
     protected $data;
     protected $title;
     protected $body;
+    protected $thumb_path;
     protected $published_at;
     protected $author;
     protected $type;
@@ -79,7 +80,8 @@ class Announcement extends Model
         $this->data['author'] = $this->createAuthorName();
 
         // Add required img path to the array
-        $this->data['img_path'] = $this->createImgPath();
+//        $this->data['img_path'] = $this->createImgPath();
+        $this->data['thumb_path'] = $this->createImgPath();
     }
 
     protected function createAuthorName()
@@ -88,31 +90,40 @@ class Announcement extends Model
     }
 
     /**
-     * Create an img path that is specific to this announcement
+     * Return the stored image path or
+     * create one that is specific to this announcement
      *
      * @return string
      */
     protected function createImgPath()
     {
+        if (! is_null($this->thumb_path)) {
+            return $this->thumb_path;
+        }
+
         switch ($this->data['type_id']) {
             // All of the following announcements are linked to a business
             case AnnouncementType::FUNDED_ID:
             case AnnouncementType::INVESTMENT_ID:
+                    $imgType = 'business';
+                break;
             case AnnouncementType::FUNDING_MILESTONE_ID:
-                    $imgPath = 'https://placeimg.com/'.env('THUMBNAIL_WIDTH').'/'.env('THUMBNAIL_HEIGHT').'/tech';
+                    $imgType = 'city';
                 break;
             case AnnouncementType::ANNOUNCEMENT_ID:
-                $imgPath = 'https://placeimg.com/'.env('THUMBNAIL_WIDTH').'/'.env('THUMBNAIL_HEIGHT').'/nature';
+                    $imgType = 'nature';
                 break;
             case AnnouncementType::BIRTHDAY_ID:
-                $imgPath = 'https://placeimg.com/'.env('THUMBNAIL_WIDTH').'/'.env('THUMBNAIL_HEIGHT').'/people';
+                    $imgType = 'people';
                 break;
-//            case AnnouncementType::CODE_DEPLOY_ID: // Force the default to fire
-//                $imgPath = 'https://placeimg.com/60/60/architecture/';
-//                break;
+            case AnnouncementType::CODE_DEPLOY_ID:
+                    $imgType = 'technics';
+                break;
             default:
-                $imgPath = 'http://fillmurray.com/'.env('THUMBNAIL_WIDTH').'/'.env('THUMBNAIL_HEIGHT');
+                $imgType = 'abstract';
         }
+
+        $imgPath = 'http://lorempixel.com/50/50/'.$imgType.'/?'.rand(1000000, 999999);
 
         return $imgPath;
     }

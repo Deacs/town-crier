@@ -16,6 +16,7 @@ class CreateAnnouncementsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('body');
+            $table->text('thumb_path')->nullable();
             $table->integer('type_id')->references('id')->on('announcement_types');
             $table->integer('user_id')->references('id')->on('users');
             $table->boolean('active')->default(1);
