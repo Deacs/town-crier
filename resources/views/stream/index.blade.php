@@ -9,17 +9,13 @@
 @stop
 
 @section('content')
-    <div class="town-crier shouts container">
+    <div class="town-crier shouts">
         @forelse($announcements as $announcement)
             <div class="list-group-item {{ $announcement->type_id }}">
                 <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
-                <div class="row">
-                    <div class="col-xs-1">
-                        <img src="{{ $announcement->thumb_path }}" alt="No Image Available" />
-                    </div>
-                    <div class="col-xs-11">
-                        {{ $announcement->body }}
-                    </div>
+                <div>
+                    <img src="{{ $announcement->thumb_path }}" alt="No Image Available" class="stream_thumb" />
+                    {{ $announcement->body }}
                 </div>
                 <div class="author">
                     {{ $announcement->user->name }}, {{ $announcement->created_at->diffForHumans() }} <span class="glyphicon glyphicon-time"></span>

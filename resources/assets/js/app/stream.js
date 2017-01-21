@@ -78,11 +78,11 @@ socket.on("town-crier:App\\Events\\Shout", function(message) {
 
         var panel = $('<div class="list-group-item list-group-item-'+type.panel+'">'+
             '<h4 class="shout-title"><span class="glyphicon glyphicon-'+type.icon+' shout-type"></span>'+data.title+'</h4>'+
-            '<div class="row">'+
-            '<div class="col-xs-1"><img src="'+data.thumb_path+'" alt="No Image From JS"></div>'+
-            '<div class="col-xs-11">'+
-            data.body+
+            '<div>'+
+            '<img src="'+data.thumb_path+'" alt="No Image From JS" class="stream_thumb">'+
             '</div>'+
+            '<div>'+
+            data.body+
             '</div>'+
             '<div class="author">'+data.author+', '+moment().calendar()+' <span class="glyphicon glyphicon glyphicon-time"></span></div>'+
             '</div>').hide().fadeIn(250);

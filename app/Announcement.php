@@ -23,7 +23,8 @@ class Announcement extends Model
         'title',
         'body',
         'user_id',
-        'type_id'
+        'type_id',
+        'thumb_path'
     ];
 
     public function user()
@@ -46,7 +47,7 @@ class Announcement extends Model
     {
         $result = 'fail';
 
-        $this->data = Input::only('title', 'body', 'user_id', 'type_id');
+        $this->data = Input::only('title', 'body', 'user_id', 'type_id', 'thumb_path');
 
         $validator = Validator::make($this->data, [
             'title'     => 'required|max:255',
@@ -123,7 +124,7 @@ class Announcement extends Model
                 $imgType = 'abstract';
         }
 
-        $imgPath = 'http://lorempixel.com/50/50/'.$imgType.'/?'.rand(1000000, 999999);
+        $imgPath = 'http://lorempixel.com/'.env('THUMBNAIL_WIDTH').'/'.env('THUMBNAIL_HEIGHT').'/'.$imgType.'/?'.rand(1000000, 999999);
 
         return $imgPath;
     }

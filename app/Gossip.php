@@ -13,7 +13,8 @@ class Gossip extends Model
         'title',
         'body',
         'user_id',
-        'type_id'
+        'type_id',
+        'thumb_path'
     ];
 
     protected $table = 'announcements';
@@ -26,7 +27,7 @@ class Gossip extends Model
     protected $type_id = null;
     protected $faker;
     protected $actions = [1,2,3,4,5,6];
-    protected $img_path = null;
+    protected $thumb_path = 'http://lorempixel.com/50/50/abstract/';
 
     public function __construct($eventType = null)
     {
@@ -52,6 +53,8 @@ class Gossip extends Model
     {
         Log::info('firing random '.$this->event.' event');
 
+        Log::info(Input::all());
+
         Input::merge($this->buildPayload());
 
         return (new Announcement())->shout();
@@ -68,14 +71,14 @@ class Gossip extends Model
         Log::info($this->body);
 
         $payload = [
-            'title'     => $this->title ?: $this->faker->company,
-            'body'      => $this->body ?: $this->faker->text,
-            'user_id'   => $this->user_id ?: User::SYSTEM_USER_ID,
-            'type_id'   => $this->type_id ?: $this->event,
-            'img_path'  => $this->img_path ?: 'http://lorempixel.com/70/70/'
+            'title'         => $this->title ?: $this->faker->company,
+            'body'          => $this->body ?: $this->faker->text,
+            'user_id'       => $this->user_id ?: User::SYSTEM_USER_ID,
+            'type_id'       => $this->type_id ?: $this->event,
+            'thumb_path'    => $this->thumb_path ?: 'http://lorempixel.com/70/70/',
         ];
 
-//        Log::info($payload);
+        Log::info($payload);
 
         return $payload;
     }
