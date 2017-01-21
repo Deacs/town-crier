@@ -15,7 +15,7 @@
                 <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
                 <div class="row">
                     <div class="col-xs-1">
-                        <img src="{{ $announcement->thumb_path }}" alt="No Image Available" class="stream_thumb" />
+                        <img src="{{ $announcement->thumb_path }}" alt="No Image Available" />
                     </div>
                     <div class="col-xs-11">
                         {{ $announcement->body }}
