@@ -16,7 +16,9 @@
 }
 .shouts {
     width:100%;
-    display:none;
+    /*display:none;*/
+    /*display: -webkit-flex;*/
+    /*display: flex;*/
 }
 .shout-type {
     margin-right: 0.5em;
@@ -31,4 +33,15 @@
 }
 .author-icon {
     margin-right:0.5em;
+}
+.stream_thumb {
+    display: inline-flex;
+    flex: initial;
+    width: 60px;
+    min-width: 60px;
+}
+.stream_body {
+    display: inline-flex;
+    vertical-align: top;
+    flex: auto;
 }

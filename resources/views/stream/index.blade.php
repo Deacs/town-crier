@@ -13,8 +13,10 @@
         @forelse($announcements as $announcement)
             <div class="list-group-item {{ $announcement->type_id }}">
                 <h4 class="shout-title"><span class="glyphicon glyphicon-plus shout-type"></span>{{ $announcement->title }}</h4>
-                <div>
-                    <img src="{{ $announcement->thumb_path }}" alt="No Image Available" class="stream_thumb" />
+                <div class="stream_thumb">
+                    <img src="{{ $announcement->thumb_path }}" alt="No Image Available" />
+                </div>
+                <div class="stream_body">
                     {{ $announcement->body }}
                 </div>
                 <div class="author">
