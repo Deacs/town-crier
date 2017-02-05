@@ -1,9 +1,12 @@
 <?php
 
-class TestCase extends BrowserKitTest
+use Illuminate\Contracts\Console\Kernel;
+use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
+
+abstract class BrowserKitTest extends BaseTestCase
 {
     /**
-     * The base URL to use while testing the application.
+     * The base URL of the application.
      *
      * @var string
      */
@@ -18,7 +21,7 @@ class TestCase extends BrowserKitTest
     {
         $app = require __DIR__.'/../bootstrap/app.php';
 
-        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+        $app->make(Kernel::class)->bootstrap();
 
         return $app;
     }

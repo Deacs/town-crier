@@ -2,12 +2,15 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    const SYSTEM_USER_ID = 1;
-    const JANITOR_USER_ID = 2;
+    use Notifiable;
+
+    const SYSTEM_USER_ID    = 1;
+    const JANITOR_USER_ID   = 2;
 
     protected $table = 'users';
 
