@@ -31,8 +31,12 @@
         "classmap": [
             "tests/TestCase.php",
             "tests/TestBase.php",
+            "tests/DuskTestCase.php",
             "tests/BrowserKitTest.php"
-        ]
+        ],
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "scripts": {
         "post-root-package-install": [

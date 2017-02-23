@@ -15,7 +15,8 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $id;
-    protected $name;
+    protected $first_name;
+    protected $last_name;
     protected $email;
 
     /**
@@ -24,7 +25,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name'
+        'first_name',
+        'last_name'
     ];
 
     /**
@@ -34,7 +36,6 @@ class User extends Authenticatable
      */
     public function isSystem()
     {
-//        $id = $this->getAttribute('id');
         return $this->getAttribute('id') == self::SYSTEM_USER_ID;
     }
 
@@ -45,7 +46,6 @@ class User extends Authenticatable
      */
     public function isJanitor()
     {
-//        $id = $this->getAttribute('id');
         return $this->getAttribute('id') == self::JANITOR_USER_ID;
     }
 }
