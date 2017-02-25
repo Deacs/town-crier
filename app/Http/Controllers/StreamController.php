@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Announcement;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class StreamController extends Controller
 {

@@ -5,12 +5,10 @@ namespace Tests\Browser;
 use App\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Chrome;
-//Use Faker;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-
-class LoginTest extends DuskTestCase
+class ExampleTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
@@ -21,24 +19,22 @@ class LoginTest extends DuskTestCase
      */
     public function testBasicExample()
     {
-        //$faker = Faker\Factory::create();
-
-//        dd(env('DB_CONNECTION'));
-
         $user = factory(User::class)->create([
-            'email'         => 'user@town-crier.app',
-            'password'      => bcrypt('secret'),
+            'email'         => 'jackie.chan@town-crier.app',
             'first_name'    => 'Jackie',
             'last_name'     => 'Chan',
+            'password'      => bcrypt('secret')
         ]);
 
-
         $this->browse(function ($browser) use ($user) {
-            $browser->visit('/login')
+            $browser->visit('/')
+                ->click('#join-in')
+                ->assertPathIs('/login')
                 ->type('email', $user->email)
                 ->type('password', 'secret')
                 ->press('Login')
-                ->assertPathIs('/');
+                ->assertPathIs('/')
+                ->assertSee('Welcome back, '.$user->first_name);
         });
     }
 }
