@@ -13,11 +13,11 @@ class ExampleTest extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * A basic browser test example.
+     * Test a user can login and receive the correct welcome message.
      *
      * @return void
      */
-    public function testBasicExample()
+    public function testSuccessfulLoginReceivesCorrectWelcomeMessage()
     {
         $user = factory(User::class)->create([
             'email'         => 'jackie.chan@town-crier.app',
@@ -27,9 +27,7 @@ class ExampleTest extends DuskTestCase
         ]);
 
         $this->browse(function ($browser) use ($user) {
-            $browser->visit('/')
-                ->click('#join-in')
-                ->assertPathIs('/login')
+            $browser->visit('/login')
                 ->type('email', $user->email)
                 ->type('password', 'secret')
                 ->press('Login')
