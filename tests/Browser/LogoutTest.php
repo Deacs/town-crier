@@ -27,7 +27,7 @@ class LogoutTest extends DuskTestCase
                 ->visit('/')
                 ->click('#nav-cog')
                 ->clickLink('Logout')
-                ->assertSee('Y\'all come back soon, ya hear!')
+                ->assertSee('Y\'all come back soon, ya hear?!')
                 ->assertPathIs('/logged-out');
         });
     }
@@ -58,6 +58,10 @@ class LogoutTest extends DuskTestCase
      * @group logout
      * @return void
      */
+    public function testLogoutPageNotDirectlyCallable()
+    {
+        // @TODO Add all the tests ;)
+    }
 
     /**
      * Check that the relevant cookies have been deleted after logout
