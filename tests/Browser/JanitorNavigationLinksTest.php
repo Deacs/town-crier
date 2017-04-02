@@ -13,29 +13,13 @@ class JanitorNavigationLinksTest extends DuskTestCase
     use DatabaseTransactions;
 
     /**
-     * Confirm that the correct welcome message is displayed after a successful login
-     * @TODO this is a more generic test that will be relevant to all authorised users - move up a level
-     * @return void
-     */
-    public function testWelcomeMessageDisplayedOnSuccessfulLogin()
-    {
-        $user = User::find(2);
-
-        $this->browse(function ($browser) use ($user) {
-            $browser->loginAs($user)
-                    ->visit('/')
-                    ->assertSee('Welcome back, ' . $user->firstName);
-        });
-    }
-
-    /**
      * Check the Stats navigation links are available for the Janitor.
      *
      * @return void
      */
     public function testStatsNavigationLinksIsPresent()
     {
-        $user = User::find(2);
+        $user = User::find(User::JANITOR_USER_ID);
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
@@ -52,7 +36,7 @@ class JanitorNavigationLinksTest extends DuskTestCase
      */
     public function testJanitorNavigationLinksIsPresent()
     {
-        $user = User::find(2);
+        $user = User::find(User::JANITOR_USER_ID);
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
@@ -69,7 +53,7 @@ class JanitorNavigationLinksTest extends DuskTestCase
      */
     public function testAuditLogNavigationLinksIsPresent()
     {
-        $user = User::find(2);
+        $user = User::find(User::JANITOR_USER_ID);
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
@@ -86,7 +70,7 @@ class JanitorNavigationLinksTest extends DuskTestCase
      */
     public function testStatsNavigationLinksOpensStatsPage()
     {
-        $user = User::find(2);
+        $user = User::find(User::JANITOR_USER_ID);
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
@@ -98,13 +82,13 @@ class JanitorNavigationLinksTest extends DuskTestCase
     }
 
     /**
-     * Check the Janitor link in the main navigation opens the Stats page.
+     * Check the Janitor link in the main navigation opens the Janitor page.
      *
      * @return void
      */
     public function testJanitorNavigationLinksOpensStatsPage()
     {
-        $user = User::find(2);
+        $user = User::find(User::JANITOR_USER_ID);
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
@@ -116,13 +100,13 @@ class JanitorNavigationLinksTest extends DuskTestCase
     }
 
     /**
-     * Check the Audit Log link in the main navigation opens the Stats page.
+     * Check the Audit Log link in the main navigation opens the Audit Log page.
      *
      * @return void
      */
-    public function testAuditLogNavigationLinksOpensStatsPage()
+    public function testAuditLogNavigationLinksOpensAuditLogPage()
     {
-        $user = User::find(2);
+        $user = User::find(User::JANITOR_USER_ID);
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
