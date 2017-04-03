@@ -15,6 +15,7 @@ class ExampleTest extends DuskTestCase
     /**
      * Test a user can login and receive the correct welcome message.
      *
+     * @group passing
      * @return void
      */
     public function testSuccessfulLoginReceivesCorrectWelcomeMessage()
