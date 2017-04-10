@@ -30,6 +30,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * Return a concatenated full name
+     *
+     * @return string
+     */
+    public function fullName()
+    {
+        return $this->getAttribute('first_name').' '.$this->getAttribute('last_name');
+    }
+
+    /**
      * Is the current user the System User
      *
      * @return boolean

@@ -21,8 +21,10 @@ class AnnouncementTest extends DuskTestCase
      */
     public function testStandardAnnouncementIsCorrectlyDisplayedInStream()
     {
-        $this->browse(function ($broadcast, $stream) {
-            $broadcast->loginAs(User::find(3))
+        $user = User::find(3);
+
+        $this->browse(function ($broadcast, $stream) use ($user) {
+            $broadcast->loginAs($user)
                 ->visit('/shout')
                 ->assertSee('Shout!')
                 ->type('title', 'New Stream Item')
@@ -37,4 +39,6 @@ class AnnouncementTest extends DuskTestCase
                 ->assertSee('Body of the stream item');
         });
     }
+
+    // @TODO Test the stream item issue - https://github.com/Deacs/town-crier/projects/1#card-2327042
 }
