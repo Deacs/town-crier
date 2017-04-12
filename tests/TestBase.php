@@ -132,6 +132,5 @@ class TestBase extends TestCase
             'type_id'   => AnnouncementType::ANNOUNCEMENT_ID,
             'user_id'   => $announcer->id
         ];
-
     }
 }

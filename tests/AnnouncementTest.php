@@ -80,4 +80,18 @@ class AnnouncementTest extends TestBase
 
         $this->seeInDatabase('announcements', $attributes);
     }
+
+    /**
+     * @test
+     */
+    public function announcer_id_is_correctly_stored()
+    {
+        $user = $this->makeUser(['id' => 22]);
+
+        $attributes = $this->createAnnouncementAttributes($user);
+
+        Announcement::create($attributes);
+
+        $this->seeInDatabase('announcements', $attributes);
+    }
 }
