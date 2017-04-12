@@ -36,9 +36,8 @@ class AnnouncementTest extends DuskTestCase
             $stream->loginAs(User::find(4))
                 ->visit('/stream')
                 ->waitForText('New Stream Item')
-                ->assertSee('Body of the stream item');
+                ->assertSee('Body of the stream item')
+                ->assertSeeIn('div.author', $user->fullName());
         });
     }
-
-    // @TODO Test the stream item issue - https://github.com/Deacs/town-crier/projects/1#card-2327042
 }
