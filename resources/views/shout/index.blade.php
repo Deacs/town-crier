@@ -60,7 +60,7 @@
                 data = {
                     type: "error",
                     title: "Uh Oh!",
-                    text: "Looks like you've forgotten something, Try again",
+                    text: "Looks like you've forgotten something. Try again",
                 };
             }
 
