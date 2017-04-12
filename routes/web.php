@@ -10,7 +10,6 @@
 |
 */
 
-//Route::post('/logout','UserController@index');
 Route::post('/logout', 'Auth\LogoutController@performLogout');
 // Laravel 5.3+ uses POST for logout - this workaround allows a GET request
 Route::get('/logout', 'Auth\LogoutController@performLogout');
