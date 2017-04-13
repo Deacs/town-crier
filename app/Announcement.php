@@ -29,7 +29,7 @@ class Announcement extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     public function type()
@@ -70,7 +70,6 @@ class Announcement extends Model
         else {
             // TODO Throw exception
             Log::info('Shout Validation FAILED');
-
         }
 
         return $result;
@@ -84,9 +83,15 @@ class Announcement extends Model
         $this->data['thumb_path'] = $this->createImgPath();
     }
 
+    /**
+     * Return the formatted full name of the authoring user
+     *
+     * @return string
+     */
     protected function createAuthorName()
     {
-        return User::find($this->data['user_id'])->name;
+        $user = User::find($this->data['user_id']);
+        return $user->fullName();
     }
 
     /**

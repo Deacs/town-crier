@@ -139,8 +139,9 @@ class GuestUserTest extends TestBase
     public function user_can_log_in_and_see_correct_welcome_page()
     {
         $attributes = [
-            'name'      => 'John Doe',
-            'password'  => bcrypt('johndoe')
+            'first_name'    => 'John',
+            'last_name'     => 'Doe',
+            'password'      => bcrypt('johndoe')
         ];
 
         $user = $this->createUser($attributes);

@@ -10,15 +10,23 @@
 |
 */
 
+Route::post('/logout', 'Auth\LogoutController@performLogout');
+// Laravel 5.3+ uses POST for logout - this workaround allows a GET request
+Route::get('/logout', 'Auth\LogoutController@performLogout');
+
 Auth::routes();
 
-// Laravel 5.3+ uses POST for logout - this workaround allows a GET request
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/logged-out',
+    [
+        'as'    => 'logged-out',
+        'uses'  => 'Auth\LogoutController@index'
+    ]
+);
 
 Route::get('/',
     [
         'as'    => 'home',
-        'uses'  =>'HomeController@index'
+        'uses'  => 'HomeController@index'
     ]
 );
 

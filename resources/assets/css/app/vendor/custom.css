@@ -14,6 +14,10 @@
     min-height: 500px;
     background: url("/img/TownCrierBG.png") right bottom no-repeat;
 }
+.logged-out {
+    min-height: 500px;
+    background: url("/img/goodbye.png") right bottom no-repeat;
+}
 .shouts {
     width:100%;
     /*display:none;*/

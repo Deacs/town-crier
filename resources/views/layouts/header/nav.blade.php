@@ -16,7 +16,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="nav-cog"><span class="glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/') }}"><span class="glyphicon glyphicon-home"></span> Town Square</a></li>
                         <li><a href="{{ url('/stream') }}"><span class="glyphicon glyphicon-list-alt"></span> Stream</a></li>

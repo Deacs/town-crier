@@ -12,7 +12,7 @@
 
         <form action="fire" id="shout" method="POST" class="form-horizontal">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="user_id" value="1">
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
             <div class="form-group">
                 <label for="title" class="col-sm-2 control-label">Title</label>
                 <div class="col-sm-10">
@@ -60,7 +60,7 @@
                 data = {
                     type: "error",
                     title: "Uh Oh!",
-                    text: "Looks like you've forgotten something, Try again",
+                    text: "Looks like you've forgotten something. Try again",
                 };
             }
 

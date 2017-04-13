@@ -119,7 +119,7 @@ class TestBase extends TestCase
             'body'      => 'New application code successfully deployed',
             'type_id'   => AnnouncementType::CODE_DEPLOY_ID,
             'user_id'   => User::SYSTEM_USER_ID
-        ];
+        ];w
     }
 
     protected function createAnnouncementAttributes(User $user = null)
@@ -132,6 +132,5 @@ class TestBase extends TestCase
             'type_id'   => AnnouncementType::ANNOUNCEMENT_ID,
             'user_id'   => $announcer->id
         ];
-
     }
 }
