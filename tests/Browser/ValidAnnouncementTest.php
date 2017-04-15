@@ -17,6 +17,8 @@ class ValidAnnouncementTest extends DuskTestCase
      * Ensure a standard announcement is received and correctly displayed in the stream.
      *
      * @group stream
+     * @group announcement
+     * @group valid
      * @return void
      */
     public function testStandardAnnouncementIsCorrectlyDisplayedInStream()
@@ -35,7 +37,7 @@ class ValidAnnouncementTest extends DuskTestCase
             $stream->loginAs(User::find(4))
                 ->visit('/stream')
                 ->waitForText('New Stream Item')
-                ->assertSee('Body of the stream item')
+                ->assertSeeIn('div.stream_body', 'Body of the stream item')
                 ->assertSeeIn('div.author', $user->fullName());
         });
     }
@@ -44,6 +46,8 @@ class ValidAnnouncementTest extends DuskTestCase
      * Ensure the correct information and messaging is displayed in the modal
      *
      * @group stream
+     * @group announcement
+     * @group valid
      * @return void
      */
     public function testCorrectConfirmationMessageStringsDisplayedInModalForValidAnnouncement()

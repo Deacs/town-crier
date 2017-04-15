@@ -15,9 +15,36 @@ class InvalidAnnouncementTest extends DuskTestCase
 
     /**
      * Check that correct messaging displayed within modal for a message that fails validation
+     * No fields have been completed
+     *
+     * @group stream
+     * @group announcement
+     * @group invalid
+     * @return void
+     */
+    public function testCorrectConfirmationMessageStringsDisplayedForAnnouncementMissingAllData()
+    {
+        $user = User::find(3);
+
+        $this->browse(function ($broadcast) use ($user) {
+            $broadcast->loginAs($user)
+                ->visit('/shout')
+                ->assertSee('Shout!')
+                ->press('Shout!')
+                ->waitForText('Uh Oh!')
+                ->assertSee('Looks like you\'ve forgotten something. Try again')
+                ->visit('/stream')
+                ->assertDontSeeIn('div.author', $user->fullName());
+        });
+    }
+
+    /**
+     * Check that correct messaging displayed within modal for a message that fails validation
      * Title value has not been entered
      *
      * @group stream
+     * @group announcement
+     * @group invalid
      * @return void
      */
     public function testCorrectConfirmationMessageStringsDisplayedInModalForAnnouncementMissingTitle()
@@ -32,7 +59,10 @@ class InvalidAnnouncementTest extends DuskTestCase
                 ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
-                ->assertSee('Looks like you\'ve forgotten something. Try again');
+                ->assertSee('Looks like you\'ve forgotten something. Try again')
+                ->visit('/stream')
+                ->assertDontSeeIn('div.stream_body', 'Body of the stream item')
+                ->assertDontSeeIn('div.author', $user->fullName());
         });
     }
 
@@ -41,6 +71,8 @@ class InvalidAnnouncementTest extends DuskTestCase
      * Body value has not been entered
      *
      * @group stream
+     * @group announcement
+     * @group invalid
      * @return void
      */
     public function testCorrectConfirmationMessageStringsDisplayedInModalForAnnouncementMissingBody()
@@ -56,7 +88,9 @@ class InvalidAnnouncementTest extends DuskTestCase
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
                 ->assertSee('Looks like you\'ve forgotten something. Try again')
-                ->pause(3000);
+                ->visit('/stream')
+                ->assertDontSeeIn('h4.shout-title', 'New Stream Item')
+                ->assertDontSeeIn('div.author', $user->fullName());
         });
     }
 
@@ -64,8 +98,9 @@ class InvalidAnnouncementTest extends DuskTestCase
      * Check that correct messaging displayed within modal for a message that fails validation
      * Announcement type has not been selected from the drop down
      *
-     * @group single
      * @group stream
+     * @group announcement
+     * @group invalid
      * @return void
      */
     public function testCorrectConfirmationMessageStringsDisplayedInModalForAnnouncementWithoutSelectedType()
