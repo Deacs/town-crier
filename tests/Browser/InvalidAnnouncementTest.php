@@ -33,6 +33,28 @@ class InvalidAnnouncementTest extends DuskTestCase
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
                 ->assertSee('Looks like you\'ve forgotten something. Try again')
+                ->visit('/stream');
+        });
+    }
+
+    /**
+     * Ensure that an announcement that fails validation does not appear in the stream
+     * No fields have been completed
+     *
+     * @group stream
+     * @group announcement
+     * @group invalid
+     * @return void
+     */
+    public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfAnyData()
+    {
+        $user = User::find(3);
+
+        $this->browse(function ($broadcast) use ($user) {
+            $broadcast->loginAs($user)
+                ->visit('/shout')
+                ->assertSee('Shout!')
+                ->press('Shout!')
                 ->visit('/stream')
                 ->assertDontSeeIn('div.author', $user->fullName());
         });
@@ -59,7 +81,30 @@ class InvalidAnnouncementTest extends DuskTestCase
                 ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
-                ->assertSee('Looks like you\'ve forgotten something. Try again')
+                ->assertSee('Looks like you\'ve forgotten something. Try again');
+        });
+    }
+
+    /**
+     * Ensure that an announcement that fails validation does not appear in the stream
+     * Title value has not been entered
+     *
+     * @group stream
+     * @group announcement
+     * @group invalid
+     * @return void
+     */
+    public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfTitle()
+    {
+        $user = User::find(3);
+
+        $this->browse(function ($broadcast) use ($user) {
+            $broadcast->loginAs($user)
+                ->visit('/shout')
+                ->assertSee('Shout!')
+                ->type('body', 'Body of the stream item')
+                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->press('Shout!')
                 ->visit('/stream')
                 ->assertDontSeeIn('div.stream_body', 'Body of the stream item')
                 ->assertDontSeeIn('div.author', $user->fullName());
@@ -95,6 +140,32 @@ class InvalidAnnouncementTest extends DuskTestCase
     }
 
     /**
+     * Ensure that an announcement that fails validation does not appear in the stream
+     * Body value has not been entered
+     *
+     * @group stream
+     * @group announcement
+     * @group invalid
+     * @return void
+     */
+    public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfBody()
+    {
+        $user = User::find(3);
+
+        $this->browse(function ($broadcast) use ($user) {
+            $broadcast->loginAs($user)
+                ->visit('/shout')
+                ->assertSee('Shout!')
+                ->type('title', 'New Stream Item')
+                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->press('Shout!')
+                ->visit('/stream')
+                ->assertDontSeeIn('h4.shout-title', 'New Stream Item')
+                ->assertDontSeeIn('div.author', $user->fullName());
+        });
+    }
+
+    /**
      * Check that correct messaging displayed within modal for a message that fails validation
      * Announcement type has not been selected from the drop down
      *
@@ -115,8 +186,34 @@ class InvalidAnnouncementTest extends DuskTestCase
                 ->type('body', 'Body of the stream item')
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
-                ->assertSee('Looks like you\'ve forgotten something. Try again')
-                ->pause(3000);
+                ->assertSee('Looks like you\'ve forgotten something. Try again');
+        });
+    }
+
+    /**
+     * Ensure that an announcement that fails validation does not appear in the stream
+     * Type value has not been selected
+     *
+     * @group stream
+     * @group announcement
+     * @group invalid
+     * @return void
+     */
+    public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfType()
+    {
+        $user = User::find(3);
+
+        $this->browse(function ($broadcast) use ($user) {
+            $broadcast->loginAs($user)
+                ->visit('/shout')
+                ->assertSee('Shout!')
+                ->type('title', 'New Stream Item')
+                ->type('body', 'Body of the stream item')
+                ->press('Shout!')
+                ->visit('/stream')
+                ->assertDontSeeIn('h4.shout-title', 'New Stream Item')
+                ->assertDontSeeIn('div.stream_body', 'Body of the stream item')
+                ->assertDontSeeIn('div.author', $user->fullName());
         });
     }
 }
