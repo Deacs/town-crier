@@ -14,7 +14,6 @@ class StreamTest extends TestBase
      */
     public function investment_is_correctly_displayed()
     {
-
         $user = $this->createSystemUser();
 
         $attributes = $this->createInvestmentAttributes();

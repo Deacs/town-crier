@@ -9,8 +9,8 @@
         <div class="row">
             <h1><span class="glyphicon glyphicon-dashboard"></span> Stats</h1>
             <ul>
-                <li>Total Announcements: <b>{{ $statData['activeAnnouncementsCount'] }}</b></li>
-                <li>Last Announcement:
+                <li id="total_announcements">Total Announcements: <b>{{ $statData['activeAnnouncementsCount'] }}</b></li>
+                <li id="last_announcement">Last Announcement:
                     @if(!is_null($statData['latestAnnouncementDate']))
                         <b>{{ $statData['latestAnnouncementDate']->created_at->diffForHumans() }}</b> <b>({{ $statData['latestAnnouncementDate']->created_at->toDayDateTimeString() }})</b></li>
                     @else
