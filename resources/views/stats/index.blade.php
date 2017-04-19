@@ -16,7 +16,7 @@
                     @else
                         <b>No active announcements</b>
                     @endif
-                <li>Last Client Refresh:
+                <li id="last_client_refresh">Last Client Refresh:
                     @if(!is_null($statData['lastClientRefreshDate']))
                         <b>{{ $statData['lastClientRefreshDate']->diffForHumans() }}</b> <b>({{ $statData['lastClientRefreshDate']->toDayDateTimeString() }})</b></li>
                     @else

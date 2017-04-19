@@ -128,7 +128,6 @@
 
                 if (prompt) {
 
-
                     swal({
                         title: prompt.title,
                         text: prompt.text,
@@ -137,7 +136,7 @@
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: prompt.confirm,
                         closeOnConfirm: false,
-                        timer: 3000
+                        //timer: 3000
                     }, function(){
 
                         $.ajax({
