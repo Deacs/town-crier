@@ -87,7 +87,7 @@ class StatsDashboardTest extends DuskTestCase
      *
      * @group stats
      * @group valid
-     * @group single
+     * @group chore
      * @return void
      */
     public function testLastClientRefreshDateIsCorrectlyUpdatedAfterChoreFired()
@@ -104,15 +104,15 @@ class StatsDashboardTest extends DuskTestCase
                 ->visit('/janitor')
                 ->clickLink('Refresh Clients')
                 // Wait for the modal and confirm that we want the command to be broadcast
-                ->whenAvailable('div.sweet-alert', function ($modal) use($janitor) {
+                ->whenAvailable('div.sweet-alert', function ($modal) use ($janitor) {
                     $modal->waitForText('Are you sure?')
                             ->waitForText('All remote clients will be automatically refreshed')
                             ->press('Clean \'em up good!');
                 })
-                // Check that the value has been updated
+                // Give the modal a chance to close
                 ->pause(1500)
+                // Check that the value has been updated
                 ->visit('/stats')
-                ->waitForText('Last Client Refresh')
                 ->assertSeeIn('li#last_client_refresh > b', 'seconds ago');
         });
     }
