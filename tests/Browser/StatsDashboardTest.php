@@ -4,7 +4,6 @@ namespace Tests\Browser;
 
 use App\User;
 use Tests\DuskTestCase;
-use App\AnnouncementType;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -104,13 +103,16 @@ class StatsDashboardTest extends DuskTestCase
                 // Go do your chores!
                 ->visit('/janitor')
                 ->clickLink('Refresh Clients')
-                ->waitForText('Are you sure?')
-                // Click the confirmation option
-                ->press('Clean \'em up good!')
-                // Wait for the modal to let us know the command has been broadcast
+                // Wait for the modal and confirm that we want the command to be broadcast
+                ->whenAvailable('div.sweet-alert', function ($modal) use($janitor) {
+                    $modal->waitForText('Are you sure?')
+                            ->waitForText('All remote clients will be automatically refreshed')
+                            ->press('Clean \'em up good!');
+                })
                 // Check that the value has been updated
-                ->pause(3000)
+                ->pause(1500)
                 ->visit('/stats')
+                ->waitForText('Last Client Refresh')
                 ->assertSeeIn('li#last_client_refresh > b', 'seconds ago');
         });
     }
