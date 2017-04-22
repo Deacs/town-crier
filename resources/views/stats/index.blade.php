@@ -22,7 +22,7 @@
                     @else
                         <b>No client refreshes recorded</b>
                     @endif
-                <li>Last DB Purge:
+                <li id="last_db_purge">Last DB Purge:
                     @if(!is_null($statData['lastDatabasePurgeDate']))
                         <b>{{ $statData['lastDatabasePurgeDate']->diffForHumans() }}</b> <b>({{ $statData['lastDatabasePurgeDate']->toDayDateTimeString() }})</b></li>
                     @else

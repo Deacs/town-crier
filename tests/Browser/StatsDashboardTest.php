@@ -94,7 +94,6 @@ class StatsDashboardTest extends DuskTestCase
     {
         $janitor = User::find(User::JANITOR_USER_ID);
 
-        // Remotely refresh the clients
         $this->browse(function ($janitorCupboard) use ($janitor) {
             $janitorCupboard->loginAs($janitor)
                 // Check we have the standard 'no record' message
@@ -110,10 +109,48 @@ class StatsDashboardTest extends DuskTestCase
                             ->press('Clean \'em up good!');
                 })
                 // Give the modal a chance to close
-                ->pause(1500)
+                ->pause(2000)
                 // Check that the value has been updated
                 ->visit('/stats')
                 ->assertSeeIn('li#last_client_refresh > b', 'seconds ago');
+        });
+    }
+
+    /**
+     * Ensure the last database purge date is correctly updated after the system event is fired
+     * Application is using the Carbon date time library
+     * A user friendly message should be displayed
+     *
+     * @group stats
+     * @group valid
+     * @group chore
+     * @group single
+     *
+     * @return void
+     */
+    public function testLastDatabasePurgeDateIsCorrectlyUpdatedAfterChoreFired()
+    {
+        $janitor = User::find(User::JANITOR_USER_ID);
+
+        $this->browse(function ($janitorCupboard) use ($janitor) {
+            $janitorCupboard->loginAs($janitor)
+                // Check we have the standard 'no record' message
+                ->visit('/stats')
+                ->assertSeeIn('li#last_db_purge > b', 'No database purges recorded')
+                // Go do your chores!
+                ->visit('/janitor')
+                ->clickLink('Purge DB')
+                // Wait for the modal and confirm that we want the command to be broadcast
+                ->whenAvailable('div.sweet-alert', function ($modal) use ($janitor) {
+                    $modal->waitForText('Are you sure?')
+                        ->waitForText('Persistent storage will be purged. This cannot be undone')
+                        ->press('Flush \'em, cowboy!');
+                })
+                // Give the modal a chance to close
+                ->pause(2000)
+                // Check that the value has been updated
+                ->visit('/stats')
+                ->assertSeeIn('li#last_db_purge > b', 'seconds ago');
         });
     }
 
