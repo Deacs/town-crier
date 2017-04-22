@@ -3,8 +3,9 @@
 namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;
+use Laravel\Dusk\Page as BasePage;
 
-class HomePage extends Page
+class AuditLogPage extends BasePage
 {
     /**
      * Get the URL for the page.
@@ -13,13 +14,12 @@ class HomePage extends Page
      */
     public function url()
     {
-        return '/';
+        return '/audit-log';
     }
 
     /**
      * Assert that the browser is on the page.
      *
-     * @param Browser $browser
      * @return void
      */
     public function assert(Browser $browser)
@@ -35,7 +35,7 @@ class HomePage extends Page
     public function elements()
     {
         return [
-            '@nav-cog' => '#nav-cog',
+            '@element' => '#selector',
         ];
     }
 }
