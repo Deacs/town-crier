@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\Browser\Pages\StatsDashboardPage;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-
 class StatsDashboardTest extends DuskTestCase
 {
     use DatabaseMigrations;
@@ -20,6 +19,7 @@ class StatsDashboardTest extends DuskTestCase
      *
      * @group stats
      * @group valid
+     *
      * @return void
      */
     public function testAnnouncementCountIsCorrectlyIncrementedAfterSuccessfulSystemEventBroadcast()
@@ -60,6 +60,7 @@ class StatsDashboardTest extends DuskTestCase
      *
      * @group stats
      * @group valid
+     *
      * @return void
      */
     public function testLastAnnouncementDateIsCorrectlyUpdatedAfterSuccessfulSystemEventBroadcast()
@@ -92,6 +93,7 @@ class StatsDashboardTest extends DuskTestCase
      * @group stats
      * @group valid
      * @group chore
+     *
      * @return void
      */
     public function testLastClientRefreshDateIsCorrectlyUpdatedAfterChoreFired()
@@ -128,7 +130,6 @@ class StatsDashboardTest extends DuskTestCase
      * @group stats
      * @group valid
      * @group chore
-     * @group single
      *
      * @return void
      */
