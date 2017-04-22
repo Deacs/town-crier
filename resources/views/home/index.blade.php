@@ -13,10 +13,10 @@
 
         <div class="row">
             @if (Auth::guest())
-                <h2>Well, howdy stranger!</h2>
+                <h2 id="welcome-message">Well, howdy stranger!</h2>
                 <p><a href="/login" class="btn btn-lg btn-info" id="join-in"><span class="glyphicon glyphicon-log-in"></span> Join In!</a></p>
             @else
-                <h2>Welcome back, {{ Auth::user()->first_name }}</h2>
+                <h2 id="welcome-message">Welcome back, {{ Auth::user()->first_name }}</h2>
             @endif
         </div>
     </div>
