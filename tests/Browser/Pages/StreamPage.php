@@ -35,7 +35,9 @@ class StreamPage extends BasePage
     public function elements()
     {
         return [
-            '@element' => '#selector',
+            '@author'       => 'div.author',
+            '@stream_body'  => 'div.stream_body',
+            '@shout-title'  => '.shout-title',
         ];
     }
 }

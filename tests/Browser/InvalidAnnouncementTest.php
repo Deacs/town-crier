@@ -59,7 +59,7 @@ class InvalidAnnouncementTest extends DuskTestCase
                 ->assertSee('Shout!')
                 ->press('Shout!')
                 ->visit(new StreamPage)
-                ->assertDontSeeIn('div.author', $user->fullName());
+                ->assertDontSeeIn('@author', $user->fullName());
         });
     }
 
@@ -70,6 +70,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group invalid
+     * @group failing
      *
      * @return void
      */
@@ -81,8 +82,8 @@ class InvalidAnnouncementTest extends DuskTestCase
             $broadcast->loginAs($user)
                 ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('body', 'Body of the stream item')
-                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->type('@stream-item-body', 'Body of the stream item')
+                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
                 ->assertSee('Looks like you\'ve forgotten something. Try again');
@@ -107,12 +108,12 @@ class InvalidAnnouncementTest extends DuskTestCase
             $broadcast->loginAs($user)
                 ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('body', 'Body of the stream item')
-                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->type('@stream-item-body', 'Body of the stream item')
+                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
                 ->visit(new StreamPage)
-                ->assertDontSeeIn('div.stream_body', 'Body of the stream item')
-                ->assertDontSeeIn('div.author', $user->fullName());
+                ->assertDontSeeIn('@stream_body', 'Body of the stream item')
+                ->assertDontSeeIn('@author', $user->fullName());
         });
     }
 
@@ -134,14 +135,14 @@ class InvalidAnnouncementTest extends DuskTestCase
             $broadcast->loginAs($user)
                 ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('title', 'New Stream Item')
-                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->type('@stream-item-title', 'New Stream Item')
+                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
                 ->assertSee('Looks like you\'ve forgotten something. Try again')
                 ->visit(new StreamPage)
-                ->assertDontSeeIn('h4.shout-title', 'New Stream Item')
-                ->assertDontSeeIn('div.author', $user->fullName());
+                ->assertDontSeeIn('@shout-title', 'New Stream Item')
+                ->assertDontSeeIn('@author', $user->fullName());
         });
     }
 
@@ -163,12 +164,12 @@ class InvalidAnnouncementTest extends DuskTestCase
             $broadcast->loginAs($user)
                 ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('title', 'New Stream Item')
-                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->type('@stream-item-title', 'New Stream Item')
+                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
                 ->visit(new StreamPage)
-                ->assertDontSeeIn('h4.shout-title', 'New Stream Item')
-                ->assertDontSeeIn('div.author', $user->fullName());
+                ->assertDontSeeIn('@shout-title', 'New Stream Item')
+                ->assertDontSeeIn('@author', $user->fullName());
         });
     }
 
@@ -190,8 +191,8 @@ class InvalidAnnouncementTest extends DuskTestCase
             $broadcast->loginAs($user)
                 ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('title', 'New Stream Item')
-                ->type('body', 'Body of the stream item')
+                ->type('@stream-item-title', 'New Stream Item')
+                ->type('@stream-item-body', 'Body of the stream item')
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
                 ->assertSee('Looks like you\'ve forgotten something. Try again');
@@ -216,13 +217,13 @@ class InvalidAnnouncementTest extends DuskTestCase
             $broadcast->loginAs($user)
                 ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('title', 'New Stream Item')
-                ->type('body', 'Body of the stream item')
+                ->type('@stream-item-title', 'New Stream Item')
+                ->type('@stream-item-body', 'Body of the stream item')
                 ->press('Shout!')
                 ->visit(new StreamPage)
-                ->assertDontSeeIn('h4.shout-title', 'New Stream Item')
-                ->assertDontSeeIn('div.stream_body', 'Body of the stream item')
-                ->assertDontSeeIn('div.author', $user->fullName());
+                ->assertDontSeeIn('@shout-title', 'New Stream Item')
+                ->assertDontSeeIn('@stream_body', 'Body of the stream item')
+                ->assertDontSeeIn('@author', $user->fullName());
         });
     }
 }

@@ -20,6 +20,7 @@ class ShoutPage extends BasePage
     /**
      * Assert that the browser is on the page.
      *
+     * @param Browser $browser
      * @return void
      */
     public function assert(Browser $browser)
@@ -35,7 +36,9 @@ class ShoutPage extends BasePage
     public function elements()
     {
         return [
-            '@element' => '#selector',
+            '@stream-item-title'    => 'input[name=title]',
+            '@stream-item-body'     => 'textarea[name=body]',
+            '@stream-item-type'     => 'select[name=type_id]',
         ];
     }
 }
