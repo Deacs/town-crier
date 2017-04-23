@@ -18,6 +18,7 @@ class ExampleTest extends DuskTestCase
     /**
      * Ensure login with incorrect credentials does not direct to home page
      *
+     * @group login
      * @group authentication
      *
      * @return void
@@ -36,7 +37,6 @@ class ExampleTest extends DuskTestCase
                 ->type('@login-email', $user->email)
                 ->type('@login-password', 'incorrect-secret')
                 ->press('Login')
-                ->pause(3000)
                 // Errors on validation should be shown
                 ->assertSeeIn('.help-block', 'These credentials do not match our records.')
                 // Page should be /login
@@ -50,8 +50,8 @@ class ExampleTest extends DuskTestCase
     /**
      * Test a user can login and receive the correct welcome message.
      *
+     * @group login
      * @group authentication
-     * @group single
      *
      * @return void
      */
