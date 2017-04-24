@@ -14,8 +14,11 @@ class LogoutController extends Controller
 
     public function performLogout()
     {
-        Auth::logout();
+        if ( ! Auth::check()) {
+            return redirect('/');
+        }
 
+        Auth::logout();
         return redirect('logged-out');
     }
 }

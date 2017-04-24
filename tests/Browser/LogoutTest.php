@@ -5,6 +5,7 @@ namespace Tests\Browser;
 use App\User;
 use Tests\DuskTestCase;
 use Tests\Browser\Pages\HomePage;
+use Tests\Browser\Pages\LogoutPage;
 use Tests\Browser\Pages\LoggedOutPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -63,12 +64,16 @@ class LogoutTest extends DuskTestCase
      *
      * @group logout
      * @group authentication
+     * @group single
      *
      * @return void
      */
     public function testLogoutPageNotDirectlyCallable()
     {
-        // @TODO Add all the tests ;)
+        $this->browse(function ($browser) {
+            $browser->visit('logout')
+                    ->visit(new HomePage);
+        });
     }
 
     /**
