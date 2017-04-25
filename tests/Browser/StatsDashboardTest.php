@@ -4,7 +4,9 @@ namespace Tests\Browser;
 
 use App\User;
 use Tests\DuskTestCase;
+use Tests\Browser\Pages\JanitorPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\Browser\Pages\StatsDashboardPage;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class StatsDashboardTest extends DuskTestCase
@@ -17,6 +19,7 @@ class StatsDashboardTest extends DuskTestCase
      *
      * @group stats
      * @group valid
+     *
      * @return void
      */
     public function testAnnouncementCountIsCorrectlyIncrementedAfterSuccessfulSystemEventBroadcast()
@@ -26,16 +29,16 @@ class StatsDashboardTest extends DuskTestCase
         // Get the currently displayed announcements count
         $this->browse(function ($statsDashboard) use ($janitor, &$currentCount) {
             $statsDashboard->loginAs($janitor)
-                ->visit('/stats');
+                ->visit(new StatsDashboardPage);
 
-            $currentCount = $statsDashboard->text('li#total_announcements > b');
+            $currentCount = $statsDashboard->text('@total_announcements > b');
         });
 
         // Output a broadcast
         // For convenience, use a Janitor helper (code deploy system event)
         $this->browse(function ($janitorCupboard) use ($janitor) {
             $janitorCupboard->loginAs($janitor)
-                ->visit('/janitor')
+                ->visit(new JanitorPage)
                 ->clickLink('Mock Code Deploy')
                 ->waitForText('All done!');
         });
@@ -45,8 +48,8 @@ class StatsDashboardTest extends DuskTestCase
         // Ensure the updated count is now being displayed
         $this->browse(function ($dashboard) use ($janitor, $updatedCount) {
             $dashboard->loginAs($janitor)
-                ->visit('/stats')
-                ->assertSeeIn('li#total_announcements > b', (string)$updatedCount);
+                ->visit(new StatsDashboardPage)
+                ->assertSeeIn('@total_announcements > b', (string)$updatedCount);
         });
     }
 
@@ -57,6 +60,7 @@ class StatsDashboardTest extends DuskTestCase
      *
      * @group stats
      * @group valid
+     *
      * @return void
      */
     public function testLastAnnouncementDateIsCorrectlyUpdatedAfterSuccessfulSystemEventBroadcast()
@@ -67,7 +71,7 @@ class StatsDashboardTest extends DuskTestCase
         // For convenience, use a Janitor helper (code deploy system event)
         $this->browse(function ($janitorCupboard) use ($janitor) {
             $janitorCupboard->loginAs($janitor)
-                ->visit('/janitor')
+                ->visit(new JanitorPage)
                 ->clickLink('Mock Code Deploy')
                 ->waitForText('All done!');
         });
@@ -75,8 +79,9 @@ class StatsDashboardTest extends DuskTestCase
         // Ensure the updated count is now being displayed
         $this->browse(function ($dashboard) use ($janitor) {
             $dashboard->loginAs($janitor)
-                ->visit('/stats')
-                ->assertSeeIn('li#last_announcement > b', '1 second ago'); // This is flaky
+                ->pause(1500)
+                ->visit(new StatsDashboardPage)
+                ->assertSeeIn('@last_announcement > b', 'seconds ago');
         });
     }
 
@@ -88,6 +93,7 @@ class StatsDashboardTest extends DuskTestCase
      * @group stats
      * @group valid
      * @group chore
+     *
      * @return void
      */
     public function testLastClientRefreshDateIsCorrectlyUpdatedAfterChoreFired()
@@ -97,10 +103,10 @@ class StatsDashboardTest extends DuskTestCase
         $this->browse(function ($janitorCupboard) use ($janitor) {
             $janitorCupboard->loginAs($janitor)
                 // Check we have the standard 'no record' message
-                ->visit('/stats')
-                ->assertSeeIn('li#last_client_refresh > b', 'No client refreshes recorded')
+                ->visit(new StatsDashboardPage)
+                ->assertSeeIn('@last_client_refresh > b', 'No client refreshes recorded')
                 // Go do your chores!
-                ->visit('/janitor')
+                ->visit(new JanitorPage)
                 ->clickLink('Refresh Clients')
                 // Wait for the modal and confirm that we want the command to be broadcast
                 ->whenAvailable('div.sweet-alert', function ($modal) use ($janitor) {
@@ -109,10 +115,10 @@ class StatsDashboardTest extends DuskTestCase
                             ->press('Clean \'em up good!');
                 })
                 // Give the modal a chance to close
-                ->pause(2000)
+                ->pause(2500)
                 // Check that the value has been updated
-                ->visit('/stats')
-                ->assertSeeIn('li#last_client_refresh > b', 'seconds ago');
+                ->visit(new StatsDashboardPage)
+                ->assertSeeIn('@last_client_refresh > b', 'seconds ago');
         });
     }
 
@@ -124,7 +130,6 @@ class StatsDashboardTest extends DuskTestCase
      * @group stats
      * @group valid
      * @group chore
-     * @group single
      *
      * @return void
      */
@@ -135,10 +140,10 @@ class StatsDashboardTest extends DuskTestCase
         $this->browse(function ($janitorCupboard) use ($janitor) {
             $janitorCupboard->loginAs($janitor)
                 // Check we have the standard 'no record' message
-                ->visit('/stats')
-                ->assertSeeIn('li#last_db_purge > b', 'No database purges recorded')
+                ->visit(new StatsDashboardPage)
+                ->assertSeeIn('@last_purge > b', 'No database purges recorded')
                 // Go do your chores!
-                ->visit('/janitor')
+                ->visit(new JanitorPage)
                 ->clickLink('Purge DB')
                 // Wait for the modal and confirm that we want the command to be broadcast
                 ->whenAvailable('div.sweet-alert', function ($modal) use ($janitor) {
@@ -147,10 +152,10 @@ class StatsDashboardTest extends DuskTestCase
                         ->press('Flush \'em, cowboy!');
                 })
                 // Give the modal a chance to close
-                ->pause(2000)
+                ->pause(2500)
                 // Check that the value has been updated
-                ->visit('/stats')
-                ->assertSeeIn('li#last_db_purge > b', 'seconds ago');
+                ->visit(new StatsDashboardPage)
+                ->assertSeeIn('@last_purge > b', 'seconds ago');
         });
     }
 

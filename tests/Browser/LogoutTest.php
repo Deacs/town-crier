@@ -4,6 +4,9 @@ namespace Tests\Browser;
 
 use App\User;
 use Tests\DuskTestCase;
+use Tests\Browser\Pages\HomePage;
+use Tests\Browser\Pages\LogoutPage;
+use Tests\Browser\Pages\LoggedOutPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -16,6 +19,8 @@ class LogoutTest extends DuskTestCase
      * Check a logged out user is presented with the correct view
      *
      * @group logout
+     * @group authentication
+     *
      * @return void
      */
     public function testLoggingOutPresentsCorrectView()
@@ -24,11 +29,11 @@ class LogoutTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
-                ->visit('/')
-                ->click('#nav-cog')
+                ->visit(new HomePage)
+                ->click('@nav-cog')
                 ->clickLink('Logout')
-                ->assertSee('Y\'all come back soon, ya hear?!')
-                ->assertPathIs('/logged-out');
+                ->on(new LoggedOutPage)
+                ->assertSeeIn('@logged-out-message', 'Y\'all come back soon, ya hear?!');
         });
     }
 
@@ -36,6 +41,8 @@ class LogoutTest extends DuskTestCase
      * Check that the login option is present on the logout confirmation screen
      *
      * @group logout
+     * @group authentication
+     *
      * @return void
      */
     public function testLoginOptionIsAvailableAfterSuccessfulLogout()
@@ -44,11 +51,11 @@ class LogoutTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
-                ->visit('/')
-                ->click('#nav-cog')
+                ->visit(new HomePage)
+                ->click('@nav-cog')
                 ->clickLink('Logout')
-                ->assertSee('Join In!')
-                ->assertPathIs('/logged-out');
+                ->on(new LoggedOutPage)
+                ->assertSeeIn('@join-in-button', 'Join In!');
         });
     }
 
@@ -56,21 +63,15 @@ class LogoutTest extends DuskTestCase
      * Ensure the logged-in route is only available as a result of a successful log out
      *
      * @group logout
+     * @group authentication
+     *
      * @return void
      */
     public function testLogoutPageNotDirectlyCallable()
     {
-        // @TODO Add all the tests ;)
-    }
-
-    /**
-     * Check that the relevant cookies have been deleted after logout
-     *
-     * @group cookies
-     * @return void
-     */
-    public function testAuthenticationCookiesAreClearedAfterLogout()
-    {
-        // @TODO Add all the tests ;)
+        $this->browse(function ($browser) {
+            $browser->visit('logout')
+                    ->on(new HomePage);
+        });
     }
 }

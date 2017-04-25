@@ -4,6 +4,10 @@ namespace Tests\Browser;
 
 use App\User;
 use Tests\DuskTestCase;
+use Tests\Browser\Pages\HomePage;
+use Tests\Browser\Pages\JanitorPage;
+use Tests\Browser\Pages\AuditLogPage;
+use Tests\Browser\Pages\StatsDashboardPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -15,6 +19,9 @@ class JanitorNavigationLinksTest extends DuskTestCase
     /**
      * Check the Stats navigation links are available for the Janitor.
      *
+     * @group janitor
+     * @group navigation
+     *
      * @return void
      */
     public function testStatsNavigationLinksIsPresent()
@@ -23,14 +30,17 @@ class JanitorNavigationLinksTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
-                    ->visit('/')
-                    ->click('#nav-cog')
+                    ->visit(new HomePage)
+                    ->click('@nav-cog')
                     ->assertSee('Stats');
         });
     }
 
     /**
      * Check the Audit Log navigation links are available for the Janitor.
+     *
+     * @group janitor
+     * @group navigation
      *
      * @return void
      */
@@ -40,14 +50,17 @@ class JanitorNavigationLinksTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
-                ->visit('/')
-                ->click('#nav-cog')
+                ->visit(new HomePage)
+                ->click('@nav-cog')
                 ->assertSee('Janitor');
         });
     }
 
     /**
      * Check the Audit Log navigation links are available for the Janitor.
+     *
+     * @group janitor
+     * @group navigation
      *
      * @return void
      */
@@ -57,14 +70,17 @@ class JanitorNavigationLinksTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
-                ->visit('/')
-                ->click('#nav-cog')
+                ->visit(new HomePage)
+                ->click('@nav-cog')
                 ->assertSee('Audit Log');
         });
     }
 
     /**
      * Check the Stats link in the main navigation opens the Stats page.
+     *
+     * @group janitor
+     * @group navigation
      *
      * @return void
      */
@@ -74,15 +90,18 @@ class JanitorNavigationLinksTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
-                ->visit('/')
-                ->click('#nav-cog')
+                ->visit(new HomePage)
+                ->click('@nav-cog')
                 ->clickLink('Stats')
-                ->assertPathIs('/stats');
+                ->on(new StatsDashboardPage);
         });
     }
 
     /**
      * Check the Janitor link in the main navigation opens the Janitor page.
+     *
+     * @group janitor
+     * @group navigation
      *
      * @return void
      */
@@ -92,15 +111,18 @@ class JanitorNavigationLinksTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
-                ->visit('/')
-                ->click('#nav-cog')
+                ->visit(new HomePage)
+                ->click('@nav-cog')
                 ->clickLink('Janitor')
-                ->assertPathIs('/janitor');
+                ->on(new JanitorPage);
         });
     }
 
     /**
      * Check the Audit Log link in the main navigation opens the Audit Log page.
+     *
+     * @group janitor
+     * @group navigation
      *
      * @return void
      */
@@ -110,10 +132,10 @@ class JanitorNavigationLinksTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
-                ->visit('/')
-                ->click('#nav-cog')
+                ->visit(new HomePage)
+                ->click('@nav-cog')
                 ->clickLink('Audit Log')
-                ->assertPathIs('/audit-log');
+                ->on(new AuditLogPage);
         });
     }
 }

@@ -5,6 +5,8 @@ namespace Tests\Browser;
 use App\User;
 use Tests\DuskTestCase;
 use App\AnnouncementType;
+use Tests\Browser\Pages\ShoutPage;
+use Tests\Browser\Pages\StreamPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -20,6 +22,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group invalid
+     *
      * @return void
      */
     public function testCorrectConfirmationMessageStringsDisplayedForAnnouncementMissingAllData()
@@ -28,12 +31,11 @@ class InvalidAnnouncementTest extends DuskTestCase
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
-                ->visit('/shout')
+                ->visit(new ShoutPage)
                 ->assertSee('Shout!')
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
-                ->assertSee('Looks like you\'ve forgotten something. Try again')
-                ->visit('/stream');
+                ->assertSee('Looks like you\'ve forgotten something. Try again');
         });
     }
 
@@ -44,6 +46,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group invalid
+     *
      * @return void
      */
     public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfAnyData()
@@ -52,11 +55,11 @@ class InvalidAnnouncementTest extends DuskTestCase
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
-                ->visit('/shout')
+                ->visit(new ShoutPage)
                 ->assertSee('Shout!')
                 ->press('Shout!')
-                ->visit('/stream')
-                ->assertDontSeeIn('div.author', $user->fullName());
+                ->visit(new StreamPage)
+                ->assertDontSeeIn('@author', $user->fullName());
         });
     }
 
@@ -67,6 +70,8 @@ class InvalidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group invalid
+     * @group failing
+     *
      * @return void
      */
     public function testCorrectConfirmationMessageStringsDisplayedInModalForAnnouncementMissingTitle()
@@ -75,10 +80,10 @@ class InvalidAnnouncementTest extends DuskTestCase
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
-                ->visit('/shout')
+                ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('body', 'Body of the stream item')
-                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->type('@stream-item-body', 'Body of the stream item')
+                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
                 ->assertSee('Looks like you\'ve forgotten something. Try again');
@@ -92,6 +97,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group invalid
+     *
      * @return void
      */
     public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfTitle()
@@ -100,14 +106,14 @@ class InvalidAnnouncementTest extends DuskTestCase
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
-                ->visit('/shout')
+                ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('body', 'Body of the stream item')
-                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->type('@stream-item-body', 'Body of the stream item')
+                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
-                ->visit('/stream')
-                ->assertDontSeeIn('div.stream_body', 'Body of the stream item')
-                ->assertDontSeeIn('div.author', $user->fullName());
+                ->visit(new StreamPage)
+                ->assertDontSeeIn('@stream_body', 'Body of the stream item')
+                ->assertDontSeeIn('@author', $user->fullName());
         });
     }
 
@@ -118,6 +124,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group invalid
+     *
      * @return void
      */
     public function testCorrectConfirmationMessageStringsDisplayedInModalForAnnouncementMissingBody()
@@ -126,16 +133,16 @@ class InvalidAnnouncementTest extends DuskTestCase
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
-                ->visit('/shout')
+                ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('title', 'New Stream Item')
-                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->type('@stream-item-title', 'New Stream Item')
+                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
                 ->assertSee('Looks like you\'ve forgotten something. Try again')
-                ->visit('/stream')
-                ->assertDontSeeIn('h4.shout-title', 'New Stream Item')
-                ->assertDontSeeIn('div.author', $user->fullName());
+                ->visit(new StreamPage)
+                ->assertDontSeeIn('@shout-title', 'New Stream Item')
+                ->assertDontSeeIn('@author', $user->fullName());
         });
     }
 
@@ -146,6 +153,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group invalid
+     *
      * @return void
      */
     public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfBody()
@@ -154,14 +162,14 @@ class InvalidAnnouncementTest extends DuskTestCase
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
-                ->visit('/shout')
+                ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('title', 'New Stream Item')
-                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->type('@stream-item-title', 'New Stream Item')
+                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
-                ->visit('/stream')
-                ->assertDontSeeIn('h4.shout-title', 'New Stream Item')
-                ->assertDontSeeIn('div.author', $user->fullName());
+                ->visit(new StreamPage)
+                ->assertDontSeeIn('@shout-title', 'New Stream Item')
+                ->assertDontSeeIn('@author', $user->fullName());
         });
     }
 
@@ -172,6 +180,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group invalid
+     *
      * @return void
      */
     public function testCorrectConfirmationMessageStringsDisplayedInModalForAnnouncementWithoutSelectedType()
@@ -180,10 +189,10 @@ class InvalidAnnouncementTest extends DuskTestCase
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
-                ->visit('/shout')
+                ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('title', 'New Stream Item')
-                ->type('body', 'Body of the stream item')
+                ->type('@stream-item-title', 'New Stream Item')
+                ->type('@stream-item-body', 'Body of the stream item')
                 ->press('Shout!')
                 ->waitForText('Uh Oh!')
                 ->assertSee('Looks like you\'ve forgotten something. Try again');
@@ -197,6 +206,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group invalid
+     *
      * @return void
      */
     public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfType()
@@ -205,15 +215,15 @@ class InvalidAnnouncementTest extends DuskTestCase
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
-                ->visit('/shout')
+                ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('title', 'New Stream Item')
-                ->type('body', 'Body of the stream item')
+                ->type('@stream-item-title', 'New Stream Item')
+                ->type('@stream-item-body', 'Body of the stream item')
                 ->press('Shout!')
-                ->visit('/stream')
-                ->assertDontSeeIn('h4.shout-title', 'New Stream Item')
-                ->assertDontSeeIn('div.stream_body', 'Body of the stream item')
-                ->assertDontSeeIn('div.author', $user->fullName());
+                ->visit(new StreamPage)
+                ->assertDontSeeIn('@shout-title', 'New Stream Item')
+                ->assertDontSeeIn('@stream_body', 'Body of the stream item')
+                ->assertDontSeeIn('@author', $user->fullName());
         });
     }
 }

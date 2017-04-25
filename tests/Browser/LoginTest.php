@@ -5,35 +5,73 @@ namespace Tests\Browser;
 use App\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Chrome;
+use Tests\Browser\Pages\HomePage;
+use Tests\Browser\Pages\LoginPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ExampleTest extends DuskTestCase
 {
     use DatabaseMigrations;
+//    use DatabaseTransactions;
 
     /**
-     * Test a user can login and receive the correct welcome message.
+     * Ensure login with incorrect credentials does not direct to home page
      *
-     * @group passing
+     * @group login
+     * @group authentication
+     *
      * @return void
      */
-    public function testSuccessfulLoginReceivesCorrectWelcomeMessage()
+    public function testFailedLoginDisplaysCorrectMessageAndDoesNotDirectToHomePage()
     {
         $user = factory(User::class)->create([
-            'email'         => 'jackie.chan@town-crier.app',
+            'email'         => 'jackie.chan@' . env('DOMAIN'),
             'first_name'    => 'Jackie',
             'last_name'     => 'Chan',
             'password'      => bcrypt('secret')
         ]);
 
         $this->browse(function ($browser) use ($user) {
-            $browser->visit('/login')
-                ->type('email', $user->email)
-                ->type('password', 'secret')
+            $browser->visit(new LoginPage)
+                ->type('@login-email', $user->email)
+                ->type('@login-password', 'incorrect-secret')
                 ->press('Login')
-                ->assertPathIs('/')
-                ->assertSee('Welcome back, '.$user->first_name);
+                // Errors on validation should be shown
+                ->assertSeeIn('.help-block', 'These credentials do not match our records.')
+                // Page should be /login
+                ->on(new LoginPage)
+                // Visiting home page should show anonymous user message
+                ->visit(new HomePage)
+                ->assertSeeIn('@welcome-message', 'Well, howdy stranger!');
         });
     }
+
+    /**
+     * Test a user can login and receive the correct welcome message.
+     *
+     * @group login
+     * @group authentication
+     *
+     * @return void
+     */
+    public function testSuccessfulLoginReceivesCorrectWelcomeMessage()
+    {
+        $user = factory(User::class)->create([
+            'email'         => 'jackie.chan@' . env('DOMAIN'),
+            'first_name'    => 'Jackie',
+            'last_name'     => 'Chan',
+            'password'      => bcrypt('secret')
+        ]);
+
+        $this->browse(function ($browser) use ($user) {
+            $browser->visit(new LoginPage)
+                ->type('@login-email', $user->email)
+                ->type('@login-password', 'secret')
+                ->press('Login')
+                ->visit(new HomePage)
+                ->assertSeeIn('@welcome-message', 'Welcome back, '.$user->first_name);
+        });
+    }
+
 }

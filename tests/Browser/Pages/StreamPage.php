@@ -3,8 +3,9 @@
 namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;
+use Laravel\Dusk\Page as BasePage;
 
-class HomePage extends Page
+class StreamPage extends BasePage
 {
     /**
      * Get the URL for the page.
@@ -13,7 +14,7 @@ class HomePage extends Page
      */
     public function url()
     {
-        return '/';
+        return '/stream';
     }
 
     /**
@@ -35,8 +36,9 @@ class HomePage extends Page
     public function elements()
     {
         return [
-            '@welcome-message'  => '#welcome-message',
-            '@nav-cog'          => '#nav-cog',
+            '@author'       => 'div.author',
+            '@stream_body'  => 'div.stream_body',
+            '@shout-title'  => '.shout-title',
         ];
     }
 }

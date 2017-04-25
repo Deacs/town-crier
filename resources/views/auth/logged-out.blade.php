@@ -12,7 +12,7 @@
         </div>
 
         <div class="row">
-            <h2>Y'all come back soon, ya hear?!</h2>
+            <h2 id="logged-out-message">Y'all come back soon, ya hear?!</h2>
             <p><a href="/login" class="btn btn-lg btn-info" id="join-in"><span class="glyphicon glyphicon-log-in"></span> Join In!</a></p>
         </div>
 

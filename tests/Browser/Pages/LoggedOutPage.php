@@ -3,8 +3,9 @@
 namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;
+use Laravel\Dusk\Page as BasePage;
 
-class HomePage extends Page
+class LoggedOutPage extends BasePage
 {
     /**
      * Get the URL for the page.
@@ -13,7 +14,7 @@ class HomePage extends Page
      */
     public function url()
     {
-        return '/';
+        return '/logged-out';
     }
 
     /**
@@ -35,8 +36,8 @@ class HomePage extends Page
     public function elements()
     {
         return [
-            '@welcome-message'  => '#welcome-message',
-            '@nav-cog'          => '#nav-cog',
+            '@logged-out-message'   => '#logged-out-message',
+            '@join-in-button'       => '#join-in',
         ];
     }
 }

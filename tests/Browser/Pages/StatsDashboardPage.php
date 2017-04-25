@@ -3,8 +3,9 @@
 namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;
+use Laravel\Dusk\Page as BasePage;
 
-class HomePage extends Page
+class StatsDashboardPage extends BasePage
 {
     /**
      * Get the URL for the page.
@@ -13,7 +14,7 @@ class HomePage extends Page
      */
     public function url()
     {
-        return '/';
+        return '/stats';
     }
 
     /**
@@ -35,8 +36,10 @@ class HomePage extends Page
     public function elements()
     {
         return [
-            '@welcome-message'  => '#welcome-message',
-            '@nav-cog'          => '#nav-cog',
+            '@total_announcements'  => '#total_announcements',
+            '@last_purge'           => '#last_db_purge',
+            '@last_client_refresh'  => '#last_client_refresh',
+            '@last_announcement'    => '#last_announcement',
         ];
     }
 }
