@@ -64,7 +64,6 @@ class LogoutTest extends DuskTestCase
      *
      * @group logout
      * @group authentication
-     * @group single
      *
      * @return void
      */
@@ -72,21 +71,7 @@ class LogoutTest extends DuskTestCase
     {
         $this->browse(function ($browser) {
             $browser->visit('logout')
-                    ->visit(new HomePage);
+                    ->on(new HomePage);
         });
-    }
-
-    /**
-     * Check that the relevant cookies have been deleted after logout
-     *
-     * @group logout
-     * @group cookies
-     * @group authentication
-     *
-     * @return void
-     */
-    public function testAuthenticationCookiesAreClearedAfterLogout()
-    {
-        // @TODO Add all the tests ;)
     }
 }
