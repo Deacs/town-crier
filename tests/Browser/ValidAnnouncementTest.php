@@ -3,6 +3,8 @@
 namespace Tests\Browser;
 
 use App\User;
+use Tests\Browser\Pages\ShoutPage;
+use Tests\Browser\Pages\StreamPage;
 use Tests\DuskTestCase;
 use App\AnnouncementType;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -27,18 +29,18 @@ class ValidAnnouncementTest extends DuskTestCase
 
         $this->browse(function ($broadcast, $stream) use ($user) {
             $broadcast->loginAs($user)
-                ->visit('/shout')
+                ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('title', 'New Stream Item')
-                ->type('body', 'Body of the stream item')
-                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->type('@stream-item-title', 'New Stream Item')
+                ->type('@stream-item-body', 'Body of the stream item')
+                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!');
 
             $stream->loginAs(User::find(4))
-                ->visit('/stream')
+                ->visit(new StreamPage)
                 ->waitForText('New Stream Item')
-                ->assertSeeIn('div.stream_body', 'Body of the stream item')
-                ->assertSeeIn('div.author', $user->fullName());
+                ->assertSeeIn('@stream-body', 'Body of the stream item')
+                ->assertSeeIn('@author', $user->fullName());
         });
     }
 
@@ -56,11 +58,11 @@ class ValidAnnouncementTest extends DuskTestCase
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
-                ->visit('/shout')
+                ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('title', 'New Stream Item')
-                ->type('body', 'Body of the stream item')
-                ->select('type_id', (string) AnnouncementType::ANNOUNCEMENT_ID)
+                ->type('@stream-item-title', 'New Stream Item')
+                ->type('@stream-item-body', 'Body of the stream item')
+                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
                 ->waitForText('Shout Heard!')
                 ->assertSee('Your Shout has been added to the burble');

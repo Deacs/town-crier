@@ -37,7 +37,7 @@ class StreamPage extends BasePage
     {
         return [
             '@author'       => 'div.author',
-            '@stream_body'  => 'div.stream_body',
+            '@stream-body'  => 'div.stream_body',
             '@shout-title'  => '.shout-title',
         ];
     }
