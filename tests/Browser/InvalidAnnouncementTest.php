@@ -112,7 +112,7 @@ class InvalidAnnouncementTest extends DuskTestCase
                 ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
                 ->press('Shout!')
                 ->visit(new StreamPage)
-                ->assertDontSeeIn('@stream_body', 'Body of the stream item')
+                ->assertDontSeeIn('@stream-body', 'Body of the stream item')
                 ->assertDontSeeIn('@author', $user->fullName());
         });
     }
@@ -222,7 +222,7 @@ class InvalidAnnouncementTest extends DuskTestCase
                 ->press('Shout!')
                 ->visit(new StreamPage)
                 ->assertDontSeeIn('@shout-title', 'New Stream Item')
-                ->assertDontSeeIn('@stream_body', 'Body of the stream item')
+                ->assertDontSeeIn('@stream-body', 'Body of the stream item')
                 ->assertDontSeeIn('@author', $user->fullName());
         });
     }
