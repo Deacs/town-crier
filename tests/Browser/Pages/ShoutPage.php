@@ -43,21 +43,21 @@ class ShoutPage extends BasePage
         ];
     }
 
-    // Page Methods
+    // -- Page Methods
 
     /**
      * Create a shout
      *
      * @param  \Laravel\Dusk\Browser $browser
-     *
      * @param array $omissions
+     *
      * @return void
      */
     public function createShout(Browser $browser, $omissions = [])
     {
         $browser->type('@stream-item-title', 'New Stream Item')
-                ->type('@stream-item-body', 'Body of the stream item')
-                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
-                ->press('Shout!');
+            ->type('@stream-item-body', 'Body of the stream item')
+            ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
+            ->press('Shout!');
     }
 }

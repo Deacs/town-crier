@@ -21,7 +21,6 @@ class ValidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group valid
-     * @group single
      *
      * @return void
      */
@@ -34,10 +33,6 @@ class ValidAnnouncementTest extends DuskTestCase
                 ->visit(new ShoutPage)
                 ->assertSee('Shout!')
                 ->createShout();
-//                ->type('@stream-item-title', 'New Stream Item')
-//                ->type('@stream-item-body', 'Body of the stream item')
-//                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
-//                ->press('Shout!');
 
             $stream->loginAs(User::find(4))
                 ->visit(new StreamPage)

@@ -20,17 +20,13 @@ class ExampleTest extends DuskTestCase
      *
      * @group login
      * @group authentication
+     * @group single
      *
      * @return void
      */
     public function testFailedLoginDisplaysCorrectMessageAndDoesNotDirectToHomePage()
     {
-        $user = factory(User::class)->create([
-            'email'         => 'jackie.chan@' . env('DOMAIN'),
-            'first_name'    => 'Jackie',
-            'last_name'     => 'Chan',
-            'password'      => bcrypt('secret')
-        ]);
+        $user = (new LoginPage())->createTestUser();
 
         $this->browse(function ($browser) use ($user) {
             $browser->visit(new LoginPage)
@@ -57,12 +53,7 @@ class ExampleTest extends DuskTestCase
      */
     public function testSuccessfulLoginReceivesCorrectWelcomeMessage()
     {
-        $user = factory(User::class)->create([
-            'email'         => 'jackie.chan@' . env('DOMAIN'),
-            'first_name'    => 'Jackie',
-            'last_name'     => 'Chan',
-            'password'      => bcrypt('secret')
-        ]);
+        $user = (new LoginPage())->createTestUser();
 
         $this->browse(function ($browser) use ($user) {
             $browser->visit(new LoginPage)

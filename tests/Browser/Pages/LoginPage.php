@@ -2,6 +2,7 @@
 
 namespace Tests\Browser\Pages;
 
+use App\User;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Page as BasePage;
 
@@ -39,5 +40,22 @@ class LoginPage extends BasePage
             '@login-email'    => 'input[name=email]',
             '@login-password' => 'input[name=password]',
         ];
+    }
+
+    // -- Page methods
+
+    /**
+     * Create and return the test user
+     */
+    public function createTestUser()
+    {
+        $user = factory(User::class)->create([
+            'email'         => 'jackie.chan@' . env('DOMAIN'),
+            'first_name'    => 'Jackie',
+            'last_name'     => 'Chan',
+            'password'      => bcrypt('secret')
+        ]);
+
+        return $user;
     }
 }
