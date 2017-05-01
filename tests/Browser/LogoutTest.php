@@ -5,6 +5,7 @@ namespace Tests\Browser;
 use App\User;
 use Tests\DuskTestCase;
 use Tests\Browser\Pages\HomePage;
+use Tests\Browser\Pages\LoginPage;
 use Tests\Browser\Pages\LogoutPage;
 use Tests\Browser\Pages\LoggedOutPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -13,7 +14,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class LogoutTest extends DuskTestCase
 {
     use DatabaseMigrations;
-    use DatabaseTransactions;
+//    use DatabaseTransactions;
 
     /**
      * Check a logged out user is presented with the correct view
@@ -56,6 +57,27 @@ class LogoutTest extends DuskTestCase
                 ->clickLink('Logout')
                 ->on(new LoggedOutPage)
                 ->assertSeeIn('@join-in-button', 'Join In!');
+        });
+    }
+
+    /**
+     * Ensure a logged in user is redirected to the home page if they are logged in
+     *
+     * @group authentication
+     * @group logout
+     * @group single
+     *
+     * @return void
+     */
+    public function testLoggedOutPageIsNotDirectlyCallbelByLoggedInUser()
+    {
+        $user = (new LoginPage())->createTestUser();
+
+        $this->browse(function ($browser) use ($user) {
+            $browser->loginAs($user)
+//                ->visit(new LoggedOutPage)
+                ->visit('logged-out')
+                ->on(new HomePage);
         });
     }
 

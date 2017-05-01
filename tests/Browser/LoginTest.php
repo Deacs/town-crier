@@ -20,7 +20,6 @@ class ExampleTest extends DuskTestCase
      *
      * @group login
      * @group authentication
-     * @group single
      *
      * @return void
      */

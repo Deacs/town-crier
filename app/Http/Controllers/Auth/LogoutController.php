@@ -9,6 +9,10 @@ class LogoutController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+            return redirect('/');
+        }
+
         return view('auth.logged-out');
     }
 
