@@ -3,6 +3,7 @@
 namespace Tests\Browser;
 
 use App\User;
+use Tests\Browser\Pages\LoginPage;
 use Tests\DuskTestCase;
 use App\AnnouncementType;
 use Tests\Browser\Pages\ShoutPage;
@@ -13,7 +14,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class InvalidAnnouncementTest extends DuskTestCase
 {
     use DatabaseMigrations;
-    use DatabaseTransactions;
+//    use DatabaseTransactions;
 
     /**
      * Check that correct messaging displayed within modal for a message that fails validation
@@ -27,7 +28,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      */
     public function testCorrectConfirmationMessageStringsDisplayedForAnnouncementMissingAllData()
     {
-        $user = User::find(3);
+        $user = (new LoginPage())->createTestUser();
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
@@ -51,7 +52,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      */
     public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfAnyData()
     {
-        $user = User::find(3);
+        $user = (new LoginPage())->createTestUser();
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
@@ -70,13 +71,12 @@ class InvalidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group invalid
-     * @group failing
      *
      * @return void
      */
     public function testCorrectConfirmationMessageStringsDisplayedInModalForAnnouncementMissingTitle()
     {
-        $user = User::find(3);
+        $user = (new LoginPage())->createTestUser();
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
@@ -102,7 +102,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      */
     public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfTitle()
     {
-        $user = User::find(3);
+        $user = (new LoginPage())->createTestUser();
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
@@ -129,7 +129,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      */
     public function testCorrectConfirmationMessageStringsDisplayedInModalForAnnouncementMissingBody()
     {
-        $user = User::find(3);
+        $user = (new LoginPage())->createTestUser();
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
@@ -158,7 +158,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      */
     public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfBody()
     {
-        $user = User::find(3);
+        $user = (new LoginPage())->createTestUser();
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
@@ -185,7 +185,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      */
     public function testCorrectConfirmationMessageStringsDisplayedInModalForAnnouncementWithoutSelectedType()
     {
-        $user = User::find(3);
+        $user = (new LoginPage())->createTestUser();
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)
@@ -211,7 +211,7 @@ class InvalidAnnouncementTest extends DuskTestCase
      */
     public function testStreamDoesNotContainAnnouncementThatFailedValidationDueToLackOfType()
     {
-        $user = User::find(3);
+        $user = (new LoginPage())->createTestUser();
 
         $this->browse(function ($broadcast) use ($user) {
             $broadcast->loginAs($user)

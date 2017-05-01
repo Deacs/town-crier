@@ -3,10 +3,10 @@
 namespace Tests\Browser;
 
 use App\User;
-use Tests\Browser\Pages\ShoutPage;
-use Tests\Browser\Pages\StreamPage;
 use Tests\DuskTestCase;
 use App\AnnouncementType;
+use Tests\Browser\Pages\ShoutPage;
+use Tests\Browser\Pages\StreamPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -21,6 +21,7 @@ class ValidAnnouncementTest extends DuskTestCase
      * @group stream
      * @group announcement
      * @group valid
+     *
      * @return void
      */
     public function testStandardAnnouncementIsCorrectlyDisplayedInStream()
@@ -31,10 +32,7 @@ class ValidAnnouncementTest extends DuskTestCase
             $broadcast->loginAs($user)
                 ->visit(new ShoutPage)
                 ->assertSee('Shout!')
-                ->type('@stream-item-title', 'New Stream Item')
-                ->type('@stream-item-body', 'Body of the stream item')
-                ->select('@stream-item-type', (string) AnnouncementType::ANNOUNCEMENT_ID)
-                ->press('Shout!');
+                ->createShout();
 
             $stream->loginAs(User::find(4))
                 ->visit(new StreamPage)
