@@ -6,7 +6,6 @@ use App\User;
 use Tests\DuskTestCase;
 use Tests\Browser\Pages\HomePage;
 use Tests\Browser\Pages\LoginPage;
-use Tests\Browser\Pages\LogoutPage;
 use Tests\Browser\Pages\LoggedOutPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -65,17 +64,15 @@ class LogoutTest extends DuskTestCase
      *
      * @group authentication
      * @group logout
-     * @group single
      *
      * @return void
      */
-    public function testLoggedOutPageIsNotDirectlyCallbelByLoggedInUser()
+    public function testLoggedOutPageIsNotDirectlyCallableByLoggedInUser()
     {
         $user = (new LoginPage())->createTestUser();
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)
-//                ->visit(new LoggedOutPage)
                 ->visit('logged-out')
                 ->on(new HomePage);
         });
