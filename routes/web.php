@@ -42,6 +42,12 @@ Route::group(['middleware' => 'auth'], function () {
             'uses' 	=> 'ShoutController@store',
         ]
     );
+    Route::get('admin/user/add', 
+        [
+            'as'    => 'add-user',
+            'uses'  => 'UserController@add',
+        ]
+    );
 
 });
 
