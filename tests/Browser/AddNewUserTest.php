@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests\Browser;
+namespace Browser;
 
 use App\User;
 use Tests\DuskTestCase;
+use Tests\Browser\Pages\AdminNewUserPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -23,11 +24,17 @@ class AddNewUserTest extends DuskTestCase
     {
         $user = User::find(3);
 
-        $this->browse(function ($browser) use ($user) {
+        $newUserAttributes = [
+            'first_name' => ''
+        ];
+
+        $this->browse(function ($browser) use ($user, $newUserAttributes) {
             $browser
                 ->loginAs($user)
-                ->visit('/admin/user/add')
-                ->assertSee('Add New User');
+                ->visit(new AdminNewUserPage)
+                ->assertSee('Add New User')
+                ->assertSeeIn('@first-name-label', 'First Name')
+                ->assertSeeIn('@last-name-label', 'Last Name');
         });
     }
 }

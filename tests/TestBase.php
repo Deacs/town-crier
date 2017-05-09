@@ -60,6 +60,17 @@ class TestBase extends TestCase
         return $announcementType;
     }
 
+    protected function createUserAttributes()
+    {
+        $faker = Faker\Factory::create();
+
+        return [
+            'first_name'    => $faker->firstName(),
+            'last_name'     => $faker->lastName(),
+            'email'         => $faker->email()
+        ];
+    }
+
     protected function createInvestmentAttributes()
     {
         $faker = Faker\Factory::create();
