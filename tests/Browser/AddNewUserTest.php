@@ -40,6 +40,7 @@ class AddNewUserTest extends DuskTestCase
      * Ensure the form allows a new user to be added
      *
      * @group admin
+     * @group failing
      *
      * @return void
      */

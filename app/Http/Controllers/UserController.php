@@ -20,11 +20,7 @@ class UserController extends Controller
 
   	public function store() {
 
-  		$data = Input::only('first_name', 'last_name', 'email');
-
-  		$data['password'] = bcrypt($data['first_name']);
-  		
-  		return (new User())->create($data);
+  		return (new User())->add();
 
   	}
 }

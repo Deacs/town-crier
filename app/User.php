@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Input;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -30,6 +31,19 @@ class User extends Authenticatable
         'email',
         'password'
     ];
+
+    /**
+     * Add a new user
+     *
+     */
+    public function add() 
+    {
+        $data = Input::only('first_name', 'last_name', 'email');
+
+        $data['password'] = bcrypt($data['first_name']);
+        
+        return $this->create($data);
+    }
 
     /**
      * Return a concatenated full name
