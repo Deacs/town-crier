@@ -45,7 +45,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/user/add', 
         [
             'as'    => 'add-user',
-            'uses'  => 'UserController@add',
+            'uses'  => 'UserController@create',
+        ]
+    );
+    Route::post('admin/user/add', 
+        [
+            'as'    => 'add-user-form',
+            'uses'  => 'UserController@store',
         ]
     );
 
