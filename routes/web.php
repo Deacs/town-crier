@@ -54,6 +54,12 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'  => 'UserController@store',
         ]
     );
+    Route::get('admin/users', 
+        [
+            'as'    => 'all-users',
+            'uses'  => 'UserController@index',
+        ]
+    );
 
 });
 

@@ -4,6 +4,7 @@ namespace Browser;
 
 use App\User;
 use Tests\DuskTestCase;
+use Tests\Browser\Pages\UserListingPage;
 use Tests\Browser\Pages\AdminNewUserPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -11,7 +12,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class AddNewUserTest extends DuskTestCase
 {
     use DatabaseMigrations;
-    //use DatabaseTransactions;
 
     /**
      * Ensure the Add New User screen displays the correct fields
@@ -24,7 +24,7 @@ class AddNewUserTest extends DuskTestCase
     {
         $user = User::find(3);
 
-        $this->browse(function ($browser) use ($user, $newUserAttributes) {
+        $this->browse(function ($browser) use ($user) {
             $browser
                 ->loginAs($user)
                 ->visit(new AdminNewUserPage)
@@ -40,7 +40,6 @@ class AddNewUserTest extends DuskTestCase
      * Ensure the form allows a new user to be added
      *
      * @group admin
-     * @group failing
      *
      * @return void
      */
@@ -70,4 +69,36 @@ class AddNewUserTest extends DuskTestCase
             'email'         => $newUserAttributes['email'],
         ]);
     }
+
+    /**
+     * Ensure correct success notification displayed after successful addition of a new user
+     *
+     * @group admin
+     * @group new
+     * 
+     * @return void
+     */
+    public function testCorrectSuccessfulNotificationMessageAfterAdditionOfNewUser()
+    {
+        $user = User::find(3);
+
+        $newUserAttributes = [
+            'first_name'    => 'Bob',
+            'last_name'     => 'Jackson',
+            'email'         => 'bob@jackson.com'
+        ];
+
+        $this->browse(function ($browser) use ($user, $newUserAttributes) {
+            $browser
+                ->loginAs($user)
+                ->visit(new AdminNewUserPage)
+                ->type('@new-user-firstname', $newUserAttributes['first_name'])
+                ->type('@new-user-lastname', $newUserAttributes['last_name'])
+                ->type('@new-user-email', $newUserAttributes['email'])
+                ->press('Add User');
+                // ->on(new UserListingPage);
+        });
+    }
+
+
 }

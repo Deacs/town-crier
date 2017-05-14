@@ -13,14 +13,20 @@ use App\User;
 class UserController extends Controller
 {
   	
+  	public function index() 
+  	{
 
-  	public function create() {
+  	}
+
+  	public function create()
+  	{
   		return view('admin.user.add');
   	}
 
-  	public function store() {
+  	public function store()
+  	{
+  		(new User())->add();
 
-  		return (new User())->add();
-
+  		return view('admin.user.index');
   	}
 }

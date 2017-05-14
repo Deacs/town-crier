@@ -41,7 +41,7 @@ class AdminNewUserPage extends BasePage
             '@new-user-email'       => 'input[name=email]',
             '@new-user-firstname'   => 'input[name=first_name]',
             '@new-user-lastname'    => 'input[name=last_name]',
-            '@new-user-add-btn'     => 'button[id=add-new-user]',
+            '@new-user-add-btn'     => 'button#add-new-user',
         ];
     }
 }
