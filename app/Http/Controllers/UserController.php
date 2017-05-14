@@ -15,7 +15,7 @@ class UserController extends Controller
   	
   	public function index() 
   	{
-
+  		return view('admin.user.index');
   	}
 
   	public function create()
@@ -27,6 +27,6 @@ class UserController extends Controller
   	{
   		(new User())->add();
 
-  		return view('admin.user.index');
+  		return redirect()->action('UserController@index');
   	}
 }

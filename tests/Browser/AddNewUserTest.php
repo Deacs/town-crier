@@ -95,8 +95,8 @@ class AddNewUserTest extends DuskTestCase
                 ->type('@new-user-firstname', $newUserAttributes['first_name'])
                 ->type('@new-user-lastname', $newUserAttributes['last_name'])
                 ->type('@new-user-email', $newUserAttributes['email'])
-                ->press('Add User');
-                // ->on(new UserListingPage);
+                ->press('Add User')
+                ->on(new UserListingPage);
         });
     }
 
