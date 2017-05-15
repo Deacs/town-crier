@@ -49,9 +49,9 @@ class User extends Authenticatable
         $this->data['password'] = bcrypt($this->data['first_name']);
 
         $validator = Validator::make($this->data, [
-            'first_name'    => 'required|min:2|max:255',
-            'last_name'     => 'required|min:2|max:255',
-            'email'         => 'required|email|unique:users'
+            'first_name'    => 'bail|required|min:2|max:255',
+            'last_name'     => 'bail|required|min:2|max:255',
+            'email'         => 'bail|required|email|unique:users'
         ]);
 
         if ($validator->passes()) {

@@ -50,10 +50,10 @@ class Announcement extends Model
         $this->data = Input::only('title', 'body', 'user_id', 'type_id', 'thumb_path');
 
         $validator = Validator::make($this->data, [
-            'title'     => 'required|max:255',
-            'body'      => 'required|min:5',
-            'user_id'   => 'required',
-            'type_id'   => 'required|integer|in:'.implode(',', AnnouncementType::$type_ids)
+            'title'     => 'bail|required|max:255',
+            'body'      => 'bail|required|min:5',
+            'user_id'   => 'bail|required',
+            'type_id'   => 'bail|required|integer|in:'.implode(',', AnnouncementType::$type_ids)
         ]);
 
         if ($validator->passes()) {
