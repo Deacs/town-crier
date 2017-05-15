@@ -35,12 +35,11 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'  => 'ShoutController@create'
         ]
     );
-
     Route::post('fire',
         [
             'as' 	=> 'store-shout',
             'uses' 	=> 'ShoutController@store',
-        ]
+        ]   
     );
     Route::get('admin/user/add', 
         [
@@ -64,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'janitor'], function () {
+
     Route::get('audit-log',
         [
             'as'    => 'audit-log',

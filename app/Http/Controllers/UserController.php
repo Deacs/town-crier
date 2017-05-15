@@ -25,8 +25,8 @@ class UserController extends Controller
 
   	public function store()
   	{
-  		(new User())->add();
+  		return (new User())->add();
 
-  		return redirect()->action('UserController@index');
+  		//return redirect()->action('UserController@index');
   	}
 }

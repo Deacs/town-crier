@@ -60,7 +60,8 @@ class AddNewUserTest extends DuskTestCase
                 ->type('@new-user-firstname', $newUserAttributes['first_name'])
                 ->type('@new-user-lastname', $newUserAttributes['last_name'])
                 ->type('@new-user-email', $newUserAttributes['email'])
-                ->press('Add User');
+                ->press('Add User')
+                ->pause(2000);
         });
 
         $this->assertDatabaseHas('users', [
@@ -74,7 +75,6 @@ class AddNewUserTest extends DuskTestCase
      * Ensure correct success notification displayed after successful addition of a new user
      *
      * @group admin
-     * @group new
      * 
      * @return void
      */
@@ -96,7 +96,138 @@ class AddNewUserTest extends DuskTestCase
                 ->type('@new-user-lastname', $newUserAttributes['last_name'])
                 ->type('@new-user-email', $newUserAttributes['email'])
                 ->press('Add User')
-                ->on(new UserListingPage);
+                ->pause(2000)
+                ->assertSee('User Added')
+                ->assertSee('The user has been added to the crowd')
+                ->on(new AdminNewUserPage);
+        });
+    }
+
+    /**
+     * Ensure correct failure notification displayed after addition of a new user fails due to missing first name
+     *
+     * @group admin
+     * 
+     * @return void
+     */
+    public function testCorrectFailureNotificationMessageAfterAdditionOfNewUserFailsDueToMissingFirstName()
+    {
+        $user = User::find(3);
+
+        $newUserAttributes = [
+            'first_name'    => '',
+            'last_name'     => 'Jackson',
+            'email'         => 'bob@jackson.com'
+        ];
+
+        $this->browse(function ($browser) use ($user, $newUserAttributes) {
+            $browser
+                ->loginAs($user)
+                ->visit(new AdminNewUserPage)
+                ->type('@new-user-firstname', $newUserAttributes['first_name'])
+                ->type('@new-user-lastname', $newUserAttributes['last_name'])
+                ->type('@new-user-email', $newUserAttributes['email'])
+                ->press('Add User')
+                ->pause(2000)
+                ->assertSee('Uh Oh')
+                ->assertSee('Your user generation skills seems to be broken. Try again?')
+                ->on(new AdminNewUserPage);
+        });
+    }
+
+    /**
+     * Ensure correct failure notification displayed after addition of a new user fails due to missing last name
+     *
+     * @group admin
+     * 
+     * @return void
+     */
+    public function testCorrectFailureNotificationMessageAfterAdditionOfNewUserFailsDueToMissingLastName()
+    {
+        $user = User::find(3);
+
+        $newUserAttributes = [
+            'first_name'    => 'Bob',
+            'last_name'     => '',
+            'email'         => 'bob@jackson.com'
+        ];
+
+        $this->browse(function ($browser) use ($user, $newUserAttributes) {
+            $browser
+                ->loginAs($user)
+                ->visit(new AdminNewUserPage)
+                ->type('@new-user-firstname', $newUserAttributes['first_name'])
+                ->type('@new-user-lastname', $newUserAttributes['last_name'])
+                ->type('@new-user-email', $newUserAttributes['email'])
+                ->press('Add User')
+                ->pause(2000)
+                ->assertSee('Uh Oh')
+                ->assertSee('Your user generation skills seems to be broken. Try again?')
+                ->on(new AdminNewUserPage);
+        });
+    }
+
+    /**
+     * Ensure correct failure notification displayed after addition of a new user fails due to missing email address
+     *
+     * @group admin
+     * 
+     * @return void
+     */
+    public function testCorrectFailureNotificationMessageAfterAdditionOfNewUserFailsDueToMissingEmail()
+    {
+        $user = User::find(3);
+
+        $newUserAttributes = [
+            'first_name'    => 'Bob',
+            'last_name'     => 'Jackson',
+            'email'         => ''
+        ];
+
+        $this->browse(function ($browser) use ($user, $newUserAttributes) {
+            $browser
+                ->loginAs($user)
+                ->visit(new AdminNewUserPage)
+                ->type('@new-user-firstname', $newUserAttributes['first_name'])
+                ->type('@new-user-lastname', $newUserAttributes['last_name'])
+                ->type('@new-user-email', $newUserAttributes['email'])
+                ->press('Add User')
+                ->pause(2000)
+                ->assertSee('Uh Oh')
+                ->assertSee('Your user generation skills seems to be broken. Try again?')
+                ->on(new AdminNewUserPage);
+        });
+    }
+
+    /**
+     * Ensure correct failure notification displayed after addition of a new user fails due to non unique email address
+     *
+     * @group admin
+     * 
+     * @return void
+     */
+    public function testCorrectFailureNotificationMessageAfterAdditionOfNewUserFailsDueToNoUniqueEmail()
+    {
+        $user = User::find(3);
+
+        $newUserAttributes = [
+            'first_name'    => 'Bob',
+            'last_name'     => 'Jackson',
+            'email'         => $user->email
+        ];
+
+        $this->browse(function ($browser) use ($user, $newUserAttributes) {
+            $browser
+                ->loginAs($user)
+                ->visit(new AdminNewUserPage)
+                ->type('@new-user-firstname', $newUserAttributes['first_name'])
+                ->type('@new-user-lastname', $newUserAttributes['last_name'])
+                ->type('@new-user-email', $newUserAttributes['email'])
+                ->press('Add User')
+                ->pause(2000)
+                ->assertSee('Uh Oh')
+                ->assertSee('Your user generation skills seems to be broken. Try again?')
+                ->on(new AdminNewUserPage);
         });
     }
 

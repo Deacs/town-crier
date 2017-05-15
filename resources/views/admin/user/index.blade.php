@@ -8,7 +8,7 @@
     <div class="admin">
         <h1><span class="glyphicon glyphicon-sunglasses"></span> Admin</h1>
 
-        <h3><span class="glyphicon glyphicon-wrench"></span> All User</h3>
+        <h3><span class="glyphicon glyphicon-wrench"></span> All Users</h3>
 
 
     </div>

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -15,6 +16,7 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
+    protected $data;
     protected $id;
     protected $first_name;
     protected $last_name;
@@ -35,14 +37,37 @@ class User extends Authenticatable
     /**
      * Add a new user
      *
+     * @return string
+     *
      */
     public function add() 
     {
-        $data = Input::only('first_name', 'last_name', 'email');
+        $result = 'fail';
 
-        $data['password'] = bcrypt($data['first_name']);
+        $this->data = Input::only('first_name', 'last_name', 'email');
+
+        $this->data['password'] = bcrypt($this->data['first_name']);
+
+        $validator = Validator::make($this->data, [
+            'first_name'    => 'required|min:2|max:255',
+            'last_name'     => 'required|min:2|max:255',
+            'email'         => 'required|email|unique:users'
+        ]);
+
+        if ($validator->passes()) {
+
+            $this->create($this->data);
+
+            // If an Event needs to be fired - this is a good place to broadcast from
+
+            $result = 'pass';
+        }
+        else {
+            // TODO Throw exception
+            Log::info('New User Validation FAILED');
+        }
         
-        return $this->create($data);
+        return $result;
     }
 
     /**

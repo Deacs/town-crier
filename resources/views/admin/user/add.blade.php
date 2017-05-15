@@ -44,5 +44,70 @@
 @stop
 
 @section('footer')
+
+<script>
+
+        var respond = function(response) {
+
+            var data = {
+                type: "success",
+                title: "User Added!",
+                text: "The user has been added to the crowd.",
+            };
+            if (response != 'pass') {
+                data = {
+                    type: "error",
+                    title: "Uh Oh!",
+                    text: "Looks like you've forgotten something. Try again",
+                };
+            }
+
+            return data;
+        }
+
+        $("#add-user").submit(function(e) {
+
+            e.preventDefault();
+
+            var $form       = $(this),
+                url         = $form.attr("action"),
+                first_name  = $("input[name='first_name']"),
+                last_name   = $("input[name='last_name']"),
+                email       = $("input[name='email']"),
+                data        = $form.serialize(),
+                alertData   = {};
+
+            var posting = $.post( url, data )
+                
+                .done(function( res ) {
+
+                    alertData = respond(res);
+
+                    swal({
+                        type: alertData.type,
+                        title: alertData.title,
+                        text: alertData.text,
+                        timer: 2500,
+                        showConfirmButton: false
+                    });
+
+                    // Clear form input
+                    first_name.val('');
+                    last_name.val('');
+                    email.val('');
+
+                })
+                .fail(function() {
+                    swal({
+                        type: "error",
+                        title: "Uh Oh",
+                        text: "Your user generation skills seems to be broken. Try again?",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                });
+        });
+
+    </script>
     
 @stop
