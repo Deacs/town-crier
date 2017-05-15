@@ -3,9 +3,9 @@
 namespace Tests\Browser;
 
 use App\User;
-use Tests\Browser\Pages\LoginPage;
 use Tests\DuskTestCase;
 use App\AnnouncementType;
+use Tests\Browser\Pages\LoginPage;
 use Tests\Browser\Pages\ShoutPage;
 use Tests\Browser\Pages\StreamPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

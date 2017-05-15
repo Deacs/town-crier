@@ -35,17 +35,35 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'  => 'ShoutController@create'
         ]
     );
-
     Route::post('fire',
         [
             'as' 	=> 'store-shout',
             'uses' 	=> 'ShoutController@store',
+        ]   
+    );
+    Route::get('admin/user/add', 
+        [
+            'as'    => 'add-user',
+            'uses'  => 'UserController@create',
+        ]
+    );
+    Route::post('admin/user/add', 
+        [
+            'as'    => 'add-user-form',
+            'uses'  => 'UserController@store',
+        ]
+    );
+    Route::get('admin/users', 
+        [
+            'as'    => 'all-users',
+            'uses'  => 'UserController@index',
         ]
     );
 
 });
 
 Route::group(['middleware' => 'janitor'], function () {
+
     Route::get('audit-log',
         [
             'as'    => 'audit-log',
