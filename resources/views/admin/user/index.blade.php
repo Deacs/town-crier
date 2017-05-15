@@ -10,6 +10,23 @@
 
         <h3><span class="glyphicon glyphicon-wrench"></span> All Users</h3>
 
+        <table class="table table-striped">
+        	<tr>
+        		<th>ID</th>
+        		<th>Name</th>
+        		<th>Email</th>
+        		<th>Edit</th>
+        	</tr>
+        	@foreach($users as $user)
+        	<tr>
+        		<td>{{ $user->id }}</td>
+        		<td>{{ $user->fullName() }}</td>
+        		<td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
+        		<td><span class="glyphicon glyphicon-edit"></span></td>
+        	</tr>
+        	@endforeach
+        </table>
+
 
     </div>
 @stop

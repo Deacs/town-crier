@@ -12,14 +12,14 @@ class UserListingTest extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * Test the basic table structure and standard user data is present
+     * Test the basic user listing page is returned
      *
      * @group admin
      * @group new
      *
      * @return void
      */
-    public function testCorrectStandardUsersAreDisplayed()
+    public function testCorrectUserListingPageIsDisplayed()
     {
         $user = User::find(3);
 

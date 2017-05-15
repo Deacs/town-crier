@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-use App\User;
-
 class UserController extends Controller
 {
   	
   	public function index() 
   	{
-  		return view('admin.user.index');
+  		$users = User::all();
+
+  		return view('admin.user.index')->with('users', $users);
   	}
 
   	public function create()
@@ -26,7 +27,5 @@ class UserController extends Controller
   	public function store()
   	{
   		return (new User())->add();
-
-  		//return redirect()->action('UserController@index');
   	}
 }
