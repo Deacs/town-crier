@@ -70,7 +70,6 @@ class UserListingTest extends DuskTestCase
      * Ensure the delete icon is displayed for each user
      *
      * @group admin
-     * @group new
      */
     public function testDeleteIconIsDisplayedForEachUserListing()
     {
@@ -83,6 +82,24 @@ class UserListingTest extends DuskTestCase
                 ->assertVisible('span.glyphicon-trash#delete_user_1')
                 ->assertVisible('span.glyphicon-trash#delete_user_3')
                 ->assertVisible('span.glyphicon-trash#delete_user_4');
+        });
+    }
+
+    /**
+     * Ensure the delete icon IS NOT displayed for the current user
+     *
+     * @group admin
+     * @group new
+     */
+    public function testDeleteIconIsNotDisplayedForCurrentActiveUser()
+    {
+        $user = User::find(2);
+
+        $this->browse(function($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit(new UserListingPage)
+                ->assertMissing('span.glyphicon-trash#delete_user_'.$user->id);
         });
     }
 
