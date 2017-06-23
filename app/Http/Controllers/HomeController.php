@@ -26,4 +26,24 @@ class HomeController extends Controller
     {
         return view('home.index');
     }
+
+    public function fibonacci()
+    {
+        $prev = 0;
+        $curr = 1;
+        $out = [];
+
+        for ($i = 0; $i < 20; $i++) {
+
+            $fib = $prev + $curr;
+
+            $out[] = $fib;
+
+            $curr = $prev;
+            $prev = $fib;
+
+        }
+
+        print join($out, ', ');
+    }
 }

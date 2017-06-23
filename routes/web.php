@@ -6,6 +6,12 @@ Route::get('/logout', 'Auth\LogoutController@performLogout');
 
 Auth::routes();
 
+Route::get('fibonacci', 
+    [
+        'uses' => 'HomeController@fibonacci'
+    ]
+);
+
 Route::get('/logged-out',
     [
         'as'    => 'logged-out',

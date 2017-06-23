@@ -18,7 +18,11 @@
         		<th>Edit</th>
         	</tr>
         	@foreach($users as $user)
-        	<tr>
+                @if (Auth::user()->id == $user->id)
+                    <tr class="current_user">
+                @else
+                    <tr>
+                @endif
         		<td>{{ $user->id }}</td>
         		<td>{{ $user->fullName() }}</td>
         		<td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
