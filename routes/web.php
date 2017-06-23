@@ -59,6 +59,18 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'  => 'UserController@store',
         ]
     );
+    Route::get('admin/user/{id}/edit', 
+        [
+            'as'    => 'add-user',
+            'uses'  => 'UserController@edit',
+        ]
+    );
+    Route::post('admin/user/add', 
+        [
+            'as'    => 'add-user-form',
+            'uses'  => 'UserController@update',
+        ]
+    );
     Route::get('admin/users', 
         [
             'as'    => 'all-users',

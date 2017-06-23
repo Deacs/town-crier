@@ -27,7 +27,7 @@
         		<td>{{ $user->id }}</td>
         		<td>{{ $user->fullName() }}</td>
         		<td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
-        		<td><span class="glyphicon glyphicon-edit" id="edit_user_{{ $user->id }}"></span></td>
+        		<td><a href="/admin/user/{{ $user->id }}/edit"><span class="glyphicon glyphicon-edit" id="edit_user_{{ $user->id }}"></span></a></td>
                 <td>
                 @if (Auth::user()->id != $user->id)
                     <span class="glyphicon glyphicon-trash" id="delete_user_{{ $user->id }}"></span>

@@ -4,6 +4,7 @@ namespace Tests\Browser;
 
 use App\User;
 use Tests\DuskTestCase;
+use Tests\Browser\Pages\UserEditPage;
 use Tests\Browser\Pages\UserListingPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -100,6 +101,25 @@ class UserListingTest extends DuskTestCase
                 ->loginAs($user)
                 ->visit(new UserListingPage)
                 ->assertMissing('span.glyphicon-trash#delete_user_'.$user->id);
+        });
+    }
+
+    /**
+     * Ensure the edit user link opens the correct screen
+     * 
+     * @group admin
+     * @group new
+     */
+    public function testEditUserLinkOpensCorrectScreen()
+    {
+        $user = User::find(2);
+
+        $this->browse(function($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit(new UserListingPage)
+                ->click('.glyphicon-edit#edit_user_'.$user->id)
+                ->assertPathIs('/admin/user/'.$user->id.'/edit');
         });
     }
 
