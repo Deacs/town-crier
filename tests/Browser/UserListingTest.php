@@ -30,16 +30,10 @@ class UserListingTest extends DuskTestCase
         });
     }
 
-    // Test the current user is highlighted in the listing
-    // 
-    // Login as X
-    // Open listing page
-    // Row containing current user should be highlihted with X
     /**
      * Ensure current user's entry in user listing is highlighted
      *
      * @group admin
-     * @group new
      */
     public function testCurrentUserIsHighlightedInListing() 
     {
@@ -49,9 +43,56 @@ class UserListingTest extends DuskTestCase
             $browser
                 ->loginAs($user)
                 ->visit(new UserListingPage)
-                ->assertSeeIn('tr.current_user', $user->fullName());
+                ->assertSeeIn('tr.success', $user->fullName());
         });
     }
+
+    /**
+     * Ensure the edit icon is displayed for each user
+     *
+     * @group admin
+     */
+    public function testEditIconIsDisplayedForEachUserListing()
+    {
+        $user = User::find(3);
+
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit(new UserListingPage)
+                ->assertVisible('span.glyphicon-edit#edit_user_1')
+                ->assertVisible('span.glyphicon-edit#edit_user_2')
+                ->assertVisible('span.glyphicon-edit#edit_user_3');
+        });
+    }
+
+    /**
+     * Ensure the delete icon is displayed for each user
+     *
+     * @group admin
+     * @group new
+     */
+    public function testDeleteIconIsDisplayedForEachUserListing()
+    {
+        $user = User::find(2);
+
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit(new UserListingPage)
+                ->assertVisible('span.glyphicon-trash#delete_user_1')
+                ->assertVisible('span.glyphicon-trash#delete_user_3')
+                ->assertVisible('span.glyphicon-trash#delete_user_4');
+        });
+    }
+
+
+
+
+
+
+
+
     
     // Test the 'Add New User' option is displayed if the user has sufficient permisisons
 }

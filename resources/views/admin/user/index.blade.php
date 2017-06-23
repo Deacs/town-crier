@@ -16,17 +16,19 @@
         		<th>Name</th>
         		<th>Email</th>
         		<th>Edit</th>
+                <th>Delete</th>
         	</tr>
         	@foreach($users as $user)
                 @if (Auth::user()->id == $user->id)
-                    <tr class="current_user">
+                    <tr class="success">
                 @else
                     <tr>
                 @endif
         		<td>{{ $user->id }}</td>
         		<td>{{ $user->fullName() }}</td>
         		<td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
-        		<td><span class="glyphicon glyphicon-edit"></span></td>
+        		<td><span class="glyphicon glyphicon-edit" id="edit_user_{{ $user->id }}"></span></td>
+                <td><span class="glyphicon glyphicon-trash" id="delete_user_{{ $user->id }}"></span></td>
         	</tr>
         	@endforeach
         </table>
