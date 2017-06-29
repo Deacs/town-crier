@@ -71,6 +71,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Remove a user - mark as deleted
+     *
+     * @return bool
+     */
+    public function delete()
+    {
+        return 'pass';
+    }
+
+    /**
      * Return a concatenated full name
      *
      * @return string

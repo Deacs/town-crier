@@ -126,26 +126,51 @@ class UserListingTest extends DuskTestCase
      * Ensure the 'delete user' link opens a confirmation modal
      *
      * @group admin
+     * @group old
+     * 
      */
-    public function testDeleteUserLinkOpensCorrectConfirmationModal()
+    public function testDeleteUserOptionOpensCorrectConfirmationModal()
     {
         
-        $janitor    = User::find(User::JANITOR_USER_ID);
-        $user       = User::find(3);
+        $user       = User::find(User::JANITOR_USER_ID);
         $remove     = User::find(4);
 
-        $this->browse(function($browser) use ($janitor, $user, $remove) {
+        $this->browse(function($browser) use ($user, $remove) {
             $browser
                 ->loginAs($user)
                 ->visit(new UserListingPage)
                 ->click('.glyphicon#delete_user_'.$remove->id)
                 // Wait for the modal and confirm that we wish to delete the user
-                ->whenAvailable('div.sweet-alert', function ($modal) use ($janitor) {
+                ->whenAvailable('div.sweet-alert', function ($modal) {
                     $modal
                         ->waitForText('Are you sure?')
-                        ->waitForText('User will cease to be')
-                        //->pause(2500)
+                        ->waitForText('User will cease to be');
+                });
+        });
+    }
+
+    /**
+     * Ensure the 'delete user' option displays the correct notification
+     *
+     * @group admin
+     * @group new
+     */
+    public function testDeleteUserOptionDisplaysCorrectNotiifcation()
+    {
+        $user   = User::find(User::JANITOR_USER_ID);
+        $remove = User::find(4);
+
+        $this->browse(function($browser) use ($user, $remove) {
+            $browser
+                ->loginAs($user)
+                ->visit(new UserListingPage)
+                ->click('.glyphicon#delete_user_'.$remove->id)
+                ->whenAvailable('div.sweet-alert', function ($modal) {
+                    $modal
+                        ->waitForText('Are you sure?')
+                        ->pause(1000)
                         ->press('Yep, they gone!')
+                        ->waitForText('Deleted!')
                         ->assertSee('Sayonara, cowboy!');
                 });
         });

@@ -63,13 +63,25 @@
               confirmButtonText: "Yep, they gone!",
               closeOnConfirm: false
             },
+            function () {
 
-            function(){
-              swal("Deleted!", "Sayonara, cowboy!", "success");
+                $.ajax({
+                    url: '/admin/user/'+$item.data('user-id')+'/delete'
+                })
+                .done(function( res ) {
+                    if (res == 'pass') {
+                        swal("Deleted!", "Sayonara, cowboy!", "success");    
+                    } else {
+                        swal("Uh-Oh!", "Sorry, Cochese. Your lassoo is limp!", "error");
+                    }
+                })
+                .fail(function ( res ) {
+                    swal("Uh-Oh!", "Sorry, Cochese. Your lassoo is limp!", "error");
+                });
+
             });
         });
         
-
     });
 
         

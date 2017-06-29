@@ -65,12 +65,12 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'  => 'UserController@edit',
         ]
     );
-    // Route::post('admin/user/add', 
-    //     [
-    //         'as'    => 'add-user-form',
-    //         'uses'  => 'UserController@update',
-    //     ]
-    // );
+    Route::get('admin/user/{id}/delete', 
+        [
+            'as'    => 'delete-user',
+            'uses'  => 'UserController@delete',
+        ]
+    );
     Route::get('admin/users', 
         [
             'as'    => 'all-users',

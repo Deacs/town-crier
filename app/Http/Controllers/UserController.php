@@ -28,4 +28,12 @@ class UserController extends Controller
   	{
   		return (new User())->add();
   	}
+
+    public function delete($id)
+    {
+      Log::info('Searching for user >> '.$id);
+      $user = User::findOrFail($id);
+      Log::info($user);
+      return $user->delete();
+    }
 }
