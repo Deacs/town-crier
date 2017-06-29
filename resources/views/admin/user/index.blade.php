@@ -30,7 +30,7 @@
         		<td><a href="/admin/user/{{ $user->id }}/edit"><span class="glyphicon glyphicon-edit" id="edit_user_{{ $user->id }}"></span></a></td>
                 <td>
                 @if (Auth::user()->id != $user->id)
-                    <span class="glyphicon glyphicon-trash" id="delete_user_{{ $user->id }}"></span>
+                    <span class="glyphicon glyphicon-trash delete-user" id="delete_user_{{ $user->id }}" data-user-id="{{ $user->id }}"></span>
                 @else
                     &nbsp;
                 @endif
@@ -44,5 +44,35 @@
 @stop
 
 @section('footer')
+
+<script>
+
+    $(".delete-user").each(function() {
+
+        var $item = $(this);
+
+
+        $item.on('click', function() {
+
+            swal({
+              title: "Are you sure?",
+              text: "User will cease to be",
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yep, they gone!",
+              closeOnConfirm: false
+            },
+
+            function(){
+              swal("Deleted!", "Sayonara, cowboy!", "success");
+            });
+        });
+        
+
+    });
+
+        
+</script>
     
 @stop
