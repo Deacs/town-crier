@@ -65,12 +65,12 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'  => 'UserController@edit',
         ]
     );
-    Route::post('admin/user/add', 
-        [
-            'as'    => 'add-user-form',
-            'uses'  => 'UserController@update',
-        ]
-    );
+    // Route::post('admin/user/add', 
+    //     [
+    //         'as'    => 'add-user-form',
+    //         'uses'  => 'UserController@update',
+    //     ]
+    // );
     Route::get('admin/users', 
         [
             'as'    => 'all-users',
