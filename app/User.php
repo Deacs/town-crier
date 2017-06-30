@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
 
     const SYSTEM_USER_ID    = 1;
     const JANITOR_USER_ID   = 2;
@@ -75,7 +77,7 @@ class User extends Authenticatable
      *
      * @return bool
      */
-    public function delete()
+    public function remove()
     {
         // Validate that the requsting user can perform this action 
         // 
@@ -86,7 +88,12 @@ class User extends Authenticatable
         //  Mark the user as deleted and return the result
         //  
         //  Cascade through any content and update? 
-        return 'pass';
+        if ($this->delete()) {
+            return 'pass';
+        }
+
+        return 'fail';
+        
     }
 
     /**

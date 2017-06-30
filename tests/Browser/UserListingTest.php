@@ -126,7 +126,6 @@ class UserListingTest extends DuskTestCase
      * Ensure the 'delete user' link opens a confirmation modal
      *
      * @group admin
-     * @group old
      * 
      */
     public function testDeleteUserOptionOpensCorrectConfirmationModal()
@@ -153,7 +152,6 @@ class UserListingTest extends DuskTestCase
      * Ensure the 'delete user' option displays the correct notification
      *
      * @group admin
-     * @group new
      */
     public function testDeleteUserOptionDisplaysCorrectNotiifcation()
     {
@@ -173,6 +171,36 @@ class UserListingTest extends DuskTestCase
                         ->waitForText('Deleted!')
                         ->assertSee('Sayonara, cowboy!');
                 });
+        });
+    }
+
+
+    /**
+     * Ensure the deleted is no longer in the User Listing
+     *
+     * @group admin
+     * @group new
+     */
+    public function testDeletedUserIsNotVisibleInListing()
+    {
+        $user   = User::find(User::JANITOR_USER_ID);
+        $remove = User::find(4);
+
+        $this->browse(function($browser) use ($user, $remove) {
+            $browser
+                ->loginAs($user)
+                ->visit(new UserListingPage)
+                ->click('.glyphicon#delete_user_'.$remove->id)
+                ->whenAvailable('div.sweet-alert', function ($modal) {
+                    $modal
+                        ->waitForText('Are you sure?')
+                        ->pause(1000)
+                        ->press('Yep, they gone!');
+                })
+                ->pause(1000)
+                ->assertDontSee($remove->fullName())
+                ->assertDontSee($remove->email)
+                ->assertMissing('tr#user_'.$remove->id);
         });
     }
 

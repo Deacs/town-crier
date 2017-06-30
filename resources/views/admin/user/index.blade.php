@@ -22,7 +22,7 @@
                 @if (Auth::user()->id == $user->id)
                     <tr class="success">
                 @else
-                    <tr>
+                    <tr id="user_{{ $user->id }}">
                 @endif
         		<td>{{ $user->id }}</td>
         		<td>{{ $user->fullName() }}</td>
@@ -70,6 +70,7 @@
                 })
                 .done(function( res ) {
                     if (res == 'pass') {
+                        $('tr#user_'+$item.data('user-id')).fadeOut();
                         swal("Deleted!", "Sayonara, cowboy!", "success");    
                     } else {
                         swal("Uh-Oh!", "Sorry, Cochese. Your lassoo is limp!", "error");
