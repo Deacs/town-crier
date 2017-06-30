@@ -70,9 +70,22 @@
                 })
                 .done(function( res ) {
                     if (res == 'pass') {
+                        var row     = $('tr#user_'+$item.data('user-id')),
+                            listing = row.closest('table');
                         // Remove the relevant row from the listing
-                        $('tr#user_'+$item.data('user-id')).fadeOut();
-                        $('tr').removeClass('alternate').addClass('alternate');
+                        row.hide();
+                        listing.removeClass('table-striped');
+                        //tr.hide().closest('table').removeClass('table-striped');
+                        //tr.closest('table').removeClass('table-striped').addClass('table-striped');
+                        //tr.siblings().removeClass('alternate');
+
+                        $("tr:not(.hidden)").each(function (index) {
+                            $(this).toggleClass("stripe", !!(index & 1));
+                        });
+
+                        listing.addClass('table-striped');
+                        //$('tr#user_'+$item.data('user-id')).fadeOut();
+                        //$('tr').removeClass('alternate').addClass('alternate');
                         //$('tr:not(.hide):odd').addClass('alternate');
 
                         swal("Deleted!", "Sayonara, cowboy!", "success");    
