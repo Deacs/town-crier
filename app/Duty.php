@@ -16,6 +16,7 @@ class Duty extends Model
     {
         // Audit the action
         (new Audit)->record(AuditType::REFRESH_CLIENTS_ID, User::JANITOR_USER_ID);
+
         // Fire the event to refresh the clients
         event(new Chore('refresh'));
     }

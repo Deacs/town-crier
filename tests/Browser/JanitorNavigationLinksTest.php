@@ -105,7 +105,7 @@ class JanitorNavigationLinksTest extends DuskTestCase
      *
      * @return void
      */
-    public function testJanitorNavigationLinksOpensStatsPage()
+    public function testJanitorNavigationLinksOpensJanitorPage()
     {
         $user = User::find(User::JANITOR_USER_ID);
 

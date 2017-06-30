@@ -6,6 +6,12 @@ Route::get('/logout', 'Auth\LogoutController@performLogout');
 
 Auth::routes();
 
+Route::get('fibonacci', 
+    [
+        'uses' => 'HomeController@fibonacci'
+    ]
+);
+
 Route::get('/logged-out',
     [
         'as'    => 'logged-out',
@@ -51,6 +57,18 @@ Route::group(['middleware' => 'auth'], function () {
         [
             'as'    => 'add-user-form',
             'uses'  => 'UserController@store',
+        ]
+    );
+    Route::get('admin/user/{id}/edit', 
+        [
+            'as'    => 'add-user',
+            'uses'  => 'UserController@edit',
+        ]
+    );
+    Route::get('admin/user/{id}/delete', 
+        [
+            'as'    => 'delete-user',
+            'uses'  => 'UserController@delete',
         ]
     );
     Route::get('admin/users', 

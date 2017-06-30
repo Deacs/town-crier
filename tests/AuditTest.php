@@ -10,6 +10,8 @@ class AuditTest extends TestBase
 {
     /**
      * @test
+     *
+     * @group fail
      */
     public function it_records_refresh_client_action()
     {
@@ -25,6 +27,8 @@ class AuditTest extends TestBase
 
     /**
      * @test
+     *
+     * @group fail
      */
     public function it_records_purge_db_action()
     {
@@ -40,6 +44,8 @@ class AuditTest extends TestBase
 
     /**
      * @test
+     *
+     * @group fail
      */
     public function it_records_purge_redis_action()
     {
