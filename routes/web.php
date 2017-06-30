@@ -62,7 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/user/{id}/edit', 
         [
             'as'    => 'add-user',
-            'uses'  => 'UserController@edit',
+            'uses'  => 'UserController@update',
         ]
     );
     Route::get('admin/user/{id}/delete', 
