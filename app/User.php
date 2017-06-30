@@ -77,6 +77,15 @@ class User extends Authenticatable
      */
     public function delete()
     {
+        // Validate that the requsting user can perform this action 
+        // 
+        // Validate that the user is not deleting their own account
+        // 
+        // Validate that the user is not already deleted
+        // 
+        //  Mark the user as deleted and return the result
+        //  
+        //  Cascade through any content and update? 
         return 'pass';
     }
 
