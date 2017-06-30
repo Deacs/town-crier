@@ -34,6 +34,6 @@ class UserController extends Controller
       Log::info('Searching for user >> '.$id);
       $user = User::findOrFail($id);
       Log::info($user);
-      return $user->delete();
+      return $user->remove();
     }
 }
