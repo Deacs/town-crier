@@ -62,7 +62,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/user/{id}/edit', 
         [
             'as'    => 'add-user',
-            'uses'  => 'UserController@update',
+            'uses'  => 'UserController@edit',
+        ]
+    );
+    Route::post('admin/user/edit',
+        [
+            'as'    => 'update-user',
+            'uses'  => 'UserController@update'
         ]
     );
     Route::get('admin/user/{id}/delete', 
@@ -75,6 +81,13 @@ Route::group(['middleware' => 'auth'], function () {
         [
             'as'    => 'all-users',
             'uses'  => 'UserController@index',
+        ]
+    );
+
+    Route::get('user/{id}',
+        [
+            'as'    => 'user-profile',
+            'uses'  => 'UserController@show'
         ]
     );
 

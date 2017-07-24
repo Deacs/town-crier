@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Validator;
@@ -36,11 +37,34 @@ class User extends Authenticatable
         'password'
     ];
 
+    public function edit()
+    {
+        $this->data = Input::only('first_name', 'last_name', 'email');
+
+        $rules = [
+            'first_name'    => 'bail|required|min:2|max:255',
+            'last_name'     => 'bail|required|min:2|max:255',
+            'email'         => 'bail|required|email'
+        ];
+
+        // If the email has been updated, we need to check that it is unique, overwrite standard rule
+        if ($this->data['email'] != $this->email) {
+           $rules['email'] = 'bail|required|email|unique:users';
+        }
+
+        $validator = Validator::make($this->data, $rules);
+
+        if ($validator->passes()) {
+            return $this->update($this->data);
+        }
+
+        return false;
+    }
+
     /**
      * Add a new user
      *
      * @return string
-     *
      */
     public function add() 
     {

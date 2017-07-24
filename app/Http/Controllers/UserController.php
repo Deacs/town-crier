@@ -19,6 +19,17 @@ class UserController extends Controller
   		return view('admin.user.index')->with('users', $users);
   	}
 
+    public function show($id)
+  	{
+        $user = User::find($id);
+
+        if ($user) {
+            return view('user.index')->with('user', $user);
+        }
+
+        return view('admin.user.error')->with('message', 'User Not Found');
+  	}
+
   	public function create()
   	{
   		return view('admin.user.add');
@@ -29,15 +40,26 @@ class UserController extends Controller
   		return (new User())->add();
   	}
 
-    public function update($id)
+    public function edit($id)
+  	{
+        $user = User::find($id);
+
+        if ($user) {
+            return view('admin.user.edit')->with('user', $user);
+        }
+
+        return view('admin.user.error')->with('message', 'User Not Found');
+  	}
+
+    public function update()
     {
-      $user = User::find($id);
+        $user = User::findOrFail(Input::get('user_id'));
 
-      if ($user) {
-          return view('admin.user.edit')->with('user', $user);
-      }
+        if ($user->edit()) {
+            return redirect()->route('user-profile', ['id' => $user->id]);
+        }
 
-      return view('admin.user.error')->with('message', 'User Not Found');
+        return back()->withErrors();
     }
 
     public function delete($id)
