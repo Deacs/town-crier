@@ -4,7 +4,6 @@ namespace Tests\Browser;
 
 use App\User;
 use Tests\DuskTestCase;
-use Tests\Browser\Pages\UserEditPage;
 use Tests\Browser\Pages\AuditLogPage;
 use Tests\Browser\Pages\UserListingPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -179,7 +178,6 @@ class UserListingTest extends DuskTestCase
      * Ensure the deleted is no longer in the User Listing
      *
      * @group admin
-     * @group new
      */
     public function testDeletedUserIsNotVisibleInListing()
     {

@@ -31,8 +31,13 @@ class UserController extends Controller
 
     public function update($id)
     {
-      $user = User::findOrFail($id);
-      return view('admin.user.edit')->with('user', $user);
+      $user = User::find($id);
+
+      if ($user) {
+          return view('admin.user.edit')->with('user', $user);
+      }
+
+      return view('admin.user.error')->with('message', 'User Not Found');
     }
 
     public function delete($id)
