@@ -49,16 +49,27 @@
 
         var respond = function(response) {
 
+            console.log(response.email);
+
+            var error_msg = "Looks like you've forgotten something. Try again?";
+
+            if (typeof(response.email) !== "undefined") {
+                error_msg = response.email;
+            }
+
             var data = {
                 type: "success",
                 title: "User Added!",
                 text: "The user has been added to the crowd.",
             };
             if (response != 'pass') {
+
+                console.log(response);
+
                 data = {
                     type: "error",
                     title: "Uh Oh!",
-                    text: "Looks like you've forgotten something. Try again",
+                    text: error_msg
                 };
             }
 
@@ -97,7 +108,8 @@
                     email.val('');
 
                 })
-                .fail(function() {
+                .fail(function(res) {
+
                     swal({
                         type: "error",
                         title: "Uh Oh",

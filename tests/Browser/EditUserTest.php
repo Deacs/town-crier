@@ -61,7 +61,6 @@ class EditUserTest extends DuskTestCase
      *
      * @group admin
      * @group user
-     * @group new
      *
      * @return void
      */
@@ -81,6 +80,32 @@ class EditUserTest extends DuskTestCase
                 ->assertPathIs('/user/'.$edit_user->id)
                 ->assertSeeIn('h1', $edit_user->fullName())
                 ->assertSeeIn('h3', $new_email);
+        });
+    }
+    /**
+     * Ensure the user's first name is correctly updated after submission
+     *
+     * @group admin
+     * @group user
+     * @group new
+     *
+     * @return void
+     */
+    public function testUsersFirstNameIsCorrectlyUpdatedAfterSubmission()
+    {
+        $user       = User::find(User::JANITOR_USER_ID);
+        $edit_user  = User::find(5);
+        $new_fname  = 'NewName';
+
+        $this->browse(function ($browser) use ($user, $edit_user, $new_fname) {
+            $browser
+                ->loginAs($user)
+                ->visit('admin/user/'.$edit_user->id.'/edit')
+                ->assertInputValueIsNot('email', $new_fname)
+                ->type('first_name', $new_fname)
+                ->press('Update User')
+                ->assertPathIs('/user/'.$edit_user->id)
+                ->assertSeeIn('h1', $new_fname);
         });
     }
 }

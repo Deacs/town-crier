@@ -130,7 +130,7 @@ class AddNewUserTest extends DuskTestCase
                 ->press('Add User')
                 ->pause(2000)
                 ->assertSee('Uh Oh')
-                ->assertSee('Your user generation skills seems to be broken. Try again?')
+                ->assertSee('Looks like you\'ve forgotten something. Try again?')
                 ->on(new AdminNewUserPage);
         });
     }
@@ -162,7 +162,7 @@ class AddNewUserTest extends DuskTestCase
                 ->press('Add User')
                 ->pause(2000)
                 ->assertSee('Uh Oh')
-                ->assertSee('Your user generation skills seems to be broken. Try again?')
+                ->assertSee('Looks like you\'ve forgotten something. Try again?')
                 ->on(new AdminNewUserPage);
         });
     }
@@ -171,6 +171,7 @@ class AddNewUserTest extends DuskTestCase
      * Ensure correct failure notification displayed after addition of a new user fails due to missing email address
      *
      * @group admin
+     * @group failing
      * 
      * @return void
      */
@@ -194,7 +195,7 @@ class AddNewUserTest extends DuskTestCase
                 ->press('Add User')
                 ->pause(2000)
                 ->assertSee('Uh Oh')
-                ->assertSee('Your user generation skills seems to be broken. Try again?')
+                ->assertSee('The email field is required')
                 ->on(new AdminNewUserPage);
         });
     }
@@ -226,7 +227,7 @@ class AddNewUserTest extends DuskTestCase
                 ->press('Add User')
                 ->pause(2000)
                 ->assertSee('Uh Oh')
-                ->assertSee('Your user generation skills seems to be broken. Try again?')
+                ->assertSee('The email address must be unique')
                 ->on(new AdminNewUserPage);
         });
     }

@@ -47,9 +47,9 @@ class User extends Authenticatable
             'email'         => 'bail|required|email'
         ];
 
-        // If the email has been updated, we need to check that it is unique, overwrite standard rule
-        if ($this->data['email'] != $this->email) {
-           $rules['email'] = 'bail|required|email|unique:users';
+        // If the email has been updated, we need to check that it is unique, overwrite the standard rule
+        if ($this->data['email'] !== $this->attributes['email']) {
+            $rules['email'] = 'bail|required|email|unique:users';
         }
 
         $validator = Validator::make($this->data, $rules);
@@ -64,36 +64,39 @@ class User extends Authenticatable
     /**
      * Add a new user
      *
-     * @return string
+     * @return string | array
      */
     public function add() 
     {
-        $result = 'fail';
-
         $this->data = Input::only('first_name', 'last_name', 'email');
 
         $this->data['password'] = bcrypt($this->data['first_name']);
 
-        $validator = Validator::make($this->data, [
-            'first_name'    => 'bail|required|min:2|max:255',
-            'last_name'     => 'bail|required|min:2|max:255',
-            'email'         => 'bail|required|email|unique:users'
-        ]);
+        $validator = Validator::make(
+            $this->data,
+            [
+                'first_name'    => 'bail|required|min:2|max:255',
+                'last_name'     => 'bail|required|min:2|max:255',
+                'email'         => 'bail|required|email|unique:users'
+            ],
+            [
+                'email.unique' => 'The email address must be unique'
+            ]
+        );
 
         if ($validator->passes()) {
 
             $this->create($this->data);
 
             // If an Event needs to be fired - this is a good place to broadcast from
-
-            $result = 'pass';
+            return 'pass';
         }
         else {
             // TODO Throw exception
             Log::info('New User Validation FAILED');
         }
-        
-        return $result;
+
+        return $validator->messages();
     }
 
     /**
