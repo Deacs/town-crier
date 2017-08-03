@@ -202,7 +202,36 @@ class UserListingTest extends DuskTestCase
         });
     }
 
+    /**
+     * Ensure that if the cancel option is clicked in the confirmation modal, the user is not deleted
+     *
+     * @group admin
+     * @group new
+     */
+    public function testClickingCancelOptionInModalPreventsDeletion()
+    {
+        $user   = User::find(User::JANITOR_USER_ID);
+        $remove = User::find(4);
 
+        $this->browse(function($browser) use ($user, $remove) {
+            $browser
+                ->loginAs($user)
+                ->visit(new UserListingPage())
+                ->click('.glyphicon#delete_user_'.$remove->id)
+                ->whenAvailable('div.sweet-alert', function ($modal) {
+                    $modal
+                        ->waitForText('Are you sure?')
+                        ->pause(1000)
+                        ->press('Cancel')
+                        ->assertDontSee('Deleted!')
+                        ->assertDontSee('Sayonara, cowboy!');
+                })
+                ->pause(1000)
+                ->assertSee($remove->fullName())
+                ->assertSee($remove->email)
+                ->assertVisible('tr#user_'.$remove->id);
+        });
+    }
 
 
 
@@ -210,5 +239,5 @@ class UserListingTest extends DuskTestCase
 
 
     
-    // Test the 'Add New User' option is displayed if the user has sufficient permisisons
+    // Test the 'Add New User' option is displayed if the user has sufficient permissions
 }

@@ -49,8 +49,6 @@
 
         var respond = function(response) {
 
-            console.log(response.email);
-
             var error_msg = "Looks like you've forgotten something. Try again?";
 
             if (typeof(response.email) !== "undefined") {

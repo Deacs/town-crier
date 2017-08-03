@@ -48,7 +48,7 @@ class User extends Authenticatable
         ];
 
         // If the email has been updated, we need to check that it is unique, overwrite the standard rule
-        if ($this->data['email'] !== $this->attributes['email']) {
+        if ($this->data['email'] !== $this->getAttribute('email')) {
             $rules['email'] = 'bail|required|email|unique:users';
         }
 
@@ -106,15 +106,15 @@ class User extends Authenticatable
      */
     public function remove()
     {
-        // Validate that the requsting user can perform this action 
+        // Validate that the requesting user can perform this action
         // 
         // Validate that the user is not deleting their own account
         // 
         // Validate that the user is not already deleted
         // 
-        //  Mark the user as deleted and return the result
+        // Mark the user as deleted and return the result
         //  
-        //  Cascade through any content and update? 
+        // Cascade through any content and update?
         if ($this->delete()) {
             return 'pass';
         }

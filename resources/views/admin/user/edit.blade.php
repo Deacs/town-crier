@@ -34,7 +34,7 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-lg btn-primary" id="add-new-user">Update User <span class="glyphicon glyphicon-user"></span></button>
+                    <button type="submit" class="btn btn-lg btn-primary" id="update-user">Update User <span class="glyphicon glyphicon-user"></span></button>
                 </div>
             </div>
         </form>

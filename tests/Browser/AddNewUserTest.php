@@ -171,7 +171,6 @@ class AddNewUserTest extends DuskTestCase
      * Ensure correct failure notification displayed after addition of a new user fails due to missing email address
      *
      * @group admin
-     * @group failing
      * 
      * @return void
      */
@@ -207,7 +206,7 @@ class AddNewUserTest extends DuskTestCase
      * 
      * @return void
      */
-    public function testCorrectFailureNotificationMessageAfterAdditionOfNewUserFailsDueToNoUniqueEmail()
+    public function testCorrectFailureNotificationMessageAfterAdditionOfNewUserFailsDueToNonUniqueEmail()
     {
         $user = User::find(3);
 
@@ -231,6 +230,5 @@ class AddNewUserTest extends DuskTestCase
                 ->on(new AdminNewUserPage);
         });
     }
-
 
 }

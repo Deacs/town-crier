@@ -4,7 +4,7 @@ namespace Tests\Browser;
 
 use App\User;
 use Tests\DuskTestCase;
-use Tests\Browser\Pages\userEditPage;
+use Tests\Browser\Pages\UserEditPage;
 use Tests\Browser\Pages\AuditLogPage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -87,7 +87,6 @@ class EditUserTest extends DuskTestCase
      *
      * @group admin
      * @group user
-     * @group new
      *
      * @return void
      */
@@ -105,7 +104,8 @@ class EditUserTest extends DuskTestCase
                 ->type('first_name', $new_fname)
                 ->press('Update User')
                 ->assertPathIs('/user/'.$edit_user->id)
-                ->assertSeeIn('h1', $new_fname);
+                ->assertSeeIn('h1', $new_fname)
+                ->assertSeeIn('h3', $edit_user->email);
         });
     }
 }
