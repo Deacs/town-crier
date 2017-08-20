@@ -36,6 +36,14 @@
             <a class="btn btn-lg btn-info janitor-task" id="mockfundingmilestone" data-action="mockfundingmilestone"><span class="glyphicon glyphicon-flag"></span> Mock Funding Milestone</a>
         </div>
 
+        <h3><span class="glyphicon glyphicon-tasks"></span> Tasks</h3>
+        <div class="row">
+            <a class="btn btn-lg btn-primary janitor-task" id="addnewuser" data-action="addnewuser"><span class="glyphicon glyphicon-user"></span> Add New User</a>
+        </div>
+        <div class="row">
+            <a class="btn btn-lg btn-primary janitor-task" id="listusers" data-action="listuser"><span class="glyphicon glyphicon-list"></span> List Users</a>
+        </div>
+
     </div>
 @stop
 

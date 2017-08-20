@@ -152,7 +152,7 @@ class UserListingTest extends DuskTestCase
      *
      * @group admin
      */
-    public function testDeleteUserOptionDisplaysCorrectNotiifcation()
+    public function testDeleteUserOptionDisplaysCorrectNotificationOnSuccessfulRemoval()
     {
         $user   = User::find(User::JANITOR_USER_ID);
         $remove = User::find(4);
@@ -175,7 +175,7 @@ class UserListingTest extends DuskTestCase
 
 
     /**
-     * Ensure the deleted is no longer in the User Listing
+     * Ensure the deleted user is no longer in the User Listing
      *
      * @group admin
      */
@@ -203,10 +203,9 @@ class UserListingTest extends DuskTestCase
     }
 
     /**
-     * Ensure that if the cancel option is clicked in the confirmation modal, the user is not deleted
+     * Ensure that if the cancel option is clicked in the confirmation modal, the action is cancelled and the user is not deleted
      *
      * @group admin
-     * @group new
      */
     public function testClickingCancelOptionInModalPreventsDeletion()
     {
